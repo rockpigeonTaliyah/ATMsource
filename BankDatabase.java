@@ -68,16 +68,16 @@ public class BankDatabase
       getAccount( userAccountNumber ).debit( amount );
    } // end method debit
 
-   public void transfer( int userAccountNumber, int targetUserAccountNumber, double amount )
+   public void transfer( int userAccountNumber, int targetUserAccountNumber, double amount, Screen paramScreen )
    {
-          Screen screen = getScreen();
+          Screen screen = paramScreen;
           if(getAccount( targetUserAccountNumber ) == null){
             System.out.println();
           }else{
             screen.displayMessageLine("\n Transaction Processing.... ");
             getAccount( userAccountNumber ).debit(amount);
             getAccount( targetUserAccountNumber ).credit(amount);
-            creen.displayMessageLine("Transaction End.");
+            screen.displayMessageLine("Transaction End.");
           }
 
     }
