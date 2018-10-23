@@ -71,14 +71,20 @@ public class BankDatabase
    public void transfer( int userAccountNumber, int targetUserAccountNumber, double amount, Screen paramScreen )
    {
           Screen screen = paramScreen;
-          if(getAccount( targetUserAccountNumber ) == null){
-            System.out.println("Error: Account not exists");
-          }else{
+
             screen.displayMessageLine("\n Transaction Processing.... ");
             getAccount( userAccountNumber ).debit(amount);
             getAccount( targetUserAccountNumber ).credit(amount);
             screen.displayMessageLine("Transaction End.");
-          }
+
+
+    }
+    public boolean getTarget(int targetUserAccountNumber){
+        if(getAccount( targetUserAccountNumber ) == null){
+          return false;
+        }
+        return true;
+
 
     }
       // getAccount( userAccountNumber ).debit( amount );
