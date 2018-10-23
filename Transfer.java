@@ -21,19 +21,33 @@ public class Transfer extends Transaction{
 
   public void TransferDataInput()
   {
+
     BankDatabase bankDatabase = getBankDatabase();
      Screen screen = getScreen(); // get screen reference
      int temp_id = 0;
      double temp_amount = 0;
+     boolean is_account = true;
+     boolean is_amount = true;
         // display the menu
     screen.displayMessageLine( "\nTransfer Menu: \n\nPlease specify the target and amount: " );
     screen.displayMessage( "\nTransfer Account: " );
     temp_id = keypad.getInput();
     screen.displayMessage( "\nTransfer Amount: " );
     temp_amount  = keypad.getInput();
+    if(bankDatabase.getTarget( temp_id ) == false){
+      System.out.println("Error: Account not exists");
+      is_account = false;
+    }
+    if (temp_amount == 0 || temp_amount >= bankDatabase.getAvailableBalance( getAccountNumber() )) {
+      System.out.println("Error : Amount invalid. ");
+      is_amount = false;
+    }
+    if( is_account != false & is_amount != false ){
+        bankDatabase.transfer( getAccountNumber(), temp_id, temp_amount, screen );
+    }else{
+      System.out.println("\nTransaction canceled");
+    }
 
-
-    bankDatabase.transfer( getAccountNumber(), temp_id, temp_amount, screen );
     // return withdrawal amount or CANCELED
   } // end method displayMenuOfAmounts
 }
