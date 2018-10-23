@@ -17,7 +17,6 @@ public class Transfer extends Transaction{
     double availableBalance;
     Screen screen = getScreen();
     TransferDataInput();
-    s
   }
 
   public void TransferDataInput()
@@ -34,7 +33,7 @@ public class Transfer extends Transaction{
     temp_amount  = keypad.getInput();
 
 
-    bankDatabase.transfer( getAccountNumber(), temp_id, temp_amount );
+    bankDatabase.transfer( getAccountNumber(), temp_id, temp_amount, screen );
     // return withdrawal amount or CANCELED
   } // end method displayMenuOfAmounts
 }
