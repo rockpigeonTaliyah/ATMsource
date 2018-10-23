@@ -72,7 +72,7 @@ public class BankDatabase
    {
           Screen screen = paramScreen;
           if(getAccount( targetUserAccountNumber ) == null){
-            System.out.println();
+            System.out.println("Error: Account not exists");
           }else{
             screen.displayMessageLine("\n Transaction Processing.... ");
             getAccount( userAccountNumber ).debit(amount);
