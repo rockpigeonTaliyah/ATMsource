@@ -34,8 +34,11 @@ public class Transfer extends Transaction{
     temp_id = keypad.getInput();
     screen.displayMessage( "\nTransfer Amount: " );
     temp_amount  = keypad.getInput();
-    if(bankDatabase.getTarget( temp_id ) == false || getAccountNumber() == temp_id){
+    if(bankDatabase.getTarget( temp_id ) == false ){
       System.out.println("Error: Account not exists");
+      is_account = false;
+    }else if(getAccountNumber() == temp_id){
+      System.out.printf("Error: Account %d not exists", temp_id);
       is_account = false;
     }
     if (temp_amount == 0 || temp_amount >= bankDatabase.getAvailableBalance( getAccountNumber() )) {
