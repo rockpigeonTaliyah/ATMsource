@@ -38,7 +38,7 @@ public class Transfer extends Transaction{
       System.out.println("Error: Account not exists");
       is_account = false;
     }else if(getAccountNumber() == temp_id){
-      System.out.printf("Error: Account %d not exists", temp_id);
+      System.out.printf("Error: Account %d is repeated", temp_id);
       is_account = false;
     }
     if (temp_amount == 0 || temp_amount >= bankDatabase.getAvailableBalance( getAccountNumber() )) {
