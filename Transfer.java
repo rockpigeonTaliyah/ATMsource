@@ -1,7 +1,6 @@
 public class Transfer extends Transaction{
   private Keypad keypad; // reference to keypad
   // constant corresponding to menu option to cancel
-  private final static int CANCELED = 4;
 
   // Transfer constructor initializes attributes
   public Transfer( int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad)
