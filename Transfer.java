@@ -9,11 +9,14 @@ public class Transfer extends Transaction{
   } // end Transfer constructor
 
   public void execute(){
+<<<<<<< HEAD
     TransferDataInput();
   }
 
   public void TransferDataInput()
   {
+=======
+>>>>>>> 8d0f0692681615792e6723b05218f74252954940
     BankDatabase bankDatabase = getBankDatabase();
     Screen screen = getScreen(); // get screen reference
     int temp_id = 0;
