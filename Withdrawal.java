@@ -126,7 +126,7 @@ public class Withdrawal extends Transaction
                  userChoice = input;
                }else{
                  screen.displayMessageLine(
-                    "\nIvalid selection. Try again." );
+                    "\nInvalid selection. Try again." );
                }
          } // end switch
       } // end while
