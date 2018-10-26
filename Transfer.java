@@ -32,9 +32,11 @@ public class Transfer extends Transaction{
       System.out.printf("Error: Account %d is repeated", temp_id);
       is_account = false;
     }
-    if (temp_amount == 0 || temp_amount >= bankDatabase.getAvailableBalance( getAccountNumber() )) {
+    if (temp_amount == 0 ) {
       System.out.println("Error: Amount invalid. ");
       is_amount = false;
+    }else if(temp_amount >= bankDatabase.getAvailableBalance( getAccountNumber() )){
+      System.out.println("Error: Insufficient amount. ");
     }
     // transfer
     if( is_account != false & is_amount != false ){
