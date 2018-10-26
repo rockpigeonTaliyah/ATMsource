@@ -33,7 +33,7 @@ public class Transfer extends Transaction{
       is_account = false;
     }
     if (temp_amount == 0 || temp_amount >= bankDatabase.getAvailableBalance( getAccountNumber() )) {
-      System.out.println("Error : Amount invalid. ");
+      System.out.println("Error: Amount invalid. ");
       is_amount = false;
     }
     // transfer
