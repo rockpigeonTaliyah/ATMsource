@@ -13,6 +13,11 @@ public class Keypad
    } // end no-argument Keypad constructor
 
    // return an integer value entered by user
+   public double getDoubleInput()
+   {
+      return input.nextDouble(); // we assume that user enters an integer
+   } // end method getInput
+
    public int getInput()
    {
       return input.nextInt(); // we assume that user enters an integer
