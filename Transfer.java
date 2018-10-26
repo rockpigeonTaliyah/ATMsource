@@ -32,17 +32,18 @@ public class Transfer extends Transaction{
       System.out.printf("Error: Account %d is repeated", temp_id);
       is_account = false;
     }
-    if (temp_amount == 0 || temp_amount == 0.0 ) {
-      System.out.println("Error: Amount invalid. ");
+    if (temp_amount == 0 || temp_amount == 0.0  ) {
+      screen.displayMessage("Error: Amount invalid. ");
       is_amount = false;
     }else if(temp_amount >= bankDatabase.getAvailableBalance( getAccountNumber() )){
-      System.out.println("Error: Insufficient amount. ");
+      screen.displayMessage("Error: Insufficient amount. ");
+      is_amount = false;
     }
     // transfer
     if( is_account != false & is_amount != false ){
         bankDatabase.transfer( getAccountNumber(), temp_id, temp_amount, screen );
     }else{
-      System.out.println("\nTransaction canceled");
+      screen.displayMessage("\nTransaction canceled");
     }
   }
 }
