@@ -23,7 +23,7 @@ public class Transfer extends Transaction{
     screen.displayMessage( "\nTransfer Account: " );
     temp_id = keypad.getInput();
     screen.displayMessage( "\nTransfer Amount: " );
-    temp_amount  = keypad.getInput();
+    temp_amount  = keypad.getDoubleInput();
     // prevent error input
     if(bankDatabase.getTarget( temp_id ) == false ){
       System.out.println("Error: Account not exists");
