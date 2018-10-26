@@ -112,7 +112,7 @@ public class Withdrawal extends Transaction
          switch ( input )
          {
             case 1:               // if the user chose a withdrawal amount
-            case 2:                // (i.e., chose option 1, 2, 3, 4 or 5), return the
+            case 2:                // (i.e., chose option 1, 2 or 3), return the
             case 3:
              userChoice = amounts[ input ];
               // save user's choice
@@ -120,8 +120,8 @@ public class Withdrawal extends Transaction
             case CANCELED: // the user chose to cancel
                userChoice = CANCELED; // save user's choice
                break;
-            default: // the user did not enter a value from 1-6
-
+            default: // the user did not enter a value from 1-4
+              // check is the user input valid amount, then save amount , else output error
                if (input >= 100 && input % 100 == 0) {
                  userChoice = input;
                }else{

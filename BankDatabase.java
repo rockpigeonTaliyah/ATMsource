@@ -7,7 +7,7 @@ public class BankDatabase
    // no-argument BankDatabase constructor initializes accounts
    public BankDatabase()
    {
-      accounts = new Account[ 4 ]; // just 2 accounts for testing
+      accounts = new Account[ 4 ]; // just 4 accounts for testing
       accounts[ 0 ] = new Account( 12345, 54321, 1000.0, 1200.0 );
       accounts[ 1 ] = new Account( 98765, 56789, 200.0, 200.0 );
       accounts[ 2 ] = new CurrentAccount(24680, 86420, 9000, 9000);
@@ -68,28 +68,24 @@ public class BankDatabase
       getAccount( userAccountNumber ).debit( amount );
    } // end method debit
 
+   // transfer an amount from one to other with specified account numbers
    public void transfer( int userAccountNumber, int targetUserAccountNumber, double amount, Screen paramScreen )
    {
           Screen screen = paramScreen;
+          screen.displayMessageLine("\n Transaction Processing.... ");
+          getAccount( userAccountNumber ).debit(amount);
+          getAccount( targetUserAccountNumber ).credit(amount);
+          screen.displayMessageLine("Transaction End.");
+    } // end method transfer
 
-            screen.displayMessageLine("\n Transaction Processing.... ");
-            getAccount( userAccountNumber ).debit(amount);
-            getAccount( targetUserAccountNumber ).credit(amount);
-            screen.displayMessageLine("Transaction End.");
-
-
-    }
+    // getTarget
     public boolean getTarget(int targetUserAccountNumber){
         if(getAccount( targetUserAccountNumber ) == null){
           return false;
         }
         return true;
-
-
-    }
-      // getAccount( userAccountNumber ).debit( amount );
-      // getAccount( userAccountNumber ).credit( amount );
-   } // end method debit
+    } // end method getTarget
+  } 
 // end class BankDatabase
 
 
