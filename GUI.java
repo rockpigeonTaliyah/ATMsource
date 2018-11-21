@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JOptionPane;
 
 public class GUI {
 
@@ -16,11 +17,11 @@ public class GUI {
 	private JPanel keyPadJPanel;//Main keypad
 	private JPanel textJPanel;
 	private JButton keys[];
-	private JTextArea messageArea;//message shown by ATM 
-	private JTextArea textArea; //text area to display output 
+	private JTextArea messageArea;//message shown by ATM
+	private JTextArea textArea; //text area to display output
 	private String message = "";//for message
 	private String input = "";//store user input
-	   
+
 	/**
 	 * Launch the application.
 	 */
@@ -48,7 +49,7 @@ public class GUI {
 	public void setMessage( String message ) {
 		this.message = message;
 	}
-	
+
 	/**
 	 * Initialize the coents of the frame.
 	 */
@@ -59,15 +60,15 @@ public class GUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		//frame.getContentPane().setLayout( new GridBagLayout() );
-	    
+
 	    messageArea = new JTextArea(3, 20);// declaration of textArea for displaying message
 	    messageArea.setEditable(false);    // set textArea not editable
-	    messageArea.setText(message);// display line1 in textArea 
-	    
+	    messageArea.setText(message);// display line1 in textArea
+
 		textArea = new JTextArea( 3, 20 );  // declaration of textArea for displaying output
 	    textArea.setEditable(false);    // set textArea not editable
-	    textArea.setText(input);  // display line1 in textArea 
-	    
+	    textArea.setText(input);  // display line1 in textArea
+
 	    textJPanel = new JPanel();
 	    textJPanel.setLayout( new GridLayout( 1, 2));
 	    /*
@@ -84,46 +85,52 @@ public class GUI {
 	    */
 	    //textJPanel.add(messageArea);
 	    //textJPanel.add(textArea);
-	    
-	      
+
+
 	    keys = new JButton[ 24 ];
-	    
+
 	    // initialize keypad buttons
 	    for ( int i = 0; i <= 9; i++ ) {
 	    	keys[ i ] = new JButton( String.valueOf( i ) );
 	    	keys[ i ].addActionListener( new buttonListenerConcat() );
 	    }
 
-	    keys[ 10 ] = new JButton( "Cancel" );	    
+	    keys[ 10 ] = new JButton( "Cancel" );
 	    keys[ 11 ] = new JButton( "Clear" );
 	    keys[ 12 ] = new JButton( "Enter" );
 	    keys[ 13 ] = new JButton( "." );
 	    keys[ 14 ] = new JButton( "00" );
 	    keys[ 15 ] = new JButton( " " );
-	    
+
 	    // add action to buttons
+			keys[ 10 ].addActionListener( new buttonListenerConcat());
 	    keys[ 11 ].addActionListener( new buttonListenerConcat());
 	    keys[ 13 ].addActionListener( new buttonListenerConcat());
 	    keys[ 14 ].addActionListener( new buttonListenerConcat());
-	    
-	    for ( int i = 1; i <= 8; i++)	    
-	    	keys[ 15 + i ] = new JButton( " " );
-	      
-	    // set leftJPanel layout to grid layout  
+			// String ATMActionCommand =new String[8];
+			//left top for 4
+			//right top for 4
+			String [] ATMActionCommand = {" ","Withdrawl","Deposit"," ","TRANSFER"," "," ","EXIT"};
+	    for ( int i = 0; i <= 7; i++){
+	    	keys[ 16 + i ] = new JButton(ATMActionCommand[i]);
+				keys[ 16 + i ].addActionListener( new buttonListenerConcat());
+			}
+
+	    // set leftJPanel layout to grid layout
 	    leftJPanel = new JPanel();
 	    leftJPanel.setLayout( new GridLayout( 4, 1 ) );
 	    //leftJPanel.setPreferredSize( new Dimension( 70, 100 ));
-	    
-	      
+
+
 	    // add buttons to leftJPanel panel
 	    for ( int i = 16; i <= 19; i++ )
 	    	leftJPanel.add( keys[ i ]);
-	      
+
 	    // set rightJPanel layout to grid layout
 	    rightJPanel = new JPanel();
 	    rightJPanel.setLayout( new GridLayout( 4, 1 ) );
 	   // rightJPanel.setPreferredSize( new Dimension( 70, 100 ));
-	      
+
 	    // add buttons to rightJPanel panel
 	    for ( int i = 20; i <= 23; i++ )
 	    	rightJPanel.add( keys[ i ]);
@@ -157,7 +164,7 @@ public class GUI {
 	    // ., 00
 	    for ( int i = 13; i <= 15; i++ )
 	    	keyPadJPanel.add( keys[ i ] );
-	    
+
 	    frame.add( messageArea, BorderLayout.NORTH );
 	    frame.add( leftJPanel, BorderLayout.WEST );
 	    frame.add( rightJPanel, BorderLayout.EAST );
@@ -165,14 +172,23 @@ public class GUI {
 	    frame.add( keyPadJPanel, BorderLayout.SOUTH );
 
 	}
-	
+
 	class buttonListenerConcat implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			if ( e.getActionCommand().equals( "Clear" ))
 				input = "";
-			else
-				input = input.concat( e.getActionCommand() );		   
+			else if ( e.getActionCommand().equals( "Cancel" ) )
+				{
+					Object[] options = { "CANCEL", "OK" };
+					int action = JOptionPane.showOptionDialog(null, "Click OK to exit the ATM", "Warning",JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,null, options, options[0]);
+					// textArea.setText(String.valueOf(action));
+					if(action == 1)
+						System.exit(0);
+					}
+			else{
+				input = input.concat( e.getActionCommand() );
 			textArea.setText(input);
+			}
 		}
 	}
 }
