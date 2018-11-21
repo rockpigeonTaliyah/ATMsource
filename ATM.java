@@ -43,9 +43,7 @@ public class ATM
          while ( !userAuthenticated )
          {
             screen.displayMessageLine( gui, "\nWelcome!" );
-            Thread.sleep(10000);
-            //authenticateUser(); // authenticate user
-            gui.setCurrentAction("authenticateUser");
+            authenticateUser(); // authenticate user
          } // end while
 
          performTransactions(); // user is now authenticated
@@ -58,8 +56,9 @@ public class ATM
    // attempts to authenticate user against database
    private void authenticateUser()
    {
+      gui.setCurrentAction("authenticateUser");
       screen.displayMessage( gui, "\nPlease enter your account number: " );
-      int accountNumber = keypad.getInput(); // input account number
+      int accountNumber = keypad.getInput(); // input account number gui.getinput();
       screen.displayMessage( gui, "\nEnter your PIN: " ); // prompt for PIN
       int pin = keypad.getInput(); // input PIN
 

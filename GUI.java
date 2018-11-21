@@ -117,9 +117,9 @@ public class GUI {
 		keys[ 12 ].addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					switch (this.currentAction) {
+				textArea.setText(currentAction);
+					switch (currentAction) {
 						case "authenticateUser":
-							System.out.println("hi");
 							break;
 						default:
 							break;
@@ -198,14 +198,17 @@ public class GUI {
 		return currentAction;
 	}
 
-	public void setCurrentAction(string currentAction){
+	public void setCurrentAction(String currentAction){
 		this.currentAction = currentAction;
 	}
 
 	class buttonListenerConcat implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			if ( e.getActionCommand().equals( "Clear" ))
+			{	
 				input = "";
+				textArea.setText(input);
+			}
 			else if ( e.getActionCommand().equals( "Cancel" ) )
 				{
 					Object[] options = { "CANCEL", "OK" };
@@ -216,7 +219,7 @@ public class GUI {
 					}
 			else{
 				input = input.concat( e.getActionCommand() );
-			textArea.setText(input);
+				textArea.setText(input);
 			}
 		}
 	}
