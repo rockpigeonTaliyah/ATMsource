@@ -42,8 +42,7 @@ public class ATM
          while ( !userAuthenticated )
          {
             screen.displayMessageLine( gui, "\nWelcome!" );
-            Thread.sleep(10000);
-            //authenticateUser(); // authenticate user
+            //Thread.sleep(10000);
             gui.setCurrentAction("authenticateUser");
          } // end while
 
