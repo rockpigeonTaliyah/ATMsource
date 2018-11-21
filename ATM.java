@@ -1,15 +1,5 @@
 // ATM.java
 // Represents an automated teller machine
-
-public class ATM
-{
-	private boolean cashDispense;//whether user withdraw cash
-   private boolean userAuthenticated; // whether user is authenticated
-   private int currentAccountNumber; // current user's account number
-   private Screen screen; // ATM's screen
-   private Keypad keypad; /// ATM.java
-// Represents an automated teller machine
-
 public class ATM
 {
 	private boolean cashDispense;//whether user withdraw cash
