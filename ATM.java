@@ -43,9 +43,7 @@ public class ATM
          while ( !userAuthenticated )
          {
             screen.displayMessageLine( gui, "\nWelcome!" );
-            Thread.sleep(10000);
-            //authenticateUser(); // authenticate user
-            gui.setCurrentAction("authenticateUser");
+            authenticateUser(); // authenticate user                                                
          } // end while
 
          performTransactions(); // user is now authenticated
@@ -59,6 +57,8 @@ public class ATM
    private void authenticateUser()
    {
       screen.displayMessage( gui, "\nPlease enter your account number: " );
+      System.out.println("From atm 60");
+      gui.setCurrentAction("authenticateUser");
       int accountNumber = keypad.getInput(); // input account number
       screen.displayMessage( gui, "\nEnter your PIN: " ); // prompt for PIN
       int pin = keypad.getInput(); // input PIN
