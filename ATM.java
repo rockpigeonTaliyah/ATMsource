@@ -7,6 +7,15 @@ public class ATM
    private boolean userAuthenticated; // whether user is authenticated
    private int currentAccountNumber; // current user's account number
    private Screen screen; // ATM's screen
+   private Keypad keypad; /// ATM.java
+// Represents an automated teller machine
+
+public class ATM
+{
+	private boolean cashDispense;//whether user withdraw cash
+   private boolean userAuthenticated; // whether user is authenticated
+   private int currentAccountNumber; // current user's account number
+   private Screen screen; // ATM's screen
    private Keypad keypad; // ATM's keypad
    private GUI gui;
    private CashDispenser cashDispenser; // ATM's cash dispenser
@@ -43,7 +52,9 @@ public class ATM
          while ( !userAuthenticated )
          {
             screen.displayMessageLine( gui, "\nWelcome!" );
-            authenticateUser(); // authenticate user
+            Thread.sleep(10000);
+            //authenticateUser(); // authenticate user
+            gui.setCurrentAction("authenticateUser");
          } // end while
 
          performTransactions(); // user is now authenticated
