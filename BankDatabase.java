@@ -69,13 +69,13 @@ public class BankDatabase
    } // end method debit
 
    // transfer an amount from one to other with specified account numbers
-   public void transfer( int userAccountNumber, int targetUserAccountNumber, double amount, Screen paramScreen )
+   public void transfer( int userAccountNumber, int targetUserAccountNumber, double amount, Screen paramScreen, GUI gui )
    {
           Screen screen = paramScreen;
-          screen.displayMessageLine("\n Transaction Processing.... ");
+          screen.displayMessageLine( gui, "\n Transaction Processing.... ");
           getAccount( userAccountNumber ).debit(amount);
           getAccount( targetUserAccountNumber ).credit(amount);
-          screen.displayMessageLine("Transaction End.");
+          screen.displayMessageLine( gui, "Transaction End.");
     } // end method transfer
 
     // getTarget

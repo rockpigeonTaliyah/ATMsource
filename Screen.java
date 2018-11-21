@@ -6,21 +6,21 @@ public class Screen
 	public String message = "";
 	
    // displays a message without a carriage return
-   public void displayMessage( String message ) 
+   public void displayMessage( GUI gui, String message ) 
    {
-      this.message =  message ; 
+      gui.setMessage( message ) ; 
    } // end method displayMessage
 
    // display a message with a carriage return
-   public void displayMessageLine( String message ) 
+   public void displayMessageLine( GUI gui, String message ) 
    {
-      this.message =  message ;   
+      gui.setMessage( message + "\n" );   
    } // end method displayMessageLine
 
    // display a dollar amount
-   public void displayDollarAmount( double amount )
+   public void displayDollarAmount( GUI gui, double amount )
    {
-      System.out.printf( "$%,.2f", amount );   
+      gui.setMessage( String.format( "$%,.2f", amount ));   
    } // end method displayDollarAmount 
 } // end class Screen
 

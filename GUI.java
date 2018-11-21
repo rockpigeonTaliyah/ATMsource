@@ -21,6 +21,7 @@ public class GUI {
 	private JTextArea textArea; //text area to display output
 	private String message = "";//for message
 	private String input = "";//store user input
+	private String currentAction = "";
 
 	/**
 	 * Launch the application.
@@ -47,7 +48,15 @@ public class GUI {
 	}
 
 	public void setMessage( String message ) {
-		this.message = message;
+		this.message = this.message.concat(message);
+	}
+
+	public void clearMessage() {
+		this.message = "";
+	}
+
+	public String getMessage() {
+		return message;
 	}
 
 	/**
@@ -63,7 +72,7 @@ public class GUI {
 
 	    messageArea = new JTextArea(3, 20);// declaration of textArea for displaying message
 	    messageArea.setEditable(false);    // set textArea not editable
-	    messageArea.setText(message);// display line1 in textArea
+	    messageArea.setText(getMessage());// display line1 in textArea
 
 		textArea = new JTextArea( 3, 20 );  // declaration of textArea for displaying output
 	    textArea.setEditable(false);    // set textArea not editable
@@ -103,8 +112,20 @@ public class GUI {
 	    keys[ 15 ] = new JButton( " " );
 
 	    // add action to buttons
-			keys[ 10 ].addActionListener( new buttonListenerConcat());
-	    keys[ 11 ].addActionListener( new buttonListenerConcat());
+		keys[ 10 ].addActionListener( new buttonListenerConcat());
+		keys[ 11 ].addActionListener( new buttonListenerConcat());
+		keys[ 12 ].addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					switch (this.currentAction) {
+						case "authenticateUser":
+							System.out.println("hi");
+							break;
+						default:
+							break;
+					}
+				}
+			});
 	    keys[ 13 ].addActionListener( new buttonListenerConcat());
 	    keys[ 14 ].addActionListener( new buttonListenerConcat());
 			// String ATMActionCommand =new String[8];
@@ -171,6 +192,14 @@ public class GUI {
 	    frame.add( textArea, BorderLayout.CENTER );
 	    frame.add( keyPadJPanel, BorderLayout.SOUTH );
 
+	}
+
+	public String getCurrentAction(){
+		return currentAction;
+	}
+
+	public void setCurrentAction(string currentAction){
+		this.currentAction = currentAction;
 	}
 
 	class buttonListenerConcat implements ActionListener {

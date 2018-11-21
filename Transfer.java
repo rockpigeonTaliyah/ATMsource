@@ -3,9 +3,10 @@ public class Transfer extends Transaction{
   // constant corresponding to menu option to cancel
 
   // Transfer constructor initializes attributes
-  public Transfer( int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad)
+  public Transfer( int userAccountNumber, Screen atmScreen, 
+    BankDatabase atmBankDatabase, Keypad atmKeypad, GUI gui)
   {
-    super( userAccountNumber, atmScreen, atmBankDatabase );
+    super( userAccountNumber, atmScreen, atmBankDatabase, gui );
     keypad = atmKeypad;
   } // end Transfer constructor
 
@@ -13,15 +14,16 @@ public class Transfer extends Transaction{
     double availableBalance;
     BankDatabase bankDatabase = getBankDatabase();
     Screen screen = getScreen(); // get screen reference
+    GUI gui = getGUI();
     int temp_id = 0;
     double temp_amount = 0;
     boolean is_account = true;
     boolean is_amount = true;
     // display the menu
-    screen.displayMessageLine( "\nTransfer Menu: \n\nPlease specify the target and amount: " );
-    screen.displayMessage( "\nTransfer Account: " );
+    screen.displayMessageLine( gui, "\nTransfer Menu: \n\nPlease specify the target and amount: " );
+    screen.displayMessage( gui, "\nTransfer Account: " );
     temp_id = keypad.getInput();
-    screen.displayMessage( "\nTransfer Amount: " );
+    screen.displayMessage( gui, "\nTransfer Amount: " );
     temp_amount  = keypad.getDoubleInput();
     // prevent error input
     if(bankDatabase.getTarget( temp_id ) == false ){
@@ -32,17 +34,17 @@ public class Transfer extends Transaction{
       is_account = false;
     }
     if (temp_amount == 0 || temp_amount == 0.0  ) {
-      screen.displayMessage("Error: Amount invalid. ");
+      screen.displayMessage( gui, "Error: Amount invalid. ");
       is_amount = false;
     }else if(temp_amount >= bankDatabase.getAvailableBalance( getAccountNumber() )){
-      screen.displayMessage("Error: Insufficient amount. ");
+      screen.displayMessage( gui, "Error: Insufficient amount. ");
       is_amount = false;
     }
     // transfer
     if( is_account != false & is_amount != false ){
-        bankDatabase.transfer( getAccountNumber(), temp_id, temp_amount, screen );
+        bankDatabase.transfer( getAccountNumber(), temp_id, temp_amount, screen, gui );
     }else{
-      screen.displayMessage("\nTransaction canceled");
+      screen.displayMessage( gui, "\nTransaction canceled");
     }
   }
 }

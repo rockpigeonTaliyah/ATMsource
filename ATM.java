@@ -3,6 +3,7 @@
 
 public class ATM
 {
+	private boolean cashDispense;//whether user withdraw cash
    private boolean userAuthenticated; // whether user is authenticated
    private int currentAccountNumber; // current user's account number
    private Screen screen; // ATM's screen
@@ -34,30 +35,32 @@ public class ATM
       gui = new GUI();
       gui.setMessage(screen.message);
       gui.run();
-	   
-	  // welcome and authenticate user; perform transactions
+       
+      // welcome and authenticate user; perform transactions
       while ( true )
       {
          // loop while user is not yet authenticated
          while ( !userAuthenticated )
          {
-            screen.displayMessageLine( "\nWelcome!" );
-            authenticateUser(); // authenticate user
+            screen.displayMessageLine( gui, "\nWelcome!" );
+            Thread.sleep(10000);
+            //authenticateUser(); // authenticate user
+            gui.setCurrentAction("authenticateUser");
          } // end while
 
          performTransactions(); // user is now authenticated
          userAuthenticated = false; // reset before next ATM session
          currentAccountNumber = 0; // reset before next ATM session
-         screen.displayMessageLine( "\nThank you! Goodbye!" );
+         screen.displayMessageLine( gui, "\nThank you! Goodbye!" );
       } // end while
    } // end method run
 
    // attempts to authenticate user against database
    private void authenticateUser()
    {
-      screen.displayMessage( "\nPlease enter your account number: " );
+      screen.displayMessage( gui, "\nPlease enter your account number: " );
       int accountNumber = keypad.getInput(); // input account number
-      screen.displayMessage( "\nEnter your PIN: " ); // prompt for PIN
+      screen.displayMessage( gui, "\nEnter your PIN: " ); // prompt for PIN
       int pin = keypad.getInput(); // input PIN
 
       // set userAuthenticated to boolean value returned by database
@@ -70,7 +73,7 @@ public class ATM
          currentAccountNumber = accountNumber; // save user's account #
       } // end if
       else
-         screen.displayMessageLine(
+         screen.displayMessageLine( gui,
              "Invalid account number or PIN. Please try again." );
    } // end method authenticateUser
 
@@ -103,11 +106,29 @@ public class ATM
                currentTransaction.execute(); // execute transaction
                break;
             case EXIT: // user chose to terminate session
-               screen.displayMessageLine( "\nExiting the system..." );
+					synchronized ( this ) {
+						try {
+							screen.displayMessageLine( gui, "Exiting the system..." );
+							this.wait(2000);
+							gui.clearMessage();
+							screen.displayMessageLine( gui, "Card rejecting..." );
+							screen.displayMessage( gui, "Don't forget to take your card. " );
+							this.wait(2000);
+							if ( cashDispense ) //if user withdraw cash
+							{
+								gui.clearMessage();
+								screen.displayMessageLine( gui, "Cash dispensing..." );
+								screen.displayMessage( gui, "Don't forget to take your cash. " );
+								this.wait(2000);
+							}
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
                userExited = true; // this ATM session should end
                break;
             default: // user did not enter an integer from 1-4
-               screen.displayMessageLine(
+               screen.displayMessageLine( gui,
                   "\nYou did not enter a valid selection. Try again." );
                break;
          } // end switch
@@ -117,12 +138,13 @@ public class ATM
    // display the main menu and return an input selection
    private int displayMainMenu()
    {
-      screen.displayMessageLine( "\nMain menu:" );
-      screen.displayMessageLine( "1 - View my balance" );
-      screen.displayMessageLine( "2 - Withdraw cash" );
-      screen.displayMessageLine( "3 - Transfer cash" );
-      screen.displayMessageLine( "4 - Exit\n" );
-      screen.displayMessage( "Enter a choice: " );
+		gui.clearMessage();
+      screen.displayMessageLine( gui, "\nMain menu:" );
+      screen.displayMessageLine( gui, "1 - View my balance" );
+      screen.displayMessageLine( gui, "2 - Withdraw cash" );
+      screen.displayMessageLine( gui, "3 - Transfer cash" );
+      screen.displayMessageLine( gui, "4 - Exit\n" );
+      screen.displayMessage( gui, "Enter a choice: " );
       return keypad.getInput(); // return user's selection
    } // end method displayMainMenu
 
@@ -136,15 +158,16 @@ public class ATM
       {
          case BALANCE_INQUIRY: // create new BalanceInquiry transaction
             temp = new BalanceInquiry(
-               currentAccountNumber, screen, bankDatabase );
+               currentAccountNumber, screen, bankDatabase, gui );
             break;
          case WITHDRAWAL: // create new Withdrawal transaction
             temp = new Withdrawal( currentAccountNumber, screen,
-               bankDatabase, keypad, cashDispenser );
+					bankDatabase, keypad, cashDispenser, gui );
+			cashDispense = true;
             break;
         case TRANSFER: // create new Transfer transaction
             temp = new Transfer(currentAccountNumber, screen,
-               bankDatabase, keypad);
+               bankDatabase, keypad, gui );
                break;
           //  break;
       } // end switch
