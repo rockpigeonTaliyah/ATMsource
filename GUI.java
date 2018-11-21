@@ -22,6 +22,8 @@ public class GUI {
 	private String message = "";//for message
 	private String input = "";//store user input
 	private String currentAction = "";
+	private boolean enterClicked = false;
+	
 
 	/**
 	 * Launch the application.
@@ -118,6 +120,7 @@ public class GUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				textArea.setText(currentAction);
+				enterClicked = true;
 					switch (currentAction) {
 						case "authenticateUser":
 							break;
@@ -200,6 +203,18 @@ public class GUI {
 
 	public void setCurrentAction(String currentAction){
 		this.currentAction = currentAction;
+	}
+	
+	public void clearEnterClicked() {
+		this.enterClicked = false;
+	}
+	
+	public boolean getEnterClicked() {
+		return this.enterClicked;
+	}
+	
+	public int getInputInt() {
+		return input == "" ? 0 : Integer.parseInt(this.input);
 	}
 
 	class buttonListenerConcat implements ActionListener {

@@ -57,9 +57,20 @@ public class ATM
    // attempts to authenticate user against database
    private void authenticateUser()
    {
-      gui.setCurrentAction("authenticateUser");
+      //gui.setCurrentAction("authenticateUser");
       screen.displayMessage( gui, "\nPlease enter your account number: " );
-      int accountNumber = keypad.getInput(); // input account number gui.getinput();
+      
+      while(!gui.getEnterClicked()) {
+    	  if(gui.getEnterClicked()) {
+    		gui.clearEnterClicked();
+    		break;  
+    	  }
+    	  System.out.print("");
+    	  //Thread.sleep(4000);;
+      }
+      /**/
+      int accountNumber = gui.getInputInt();//keypad.getInput(); // input account number gui.getinput();
+      System.out.println(accountNumber);
       screen.displayMessage( gui, "\nEnter your PIN: " ); // prompt for PIN
       int pin = keypad.getInput(); // input PIN
 
