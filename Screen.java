@@ -1,18 +1,20 @@
-// Screen.java
+// Screen./java
 // Represents the screen of the ATM
 
 public class Screen
 {
+	public String message = "";
+	
    // displays a message without a carriage return
    public void displayMessage( String message ) 
    {
-      System.out.print( message ); 
+      this.message =  message ; 
    } // end method displayMessage
 
    // display a message with a carriage return
    public void displayMessageLine( String message ) 
    {
-      System.out.println( message );   
+      this.message =  message ;   
    } // end method displayMessageLine
 
    // display a dollar amount

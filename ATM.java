@@ -7,6 +7,7 @@ public class ATM
    private int currentAccountNumber; // current user's account number
    private Screen screen; // ATM's screen
    private Keypad keypad; // ATM's keypad
+   private GUI gui;
    private CashDispenser cashDispenser; // ATM's cash dispenser
    private BankDatabase bankDatabase; // account information database
 
@@ -30,7 +31,11 @@ public class ATM
    // start ATM
    public void run()
    {
-      // welcome and authenticate user; perform transactions
+      gui = new GUI();
+      gui.setMessage(screen.message);
+      gui.run();
+	   
+	  // welcome and authenticate user; perform transactions
       while ( true )
       {
          // loop while user is not yet authenticated
