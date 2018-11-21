@@ -19,7 +19,7 @@ public class Keypad
    } // end method getInput
 
    public int getInput()
-   {
+   { 
       return input.nextInt(); // we assume that user enters an integer
    } // end method getInput
 } // end class Keypad
