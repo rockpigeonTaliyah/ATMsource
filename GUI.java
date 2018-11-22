@@ -57,7 +57,7 @@ public class GUI {
 	}
 
 	public void setMessage( String message ) {
-		this.message = this.message.concat(message);
+		this.message = message;
 	}
 
 	public void clearMessage() {
@@ -88,6 +88,8 @@ public class GUI {
 		return password;
 	}
 
+	}
+	
 	public void waitTilInput() {
 		synchronized ( this ) {
 	           try {
