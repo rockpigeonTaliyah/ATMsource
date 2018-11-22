@@ -76,16 +76,16 @@ public class GUI {
 		return input;
 	}
 	public String getFunctionInput(){
-		// synchronized ( this ) {
-		// 				 try {
-		// 					 while ( functionChoice!=null ) {
-		// 						 Thread.sleep(200);;
-		// 					 }
-		// 				 } catch (InterruptedException e) {
-		// 					 e.printStackTrace();
-		// 				 }
-		// }
-		return functionChoice;
+		synchronized ( this ) {
+						 try {
+							 while ( functionChoice ==null ) {
+								 Thread.sleep(200);;
+							 }
+						 } catch (InterruptedException e) {
+							 e.printStackTrace();
+						 }
+				 		return functionChoice;
+		}
 		// return "123";
 	}
 	public void printInput() {
@@ -243,7 +243,9 @@ public class GUI {
 
 	class buttonListenerConcat implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-				if(!isPassword) {
+				if (e.getActionCommand() == "Clear") {
+					input = "";
+				}else if(!isPassword) {
 					input = input.concat( e.getActionCommand() );
 				}
 				else {
@@ -256,7 +258,18 @@ public class GUI {
 
 	class buttonListenerFunction implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-
+			switch(e.getActionCommand()){
+				case "BALANCE_INQUIRY":functionChoice = "BALANCE_INQUIRY";
+				  break;
+				case "WITHDRAWL": functionChoice = "WITHDRAWL";
+				 	break;
+				case "DEPOSIT": functionChoice = "DEPOSIT";
+				 	break;
+				case "TRANSFER": functionChoice = "TRANSFER";
+				 	break;
+				case "EXIT": functionChoice = "EXIT";
+				 	break;
+			}
 
 		}
 	}

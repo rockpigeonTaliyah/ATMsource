@@ -4,7 +4,9 @@ public class Withdrawal extends Transaction
 {
    private int amount; // amount to withdraw
    private Keypad keypad; // reference to keypad
+   private Screen screen; // ATM's screen
    private CashDispenser cashDispenser; // reference to cash dispenser
+   private GUI gui;
 
    // constant corresponding to menu option to cancel
    private final static int CANCELED = 4;
@@ -25,6 +27,7 @@ public class Withdrawal extends Transaction
    // perform transaction
    public void execute()
    {
+      screen.displayMessage(gui, "IN_WITHDRAWL");
       boolean cashDispensed = false; // cash was not dispensed yet
       double availableBalance; // amount available for withdrawal
 

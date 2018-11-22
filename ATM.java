@@ -109,15 +109,23 @@ public class ATM
    {
       // local variable to store transaction currently being processed
       Transaction currentTransaction = null;
-
+      String mainMenuSelection = "";
       boolean userExited = false; // user has not chosen to exit
       // screen.displayMessage(gui, (displayMainMenu()));
       // loop while user has not chosen option to exit system
       while ( !userExited )
       {
-         // show main menu and get user selection
-         String mainMenuSelection = displayMainMenu();
-        // screen.displayMessage(gui, displayMainMenu());
+        // synchronized ( this ){
+        //   try {
+            // show main menu and get user selection
+            mainMenuSelection = displayMainMenu();
+           screen.displayMessage(gui, mainMenuSelection);
+           // gui.waitTilInput();
+          // } catch(Exception e) {
+          //
+          // }
+
+      // }
          // decide how to proceed based on user's menu selection
         switch ( mainMenuSelection )
          {
@@ -125,7 +133,6 @@ public class ATM
             case "BALANCE_INQUIRY":
             case "WITHDRAWAL":
             case "TRANSFER":
-
                // initialize as new object of chosen type
                currentTransaction =
                   createTransaction( mainMenuSelection );
@@ -167,11 +174,10 @@ public class ATM
       // determine which type of Transaction to create
       switch ( type )
       {
-        case "BALANCE_INQUIRY": break;
+        case "BALANCE_INQUIRY":screen.displayMessage(gui,"BALANCE_INQUIRY"); break;
          case "WITHDRAWL": // create new BalanceInquiry transaction
-         screen.displayMessage(gui,"test");
-            // temp = new BalanceInquiry(
-            //    currentAccountNumber, screen, bankDatabase, gui );
+            temp = new BalanceInquiry(
+               currentAccountNumber, screen, bankDatabase, gui );
             break;
          case "DEPOSIT": // create new Withdrawal transaction
             temp = new Withdrawal( currentAccountNumber, screen,
