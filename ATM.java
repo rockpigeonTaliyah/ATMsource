@@ -53,9 +53,11 @@ public class ATM
    private void authenticateUser()
    {
 	  int accountNumber = 0;
+	  int accountPin = 0;
 	   synchronized ( this ) {
            try {
-        	   wait(1000);
+        	   wait(2000);
+        	   gui.clearMessage();
     		   screen.displayMessage( gui, "\nPlease enter your account number: " );
     		   gui.printMessage();
     		   gui.waitTilInput();
@@ -63,7 +65,15 @@ public class ATM
         	   gui.inputEntered = false;
         	   gui.setInput( "" );
         	   gui.printInput();
-        	   screen.displayMessage( gui, "\nEnter your PIN: " );// prompt for PIN
+        	   gui.clearMessage();
+        	   screen.displayMessage( gui, "\nEnter your PIN: " );// prompt for PIN        	   
+        	   gui.isPassword = true;
+        	   gui.waitTilInput();
+        	   System.out.printf("\n%s", gui.getPassword());
+        	   //accountPin = Integer.parseInt( gui.getPassword() );
+        	   gui.isPassword = false;
+        	   gui.setInput( "" );
+        	   
         	   gui.printMessage();
         	   gui.waitTilInput();
            } catch (InterruptedException e) {

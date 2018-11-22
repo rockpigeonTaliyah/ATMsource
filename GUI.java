@@ -28,6 +28,8 @@ public class GUI {
 	private JTextArea textArea; //text area to display output
 	private String message = "";//for message
 	private String input = "";//store user input
+	private String password = "";//password
+	public boolean isPassword = false;
 	public boolean inputEntered;
 
 	/**
@@ -80,6 +82,10 @@ public class GUI {
 
 	public void printInput() {
 		textArea.setText(input);
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 
 	public void waitTilInput() {
@@ -246,8 +252,16 @@ public class GUI {
 			// }else if ( e.getActionCommand().equals( "EXIT" ) ) {
 			//
 			// }
-			else
-				input = input.concat( e.getActionCommand() );
+			else {
+				if(!isPassword) {
+					input = input.concat( e.getActionCommand() );
+				}
+				else {
+					password = password.concat( e.getActionCommand());
+					input = input.concat("*");
+				}
+				System.out.printf("%s ", input);
+			}
 			textArea.setText(input);
 
 
