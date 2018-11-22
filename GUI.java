@@ -25,6 +25,7 @@ public class GUI {
 	private String password = "";//password
 	public boolean isPassword = false;
 	public boolean inputEntered;
+	public String functionChoice;
 
 	/**
 	 * Launch the application.
@@ -66,7 +67,7 @@ public class GUI {
 	public void mergeMessage(String message) {
 		this.message = this.message.concat(message);
 	}
-	
+
 	public void setInput( String input ) {
 		this.input = input;
 	}
@@ -74,7 +75,19 @@ public class GUI {
 	public String getInput() {
 		return input;
 	}
-
+	public String getFunctionInput(){
+		// synchronized ( this ) {
+		// 				 try {
+		// 					 while ( functionChoice!=null ) {
+		// 						 Thread.sleep(200);;
+		// 					 }
+		// 				 } catch (InterruptedException e) {
+		// 					 e.printStackTrace();
+		// 				 }
+		// }
+		return functionChoice;
+		// return "123";
+	}
 	public void printInput() {
 		textArea.setText(input);
 	}
@@ -83,9 +96,9 @@ public class GUI {
 	public void clearInput() {
 		inputEntered = false;
 		setInput( "" );
-		printInput();	
+		printInput();
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -160,7 +173,7 @@ public class GUI {
 
 			//left top for 4
 			//right top for 4
-			String [] ATMActionCommand = {" ","Withdrawl","Deposit"," ","TRANSFER"," "," ","EXIT"};
+			String [] ATMActionCommand = {"BALANCE_INQUIRY ","WITHDRAWL","DEPOSIT"," ","TRANSFER"," "," ","EXIT"};
 	    for ( int i = 0; i <= 7; i++){
 	    	keys[ 16 + i ] = new JButton(ATMActionCommand[i]);
 				keys[ 16 + i ].addActionListener( new buttonListenerConcat());
@@ -233,14 +246,14 @@ public class GUI {
 						System.exit(0);
 			}
 			//FUNCTION KEY EVENT HERE
-			else if ( e.getActionCommand().equals( "Withdrawl" ) ) {
-				
-			}else if ( e.getActionCommand().equals( "Deposit" ) ) {
-
+			else if ( e.getActionCommand().equals( "WITHDRAWL" ) ) {
+				functionChoice = "WITHDRAWL";
+			}else if ( e.getActionCommand().equals( "DEPOSIT" ) ) {
+				functionChoice = "DEPOSIT";
 			}else if ( e.getActionCommand().equals( "TRANSFER" ) ) {
-
+				functionChoice = "TRANSFER";
 			}else if ( e.getActionCommand().equals( "EXIT" ) ) {
-
+				functionChoice = "EXIT";
 			}
 			else {
 				if(!isPassword) {
@@ -250,7 +263,7 @@ public class GUI {
 					password = password.concat( e.getActionCommand());
 					input = input.concat("*");
 				}
-				System.out.printf("%s ", input);
+				// System.out.printf("%s ", input);
 			}
 			textArea.setText(input);
 
