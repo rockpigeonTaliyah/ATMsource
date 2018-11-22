@@ -117,7 +117,6 @@ public class ATM
       {
          // show main menu and get user selection
          String mainMenuSelection = displayMainMenu();
-         System.out.println(mainMenuSelection);
         // screen.displayMessage(gui, displayMainMenu());
          // decide how to proceed based on user's menu selection
         switch ( mainMenuSelection )
