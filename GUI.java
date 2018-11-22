@@ -10,6 +10,13 @@ import javax.swing.JTextArea;
 import javax.swing.JOptionPane;
 
 public class GUI {
+	private boolean userAuthenticated; // whether user is authenticated
+	private int currentAccountNumber; // current user's account number
+	private Screen screen; // ATM's screen
+	private Keypad keypad; // ATM's keypad
+	private GUI gui;
+	private CashDispenser cashDispenser; // ATM's cash dispenser
+	private BankDatabase bankDatabase; // account information database
 
 	private JFrame frame;
 	private JPanel leftJPanel;
@@ -226,15 +233,15 @@ public class GUI {
 						System.exit(0);
 			}
 			//FUNCTION KEY EVENT HERE
-			else if ( e.getActionCommand().equals( "Withdrawl" ) ) {
-
-			}else if ( e.getActionCommand().equals( "Deposit" ) ) {
-
-			}else if ( e.getActionCommand().equals( "TRANSFER" ) ) {
-
-			}else if ( e.getActionCommand().equals( "EXIT" ) ) {
-
-			}
+			// else if ( e.getActionCommand().equals( "Withdrawl" ) ) {
+			//
+			// }else if ( e.getActionCommand().equals( "Deposit" ) ) {
+			//
+			// }else if ( e.getActionCommand().equals( "TRANSFER" ) ) {
+			//
+			// }else if ( e.getActionCommand().equals( "EXIT" ) ) {
+			//
+			// }
 			else
 				input = input.concat( e.getActionCommand() );
 			textArea.setText(input);

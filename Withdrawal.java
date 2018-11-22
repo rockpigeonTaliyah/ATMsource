@@ -107,7 +107,17 @@ public class Withdrawal extends Transaction
          screen.displayMessageLine( gui, "4 - Cancel transaction" );
          screen.displayMessage( gui, "\nChoose a withdrawal amount: " );
 
-         int input = keypad.getInput();
+          int input = keypad.getInput();
+          boolean valid_input = false;
+         do {
+           try {
+            Double.parseDouble(String.valueOf(input));
+            valid_input = true;
+           } catch(Exception e) {
+             valid_input = false;
+           }
+         } while (valid_input != true);
+
          // int customValue = keypad.getInput();// get user input through keypad
 
          // determine how to proceed based on the input value
