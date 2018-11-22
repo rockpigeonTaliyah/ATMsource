@@ -55,9 +55,17 @@ public class GUI {
 	}
 
 	public void setMessage( String message ) {
+<<<<<<< HEAD
 		this.message = message;
 		//messageArea.setText(this.message);
 		messageArea.setText(this.message);
+=======
+		this.message = this.message.concat(message);
+	}
+
+	public void clearMessage() {
+		this.message = "";
+>>>>>>> parent of 66fde05... no message
 	}
 
 	public String getMessage() {

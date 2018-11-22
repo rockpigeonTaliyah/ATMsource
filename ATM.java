@@ -41,7 +41,7 @@ public class ATM
          // loop while user is not yet authenticated
          while ( !userAuthenticated )
          {
-            screen.displayMessageLine( gui, "Welcome!" );
+            screen.displayMessageLine( gui, "\nWelcome!" );
             //Thread.sleep(10000);
             authenticateUser(); // authenticate user
             gui.setCurrentAction("authenticateUser");
@@ -58,21 +58,20 @@ public class ATM
    private void authenticateUser()
    {
       //gui.setCurrentAction("authenticateUser");
-      screen.displayMessage( gui, "Please enter your account number: " );
+      screen.displayMessage( gui, "\nPlease enter your account number: " );
       
       while(!gui.getEnterClicked()) {
     	  if(gui.getEnterClicked()) {
     		gui.clearEnterClicked();
     		break;  
     	  }
-    	  System.out.print(""); //Nice :o)
+    	  System.out.print("");
+    	  //Thread.sleep(4000);;
       }
       /**/
       int accountNumber = gui.getInputInt();//keypad.getInput(); // input account number gui.getinput();
       System.out.println(accountNumber);
-      gui.clearScreen();
-      screen.displayMessage( gui, "Enter your PIN: " ); // prompt for PIN
-      System.out.print("LOMO");
+      screen.displayMessage( gui, "\nEnter your PIN: " ); // prompt for PIN
       int pin = keypad.getInput(); // input PIN
 
       // set userAuthenticated to boolean value returned by database
@@ -122,13 +121,13 @@ public class ATM
 						try {
 							screen.displayMessageLine( gui, "Exiting the system..." );
 							this.wait(2000);
-							gui.clearScreen();
+							gui.clearMessage();
 							screen.displayMessageLine( gui, "Card rejecting..." );
 							screen.displayMessage( gui, "Don't forget to take your card. " );
 							this.wait(2000);
 							if ( cashDispense ) //if user withdraw cash
 							{
-								gui.clearScreen();
+								gui.clearMessage();
 								screen.displayMessageLine( gui, "Cash dispensing..." );
 								screen.displayMessage( gui, "Don't forget to take your cash. " );
 								this.wait(2000);
@@ -150,7 +149,7 @@ public class ATM
    // display the main menu and return an input selection
    private int displayMainMenu()
    {
-		gui.clearScreen();
+		gui.clearMessage();
       screen.displayMessageLine( gui, "\nMain menu:" );
       screen.displayMessageLine( gui, "1 - View my balance" );
       screen.displayMessageLine( gui, "2 - Withdraw cash" );
