@@ -1,6 +1,3 @@
-// ATM.java
-// Represents an automated teller machine
-
 public class ATM
 {
    private boolean userAuthenticated; // whether user is authenticated
@@ -34,7 +31,7 @@ public class ATM
       gui = new GUI();
       gui.setMessage(screen.message);
       gui.run();
-	   
+
 	  // welcome and authenticate user; perform transactions
       while ( true )
       {
@@ -69,7 +66,7 @@ public class ATM
            		e.printStackTrace();
            }
       }
-	 
+
       int pin = Integer.parseInt( gui.getInput() ) ; // input PIN
       gui.clearInput();
       // set userAuthenticated to boolean value returned by database
@@ -170,7 +167,7 @@ public class ATM
 
 
 
-/**************************************************************************
+/**************************
  * (C) Copyright 1992-2007 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
@@ -183,4 +180,4 @@ public class ATM
  * and publisher shall not be liable in any event for incidental or       *
  * consequential damages in connection with, or arising out of, the       *
  * furnishing, performance, or use of these programs.                     *
- *************************************************************************/
+ *************************/
