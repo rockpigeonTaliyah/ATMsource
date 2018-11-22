@@ -115,16 +115,16 @@ public class GUI {
 	           }
 		}
 	}
-	
+
 	public void welcomePageButtonAction() {
 		//left top for 4
 		//right top for 4
-		String [] ATMActionCommand = {" ","Withdrawl","Deposit"," ","TRANSFER"," "," ","EXIT"};
+		String [] ATMActionCommand = {"BALANCE_INQUIRY","WITHDRAWL","DEPOSIT"," ","TRANSFER"," "," ","EXIT"};
 		for ( int i = 0; i <= 7; i++){
 			keys[ 16 + i ].setText(ATMActionCommand[i]);
 			keys[ 16 + i ].addActionListener( new buttonListenerFunction());
 		}
-		
+
 	}
 
 	/**
@@ -253,12 +253,12 @@ public class GUI {
 				textArea.setText(input);
 		}
 	}
-	
+
 	class buttonListenerFunction implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			
-				
+
+
 		}
 	}
-	
+
 }
