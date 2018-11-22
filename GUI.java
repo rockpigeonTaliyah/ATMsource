@@ -55,7 +55,7 @@ public class GUI {
 	}
 
 	public void setMessage( String message ) {
-		this.message = this.message.concat(message);
+		this.message = message;
 	}
 
 	public void clearMessage() {
