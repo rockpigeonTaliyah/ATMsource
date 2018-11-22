@@ -82,7 +82,7 @@ public class ATM
            }
       }
 
-      int pin = Integer.parseInt( gui.getInput() ) ; // input PIN
+      int pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
       //gui.clearInput();
       // set userAuthenticated to boolean value returned by database
       userAuthenticated =
