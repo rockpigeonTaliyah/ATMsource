@@ -70,7 +70,7 @@ public class ATM
     		   gui.waitTilInput();
         	   accountNumber = Integer.parseInt( gui.getInput() ); // input account number
         	   gui.clearInput();
-        	   //password input process -Lucas
+        	   //password input process
         	   screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
         	   gui.isPassword = true;
         	   gui.waitTilInput();
@@ -87,6 +87,7 @@ public class ATM
       }
 
       int pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
+      gui.setPassword( "" ); 
       gui.clearInput();
       // set userAuthenticated to boolean value returned by database
       userAuthenticated =
@@ -101,6 +102,7 @@ public class ATM
          screen.displayMessageLine(
         		 gui,
              "Invalid account number or PIN. Please try again." );
+         gui.setPassword( "" );
       }
    } // end method authenticateUser
 

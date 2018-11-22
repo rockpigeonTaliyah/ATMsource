@@ -124,6 +124,10 @@ public class GUI {
 	public String getPassword() {
 		return password;
 	}
+	
+	public void setPassword(String string) {
+		password = string;
+	}
 
 	//stop the system for user to press enter
 	public void waitTilInput() {
