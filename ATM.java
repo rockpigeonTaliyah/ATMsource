@@ -147,6 +147,8 @@ public class ATM
    // display the main menu and return an input selection
    private int displayMainMenu()
    {
+
+	      gui.welcomePageButtonAction();
       screen.mergeMessage(gui, "Main menu:\n" );
       screen.mergeMessage(gui, "1 - View my balance\n" );
       screen.mergeMessage(gui, "2 - Withdraw cash\n" );
@@ -158,7 +160,7 @@ public class ATM
    } // end method displayMainMenu
 
    // return object of specified Transaction subclass
-   static Transaction createTransaction( int type )
+   private Transaction createTransaction( int type )
    {
       Transaction temp = null; // temporary Transaction variable
 
