@@ -26,6 +26,7 @@ public class GUI {
 	public boolean isPassword = false;
 	public boolean inputEntered;
 	public String functionChoice;
+	public int amountChoice = 0;
 
 	/**
 	 * Launch the application.
@@ -73,6 +74,7 @@ public class GUI {
 	}
 
 	public String getInput() {
+		System.out.println(input);
 		return input;
 	}
 	public String getFunctionInput(){
@@ -85,6 +87,26 @@ public class GUI {
 							 e.printStackTrace();
 						 }
 				 		return functionChoice;
+		}
+		// return "123";
+	}
+	public int getAmountInput(){
+		synchronized ( this ) {
+						 try {
+
+							 while (amountChoice == 0 ) {
+								 Thread.sleep(200);
+
+							 }
+						 } catch (InterruptedException e) {
+							 e.printStackTrace();
+						 }
+						 // if (functionChoice == "EXIT") {
+							//  System.out.println("qwe");
+							//  amountChoice = 4;
+							 functionChoice = "";
+						 // }
+						return amountChoice;
 		}
 		// return "123";
 	}
@@ -119,7 +141,21 @@ public class GUI {
 	public void welcomePageButtonAction() {
 		//left top for 4
 		//right top for 4
-		String [] ATMActionCommand = {"BALANCE_INQUIRY","WITHDRAWL","DEPOSIT"," ","TRANSFER"," "," ","EXIT"};
+
+		String [] ATMActionCommand = {"BALANCE_INQUIRY","WITHDRAWAL","DEPOSIT","","TRANSFER","","","EXIT"};
+		removeCurrentListener();
+		for ( int i = 0; i <= 7; i++){
+			keys[ 16 + i ].setText(ATMActionCommand[i]);
+			keys[ 16 + i ].addActionListener( new buttonListenerFunction());
+
+		}
+
+	}
+	public void withdrawalButtonAction() {
+		//left top for 4
+		//right top for 4
+		String [] ATMActionCommand = {"","100","500","1000","","","","EXIT"};
+		removeCurrentListener();
 		for ( int i = 0; i <= 7; i++){
 			keys[ 16 + i ].setText(ATMActionCommand[i]);
 			keys[ 16 + i ].addActionListener( new buttonListenerFunction());
@@ -167,7 +203,7 @@ public class GUI {
 	    keys[ 12 ] = new JButton( "Enter" );
 	    keys[ 13 ] = new JButton( "." );
 	    keys[ 14 ] = new JButton( "00" );
-	    keys[ 15 ] = new JButton( " " );
+	    keys[ 15 ] = new JButton( "" );
 
 	    // add action to buttons
 			keys[ 10 ].addActionListener( new buttonListenerConcat());
@@ -184,7 +220,8 @@ public class GUI {
 			//left top for 4
 			//right top for 4
 	    for ( int i = 0; i <= 7; i++){
-	    	keys[ 16 + i ] = new JButton(" ");
+	    	keys[ 16 + i ] = new JButton("");
+				keys[ 16 + i ].setFocusPainted(false);
 			}
 	    // set leftJPanel layout to grid layout
 	    leftJPanel = new JPanel();
@@ -240,12 +277,27 @@ public class GUI {
 	    frame.add( keyPadJPanel, BorderLayout.SOUTH );
 
 	}
-
+	public void removeCurrentListener(){
+		for ( int i = 0; i <= 7; i++){
+			// keys[ 16 + i ].setText(ATMActionCommand[i]);
+			// keys[ 16 + i ].addActionListener( new buttonListenerFunction());
+			for( ActionListener al :  keys[ 16 + i ].getActionListeners() ) {
+	        keys[ 16 + i ].removeActionListener( al );
+	    }
+		}
+	}
 	class buttonListenerConcat implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 				if (e.getActionCommand() == "Clear") {
 					input = "";
-				}else if(!isPassword) {
+					password ="";
+				}else if(e.getActionCommand() == "Cancel"){
+					Object[] options = { "CANCEL", "OK" };
+					int action = JOptionPane.showOptionDialog(null, "Click OK to exit the ATM", "Warning",JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,null, options, options[0]);
+					// textArea.setText(String.valueOf(action));
+					if(action == 1)
+						System.exit(0);
+			}else if(!isPassword) {
 					input = input.concat( e.getActionCommand() );
 				}
 				else {
@@ -258,18 +310,25 @@ public class GUI {
 
 	class buttonListenerFunction implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
+			// functionChoice = e.getActionCommand();
 			switch(e.getActionCommand()){
 				case "BALANCE_INQUIRY":functionChoice = "BALANCE_INQUIRY";
 				  break;
-				case "WITHDRAWL": functionChoice = "WITHDRAWL";
+				case "WITHDRAWAL": functionChoice = "WITHDRAWAL";
 				 	break;
 				case "DEPOSIT": functionChoice = "DEPOSIT";
 				 	break;
 				case "TRANSFER": functionChoice = "TRANSFER";
 				 	break;
-				case "EXIT": functionChoice = "EXIT";
+				case "EXIT": functionChoice = "EXIT" ;amountChoice = 4;
 				 	break;
+				default :
+					amountChoice = Integer.parseInt(e.getActionCommand());
+				break;
 			}
+
+
 
 		}
 	}

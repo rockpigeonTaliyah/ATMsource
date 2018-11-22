@@ -22,66 +22,74 @@ public class Withdrawal extends Transaction
       // initialize references to keypad and cash dispenser
       keypad = atmKeypad;
       cashDispenser = atmCashDispenser;
+      screen = atmScreen;
+      this.gui = gui;
    } // end Withdrawal constructor
 
    // perform transaction
    public void execute()
    {
-      screen.displayMessage(gui, "IN_WITHDRAWL");
+     // screen.displayMessage(gui, "executed");
+      // screen.displayMessage(gui, " asdf");
       boolean cashDispensed = false; // cash was not dispensed yet
       double availableBalance; // amount available for withdrawal
 
       // get references to bank database and screen
       BankDatabase bankDatabase = getBankDatabase();
-      Screen screen = getScreen();
-      GUI gui = getGUI();
+      // Screen screen = getScreen();
+      // GUI gui = getGUI();
 
       // loop until cash is dispensed or the user cancels
       do
       {
          // obtain a chosen withdrawal amount from the user
          amount = displayMenuOfAmounts();
-
+         cashDispensed = false;
+//
+        if (amount == 4) {
+          return;
+        }
+//
          // check whether user chose a withdrawal amount or canceled
-         if ( amount != CANCELED )
-         {
-            System.out.println(amount);
-            // get available balance of account involved
-            availableBalance =
-               bankDatabase.getAvailableBalance( getAccountNumber() );
-
-            // check whether the user has enough money in the account
-            if ( amount <= availableBalance )
-            {
-               // check whether the cash dispenser has enough money
-               if ( cashDispenser.isSufficientCashAvailable( amount ) )
-               {
-                  // update the account involved to reflect withdrawal
-                  bankDatabase.debit( getAccountNumber(), amount );
-                  cashDispenser.dispenseCash( amount ); // dispense cash
-                  cashDispensed = true; // cash was dispensed
-
-                  // instruct user to take cash
-                  screen.displayMessageLine( gui,
-                     "\nPlease take your cash now." );
-               } // end if
-               else // cash dispenser does not have enough cash
-                  screen.displayMessageLine( gui,
-                     "\nInsufficient cash available in the ATM." +
-                     "\n\nPlease choose a smaller amount." );
-            } // end if
-            else // not enough money available in user's account
-            {
-               screen.displayMessageLine( gui,
-                  "\nInsufficient funds in your account." +
-                  "\n\nPlease choose a smaller amount." );
-            } // end else
-         } // end if
-         else // user chose cancel menu option
-         {
-            screen.displayMessageLine( gui, "\nCanceling transaction..." );
-            return; // return to main menu because user canceled
-         } // end else
+         // if ( amount != CANCELED )
+         // {
+         //    System.out.println(amount);
+         //    // get available balance of account involved
+         //    availableBalance =
+         //       bankDatabase.getAvailableBalance( getAccountNumber() );
+         //
+         //    // check whether the user has enough money in the account
+         //    if ( amount <= availableBalance )
+         //    {
+         //       // check whether the cash dispenser has enough money
+         //       if ( cashDispenser.isSufficientCashAvailable( amount ) )
+         //       {
+         //          // update the account involved to reflect withdrawal
+         //          bankDatabase.debit( getAccountNumber(), amount );
+         //          cashDispenser.dispenseCash( amount ); // dispense cash
+         //          cashDispensed = true; // cash was dispensed
+         //
+         //          // instruct user to take cash
+         //          screen.displayMessageLine( gui,
+         //             "\nPlease take your cash now." );
+         //       } // end if
+         //       else // cash dispenser does not have enough cash
+         //          screen.displayMessageLine( gui,
+         //             "\nInsufficient cash available in the ATM." +
+         //             "\n\nPlease choose a smaller amount." );
+         //    } // end if
+         //    else // not enough money available in user's account
+         //    {
+         //       screen.displayMessageLine( gui,
+         //          "\nInsufficient funds in your account." +
+         //          "\n\nPlease choose a smaller amount." );
+         //    } // end else
+         // } // end if
+         // else // user chose cancel menu option
+         // {
+         //    screen.displayMessageLine( gui, "\nCanceling transaction..." );
+         //    return; // return to main menu because user canceled
+         // } // end else
       } while ( !cashDispensed );
 
    } // end method execute
@@ -90,50 +98,58 @@ public class Withdrawal extends Transaction
    // return the chosen amount or 0 if the user chooses to cancel
    private int displayMenuOfAmounts()
    {
+      gui.withdrawalButtonAction();
       int userChoice = 0; // local variable to store return value
 
-      Screen screen = getScreen(); // get screen reference
-      GUI gui = getGUI();
+      // Screen screen = getScreen(); // get screen reference
+      // GUI gui = getGUI();
 
       // array of amounts to correspond to menu numbers
-      int amounts[] = {0, 100, 500, 1000};
-
+      // int amounts[] = {0, 100, 500, 1000};
       // loop while no valid choice has been made
       while ( userChoice == 0 )
       {
          // display the menu
-         screen.displayMessageLine( gui, "\nWithdrawal Menu:" );
-         screen.displayMessageLine( gui, "1 - $100" );
-         screen.displayMessageLine( gui, "2 - $500" );
-         screen.displayMessageLine( gui, "3 - $1000" );
-         screen.displayMessageLine( gui, "You may directly specify your amounts" );
-         screen.displayMessageLine( gui, "4 - Cancel transaction" );
-         screen.displayMessage( gui, "\nChoose a withdrawal amount: " );
+         screen.mergeMessage( gui, "\n Withdrawal Menu:\n\n" );
+         screen.mergeMessage( gui, " -- $100\n\n" );
+         screen.mergeMessage( gui, " -- $500\n\n" );
+         screen.mergeMessage( gui, " -- $1000\n\n" );
+         screen.mergeMessage( gui, " -- You may directly specify your amounts\n\n" );
+         screen.mergeMessage( gui, " -- Cancel transaction\n\n" );
+         screen.mergeMessage( gui, "\nChoose a withdrawal amount: " );
+         gui.printMessage();
+         int input =gui.getAmountInput();
+         System.out.println("123");
 
-         int input = keypad.getInput();
          // int customValue = keypad.getInput();// get user input through keypad
 
          // determine how to proceed based on the input value
          switch ( input )
          {
-            case 1:               // if the user chose a withdrawal amount
-            case 2:                // (i.e., chose option 1, 2 or 3), return the
-            case 3:
-             userChoice = amounts[ input ];
+            case 100:            // if the user chose a withdrawal amount
+            case 500:                  // (i.e., chose option 1, 2 or 3), return the
+            case 1000:
+             userChoice = input;
               // save user's choice
               break;
-            case CANCELED: // the user chose to cancel
-               userChoice = CANCELED; // save user's choice
+            case 4: // the user chose to cancel
+               userChoice = 4; // save user's choice
+
                break;
             default: // the user did not enter a value from 1-4
               // check is the user input valid amount, then save amount , else output error
-               if (input >= 100 && input % 100 == 0) {
-                 userChoice = input;
-               }else{
-                 screen.displayMessageLine( gui,
+               // if (input >= 100 && input % 100 == 0) {
+                 // gui.waitTilInput();
+                 // userChoice = Integer.parseInt(gui.getInput());
+                 // System.out.println(userChoice);
+               // }else{
+                 screen.displayMessage( gui,
                     "\nInvalid selection. Try again." );
-               }
+                    break;
+               // }
+
          } // end switch
+         // screen.displayMessage(gui, Integer.toString(input));
       } // end while
 
       return userChoice; // return withdrawal amount or CANCELED
