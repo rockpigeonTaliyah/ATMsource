@@ -45,7 +45,7 @@ public class ATM
            		e.printStackTrace();
            }
     	  }
-    	 
+
     	 // loop while user is not yet authenticated
          while ( !userAuthenticated )
          {
@@ -78,7 +78,7 @@ public class ATM
         	   gui.isPassword = false;
         	   gui.setInput( "" );
         	   //password input session ends here ^^^^
-        	   
+
         	   gui.printMessage();
         	   gui.waitTilInput();
            } catch (InterruptedException e) {
@@ -87,7 +87,7 @@ public class ATM
       }
 
       int pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
-      //gui.clearInput();
+      gui.clearInput();
       // set userAuthenticated to boolean value returned by database
       userAuthenticated =
          bankDatabase.authenticateUser( accountNumber, pin );
@@ -147,17 +147,18 @@ public class ATM
    // display the main menu and return an input selection
    private int displayMainMenu()
    {
-      screen.displayMessageLine(gui, "\nMain menu:" );
-      screen.displayMessageLine(gui, "1 - View my balance" );
-      screen.displayMessageLine(gui, "2 - Withdraw cash" );
-      screen.displayMessageLine(gui, "3 - Transfer cash" );
-      screen.displayMessageLine(gui, "4 - Exit\n" );
-      screen.displayMessage( gui, "Enter a choice: " );
+      // screen.displayMessageLine(gui, "\nMain menu:" );
+      // screen.displayMessageLine(gui, "1 - View my balance" );
+      // screen.displayMessageLine(gui, "2 - Withdraw cash" );
+      // screen.displayMessageLine(gui, "3 - Transfer cash" );
+      // screen.displayMessageLine(gui, "4 - Exit\n" );
+      // screen.displayMessage( gui, "Enter a choice: " );
+		screen.displayMessage( gui,	"\nMain menu:\n1 - View my balance\n2 - Withdraw cash\n3 - Transfer cash\n4 - Exit\nEnter a choice: ");
       return keypad.getInput(); // return user's selection
    } // end method displayMainMenu
 
    // return object of specified Transaction subclass
-   private Transaction createTransaction( int type )
+   static Transaction createTransaction( int type )
    {
       Transaction temp = null; // temporary Transaction variable
 

@@ -11,13 +11,6 @@ import javax.swing.JTextArea;
 import javax.swing.JOptionPane;
 
 public class GUI {
-	private boolean userAuthenticated; // whether user is authenticated
-	private int currentAccountNumber; // current user's account number
-	private Screen screen; // ATM's screen
-	private Keypad keypad; // ATM's keypad
-	private GUI gui;
-	private CashDispenser cashDispenser; // ATM's cash dispenser
-	private BankDatabase bankDatabase; // account information database
 
 	private JFrame frame;
 	private JPanel leftJPanel;
@@ -64,7 +57,7 @@ public class GUI {
 	public String getMessage() {
 		return message;
 	}
-	
+
 	public void printMessage() {
 		messageArea.setText(message);
 	}
@@ -80,7 +73,7 @@ public class GUI {
 	public void printInput() {
 		textArea.setText(input);
 	}
-	
+
 	//clear the inputArea and reset state
 	public void clearInput() {
 		inputEntered = false;
@@ -90,7 +83,7 @@ public class GUI {
 	public String getPassword() {
 		return password;
 	}
-	
+
 	//stop the system for user to press enter
 	public void waitTilInput() {
 		synchronized ( this ) {
@@ -127,7 +120,7 @@ public class GUI {
 
 	    textJPanel = new JPanel();
 	    textJPanel.setLayout( new BorderLayout() );
-	    
+
 	    textJPanel.add( messageArea, BorderLayout.CENTER );
 	    textJPanel.add( textArea, BorderLayout.SOUTH);
 
@@ -234,15 +227,15 @@ public class GUI {
 						System.exit(0);
 			}
 			//FUNCTION KEY EVENT HERE
-			// else if ( e.getActionCommand().equals( "Withdrawl" ) ) {
-			//
-			// }else if ( e.getActionCommand().equals( "Deposit" ) ) {
-			//
-			// }else if ( e.getActionCommand().equals( "TRANSFER" ) ) {
-			//
-			// }else if ( e.getActionCommand().equals( "EXIT" ) ) {
-			//
-			// }
+			else if ( e.getActionCommand().equals( "Withdrawl" ) ) {
+				
+			}else if ( e.getActionCommand().equals( "Deposit" ) ) {
+
+			}else if ( e.getActionCommand().equals( "TRANSFER" ) ) {
+
+			}else if ( e.getActionCommand().equals( "EXIT" ) ) {
+
+			}
 			else {
 				if(!isPassword) {
 					input = input.concat( e.getActionCommand() );
