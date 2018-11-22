@@ -9,6 +9,7 @@ public class Screen
    public void displayMessage( GUI gui, String message ) 
    {
       gui.setMessage( message ) ; 
+      gui.printMessage();
    } // end method displayMessage
 
    // display a message with a carriage return
@@ -17,6 +18,10 @@ public class Screen
       gui.setMessage( message + "\n" );   
    } // end method displayMessageLine
 
+   public void mergeMessage( GUI gui, String message ) {
+	   gui.setMessage( message );
+   }
+   
    // display a dollar amount
    public void displayDollarAmount( GUI gui, double amount )
    {

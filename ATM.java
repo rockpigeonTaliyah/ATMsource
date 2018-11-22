@@ -41,7 +41,7 @@ public class ATM
          // loop while user is not yet authenticated
          while ( !userAuthenticated )
          {
-            screen.displayMessageLine(gui, "\nWelcome!" );
+            screen.mergeMessage(gui, "\nWelcome!" );
             authenticateUser(); // authenticate user
          } // end while
 
@@ -60,14 +60,10 @@ public class ATM
            try {
         	   wait(1000);
     		   screen.displayMessage( gui, "\nPlease enter your account number: " );
-    		   gui.printMessage();
     		   gui.waitTilInput();
         	   accountNumber = Integer.parseInt( gui.getInput() ); // input account number
-        	   gui.inputEntered = false;
-        	   gui.setInput( "" );
-        	   gui.printInput();
+        	   gui.clearInput();
         	   screen.displayMessage( gui, "\nEnter your PIN: " );// prompt for PIN
-        	   gui.printMessage();
         	   gui.waitTilInput();
            } catch (InterruptedException e) {
            		e.printStackTrace();
@@ -75,7 +71,7 @@ public class ATM
       }
 	 
       int pin = Integer.parseInt( gui.getInput() ) ; // input PIN
-
+      gui.clearInput();
       // set userAuthenticated to boolean value returned by database
       userAuthenticated =
          bankDatabase.authenticateUser( accountNumber, pin );

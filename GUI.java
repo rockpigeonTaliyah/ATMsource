@@ -70,6 +70,12 @@ public class GUI {
 		textArea.setText(input);
 	}
 	
+	public void clearInput() {
+		inputEntered = false;
+		setInput( "" );
+		printInput();
+	}
+	
 	public void waitTilInput() {
 		synchronized ( this ) {
 	           try {
