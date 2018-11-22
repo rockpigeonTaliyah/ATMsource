@@ -2,9 +2,7 @@
 // Represents the screen of the ATM
 
 public class Screen
-{
-	public String message = "";
-	
+{	
    // displays a message without a carriage return
    public void displayMessage( GUI gui, String message ) 
    {
@@ -15,7 +13,8 @@ public class Screen
    // display a message with a carriage return
    public void displayMessageLine( GUI gui, String message ) 
    {
-      gui.setMessage( message + "\n" );   
+      gui.setMessage( message + "\n" );  
+      gui.printMessage();
    } // end method displayMessageLine
 
    public void mergeMessage( GUI gui, String message ) {

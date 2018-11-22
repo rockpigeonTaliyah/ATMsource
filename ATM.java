@@ -29,23 +29,33 @@ public class ATM
    public void run()
    {
       gui = new GUI();
-      gui.setMessage(screen.message);
       gui.run();
 
 	  // welcome and authenticate user; perform transactions
       while ( true )
       {
-         // loop while user is not yet authenticated
+    	  //print the welcome message
+    	  synchronized ( this ) {
+    		try {
+    			screen.mergeMessage(gui, "Welcome");
+    			wait(1000);
+    			screen.displayMessage(gui, "Please insert your card.");
+    			wait(1000);//wait for user to insert card
+    		}catch(InterruptedException e) {
+           		e.printStackTrace();
+           }
+    	  }
+    	 
+    	 // loop while user is not yet authenticated
          while ( !userAuthenticated )
          {
-            screen.mergeMessage(gui, "\nWelcome!" );
             authenticateUser(); // authenticate user
          } // end while
 
          performTransactions(); // user is now authenticated
          userAuthenticated = false; // reset before next ATM session
          currentAccountNumber = 0; // reset before next ATM session
-         screen.displayMessageLine(gui, "\nThank you! Goodbye!" );
+         screen.displayMessageLine(gui, "Thank you! Goodbye!" );
       } // end while
    } // end method run
 
@@ -55,12 +65,12 @@ public class ATM
 	  int accountNumber = 0;
 	   synchronized ( this ) {
            try {
-        	   wait(1000);
-    		   screen.displayMessage( gui, "\nPlease enter your account number: " );
+        	   wait(1000);//give user time to watch the message
+    		   screen.displayMessage( gui, "Please enter your account number: " );
     		   gui.waitTilInput();
         	   accountNumber = Integer.parseInt( gui.getInput() ); // input account number
         	   gui.clearInput();
-        	   screen.displayMessage( gui, "\nEnter your PIN: " );// prompt for PIN
+        	   screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
         	   gui.waitTilInput();
            } catch (InterruptedException e) {
            		e.printStackTrace();
@@ -82,7 +92,6 @@ public class ATM
          screen.displayMessageLine(
         		 gui,
              "Invalid account number or PIN. Please try again." );
-         gui.printMessage();
       }
    } // end method authenticateUser
 
@@ -115,12 +124,12 @@ public class ATM
                currentTransaction.execute(); // execute transaction
                break;
             case EXIT: // user chose to terminate session
-               screen.displayMessageLine(gui, "\nExiting the system..." );
+               screen.displayMessageLine(gui, "Exiting the system..." );
                userExited = true; // this ATM session should end
                break;
             default: // user did not enter an integer from 1-4
                screen.displayMessageLine(gui,
-                  "\nYou did not enter a valid selection. Try again." );
+                  "You did not enter a valid selection. Try again." );
                break;
          } // end switch
       } // end while

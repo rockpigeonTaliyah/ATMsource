@@ -2,6 +2,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -58,14 +59,10 @@ public class GUI {
 		this.message = message;
 	}
 
-	public void clearMessage() {
-		this.message = "";
-	}
-
 	public String getMessage() {
 		return message;
 	}
-
+	
 	public void printMessage() {
 		messageArea.setText(message);
 	}
@@ -82,12 +79,14 @@ public class GUI {
 		textArea.setText(input);
 	}
 	
+	//clear the inputArea and reset state
 	public void clearInput() {
 		inputEntered = false;
 		setInput( "" );
 		printInput();
 	}
 	
+	//stop the system for user to press enter
 	public void waitTilInput() {
 		synchronized ( this ) {
 	           try {
@@ -110,35 +109,24 @@ public class GUI {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		//frame.getContentPane().setLayout( new GridBagLayout() );
 
+	    messageArea = new JTextArea(3, 20);// declaration of messageArea for displaying message
+	    messageArea.setEditable(false);    // set messageArea not editable
+	    messageArea.setText(message);// display message in messageArea
+	    messageArea.setLineWrap(true);// set auto line wrap
+	    messageArea.setWrapStyleWord(true);//line wrap without cut words
 
-	    messageArea = new JTextArea(3, 20);// declaration of textArea for displaying message
-	    messageArea.setEditable(false);    // set textArea not editable
-	    messageArea.setText(getMessage());// display line1 in textArea
-
-		textArea = new JTextArea( 3, 20 );  // declaration of textArea for displaying output
+		textArea = new JTextArea( 3, 20 );  // declaration of textArea for displaying input
 	    textArea.setEditable(false);    // set textArea not editable
-	    textArea.setText(input);  // display line1 in textArea
+	    textArea.setText(input);  // display input in textArea
 
 	    textJPanel = new JPanel();
-	    textJPanel.setLayout( new GridLayout( 1, 2));
-	    /*
-	    GridBagConstraints messageC = new GridBagConstraints();
-	    messageC.gridx = 0;
-	    messageC.gridy = 0;
-	    messageC.gridwidth = 12;
-	    messageC.gridheight = 2;
-	    messageC.weightx = 0;
-	    messageC.weighty = 0;
-	    messageC.fill = GridBagConstraints.BOTH;
-	    messageC.anchor = GridBagConstraints.WEST;
-	    textJPanel.add(messageArea, messageC);
-	    */
-	    //textJPanel.add(messageArea);
-	    //textJPanel.add(textArea);
+	    textJPanel.setLayout( new BorderLayout() );
+	    
+	    textJPanel.add( messageArea, BorderLayout.CENTER );
+	    textJPanel.add( textArea, BorderLayout.SOUTH);
 
-
+	    //left 4 + right 4 + num 1-9 + 4 = 24
 	    keys = new JButton[ 24 ];
 
 	    // initialize keypad buttons
@@ -186,7 +174,6 @@ public class GUI {
 	    // set rightJPanel layout to grid layout
 	    rightJPanel = new JPanel();
 	    rightJPanel.setLayout( new GridLayout( 4, 1 ) );
-	   // rightJPanel.setPreferredSize( new Dimension( 70, 100 ));
 
 	    // add buttons to rightJPanel panel
 	    for ( int i = 20; i <= 23; i++ )
@@ -222,10 +209,9 @@ public class GUI {
 	    for ( int i = 13; i <= 15; i++ )
 	    	keyPadJPanel.add( keys[ i ] );
 
-	    frame.add( messageArea, BorderLayout.NORTH );
 	    frame.add( leftJPanel, BorderLayout.WEST );
 	    frame.add( rightJPanel, BorderLayout.EAST );
-	    frame.add( textArea, BorderLayout.CENTER );
+	    frame.add( textJPanel, BorderLayout.CENTER );
 	    frame.add( keyPadJPanel, BorderLayout.SOUTH );
 
 	}
