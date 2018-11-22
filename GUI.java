@@ -10,6 +10,13 @@ import javax.swing.JTextArea;
 import javax.swing.JOptionPane;
 
 public class GUI {
+	private boolean userAuthenticated; // whether user is authenticated
+	private int currentAccountNumber; // current user's account number
+	private Screen screen; // ATM's screen
+	private Keypad keypad; // ATM's keypad
+	private GUI gui;
+	private CashDispenser cashDispenser; // ATM's cash dispenser
+	private BankDatabase bankDatabase; // account information database
 
 	private JFrame frame;
 	private JPanel leftJPanel;
@@ -21,9 +28,7 @@ public class GUI {
 	private JTextArea textArea; //text area to display output
 	private String message = "";//for message
 	private String input = "";//store user input
-	private String currentAction = "";
-	private boolean enterClicked = false;
-	
+	public boolean inputEntered;
 
 	/**
 	 * Launch the application.
@@ -50,16 +55,43 @@ public class GUI {
 	}
 
 	public void setMessage( String message ) {
-		this.message = this.message.concat(message);
-	}
-
-	public void clearMessage() {
-		this.message = "";
+		this.message = message;
+		//messageArea.setText(this.message);
+		messageArea.setText(this.message);
 	}
 
 	public String getMessage() {
 		return message;
 	}
+
+	public void printMessage() {
+		messageArea.setText(message);
+	}
+
+	public void setInput( String input ) {
+		this.input = input;
+	}
+
+	public String getInput() {
+		return input;
+	}
+
+	public void printInput() {
+		textArea.setText(input);
+	}
+
+	public void waitTilInput() {
+		synchronized ( this ) {
+	           try {
+	        	   while ( !inputEntered ) {
+	        		   Thread.sleep(200);;
+	        	   }
+	           } catch (InterruptedException e) {
+	        	   e.printStackTrace();
+	           }
+		}
+	}
+
 
 	/**
 	 * Initialize the coents of the frame.
@@ -71,6 +103,7 @@ public class GUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		//frame.getContentPane().setLayout( new GridBagLayout() );
+
 
 	    messageArea = new JTextArea(3, 20);// declaration of textArea for displaying message
 	    messageArea.setEditable(false);    // set textArea not editable
@@ -114,24 +147,17 @@ public class GUI {
 	    keys[ 15 ] = new JButton( " " );
 
 	    // add action to buttons
-		keys[ 10 ].addActionListener( new buttonListenerConcat());
-		keys[ 11 ].addActionListener( new buttonListenerConcat());
-		keys[ 12 ].addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				textArea.setText(currentAction);
-				enterClicked = true;
-					switch (currentAction) {
-						case "authenticateUser":
-							break;
-						default:
-							break;
-					}
-				}
-			});
+			keys[ 10 ].addActionListener( new buttonListenerConcat());
+	    keys[ 11 ].addActionListener( new buttonListenerConcat());
+	    keys[ 12 ].addActionListener( new ActionListener() {
+	    	@Override
+	    	public void actionPerformed( ActionEvent e ) {
+	    		inputEntered = true;
+	    	}
+	    });
 	    keys[ 13 ].addActionListener( new buttonListenerConcat());
 	    keys[ 14 ].addActionListener( new buttonListenerConcat());
-			// String ATMActionCommand =new String[8];
+
 			//left top for 4
 			//right top for 4
 			String [] ATMActionCommand = {" ","Withdrawl","Deposit"," ","TRANSFER"," "," ","EXIT"};
@@ -139,7 +165,6 @@ public class GUI {
 	    	keys[ 16 + i ] = new JButton(ATMActionCommand[i]);
 				keys[ 16 + i ].addActionListener( new buttonListenerConcat());
 			}
-
 	    // set leftJPanel layout to grid layout
 	    leftJPanel = new JPanel();
 	    leftJPanel.setLayout( new GridLayout( 4, 1 ) );
@@ -197,45 +222,34 @@ public class GUI {
 
 	}
 
-	public String getCurrentAction(){
-		return currentAction;
-	}
-
-	public void setCurrentAction(String currentAction){
-		this.currentAction = currentAction;
-	}
-	
-	public void clearEnterClicked() {
-		this.enterClicked = false;
-	}
-	
-	public boolean getEnterClicked() {
-		return this.enterClicked;
-	}
-	
-	public int getInputInt() {
-		return input == "" ? 0 : Integer.parseInt(this.input);
-	}
-
 	class buttonListenerConcat implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			if ( e.getActionCommand().equals( "Clear" ))
-			{	
 				input = "";
-				textArea.setText(input);
-			}
-			else if ( e.getActionCommand().equals( "Cancel" ) )
-				{
+			else if(e.getActionCommand().equals( "Cancel" ))
+			{
 					Object[] options = { "CANCEL", "OK" };
 					int action = JOptionPane.showOptionDialog(null, "Click OK to exit the ATM", "Warning",JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,null, options, options[0]);
 					// textArea.setText(String.valueOf(action));
 					if(action == 1)
 						System.exit(0);
-					}
-			else{
-				input = input.concat( e.getActionCommand() );
-				textArea.setText(input);
 			}
+			//FUNCTION KEY EVENT HERE
+			// else if ( e.getActionCommand().equals( "Withdrawl" ) ) {
+			//
+			// }else if ( e.getActionCommand().equals( "Deposit" ) ) {
+			//
+			// }else if ( e.getActionCommand().equals( "TRANSFER" ) ) {
+			//
+			// }else if ( e.getActionCommand().equals( "EXIT" ) ) {
+			//
+			// }
+			else
+				input = input.concat( e.getActionCommand() );
+			textArea.setText(input);
+
+
+
 		}
 	}
 }
