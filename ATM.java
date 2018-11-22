@@ -70,15 +70,24 @@ public class ATM
     		   gui.waitTilInput();
         	   accountNumber = Integer.parseInt( gui.getInput() ); // input account number
         	   gui.clearInput();
+        	   //password input process -Lucas
         	   screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
+        	   gui.isPassword = true;
+        	   gui.waitTilInput();
+        	   System.out.printf("\n%s", gui.getPassword());
+        	   gui.isPassword = false;
+        	   gui.setInput( "" );
+        	   //password input session ends here ^^^^
+        	   
+        	   gui.printMessage();
         	   gui.waitTilInput();
            } catch (InterruptedException e) {
            		e.printStackTrace();
            }
       }
 
-      int pin = Integer.parseInt( gui.getInput() ) ; // input PIN
-      gui.clearInput();
+      int pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
+      //gui.clearInput();
       // set userAuthenticated to boolean value returned by database
       userAuthenticated =
          bankDatabase.authenticateUser( accountNumber, pin );
