@@ -149,9 +149,13 @@ public class GUI {
 	    keys[ 13 ].addActionListener( new buttonListenerConcat());
 	    keys[ 14 ].addActionListener( new buttonListenerConcat());
 
-	    for ( int i = 1; i <= 8; i++)
-	    	keys[ 15 + i ] = new JButton( " " );
-
+			//left top for 4
+			//right top for 4
+			String [] ATMActionCommand = {" ","Withdrawl","Deposit"," ","TRANSFER"," "," ","EXIT"};
+	    for ( int i = 0; i <= 7; i++){
+	    	keys[ 16 + i ] = new JButton(ATMActionCommand[i]);
+				keys[ 16 + i ].addActionListener( new buttonListenerConcat());
+			}
 	    // set leftJPanel layout to grid layout
 	    leftJPanel = new JPanel();
 	    leftJPanel.setLayout( new GridLayout( 4, 1 ) );
@@ -214,16 +218,29 @@ public class GUI {
 			if ( e.getActionCommand().equals( "Clear" ))
 				input = "";
 			else if(e.getActionCommand().equals( "Cancel" ))
-				{
+			{
 					Object[] options = { "CANCEL", "OK" };
 					int action = JOptionPane.showOptionDialog(null, "Click OK to exit the ATM", "Warning",JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,null, options, options[0]);
 					// textArea.setText(String.valueOf(action));
 					if(action == 1)
 						System.exit(0);
-				}
+			}
+			//FUNCTION KEY EVENT HERE
+			else if ( e.getActionCommand().equals( "Withdrawl" ) ) {
+
+			}else if ( e.getActionCommand().equals( "Deposit" ) ) {
+
+			}else if ( e.getActionCommand().equals( "TRANSFER" ) ) {
+
+			}else if ( e.getActionCommand().equals( "EXIT" ) ) {
+
+			}
 			else
 				input = input.concat( e.getActionCommand() );
 			textArea.setText(input);
+
+
+
 		}
 	}
 }
