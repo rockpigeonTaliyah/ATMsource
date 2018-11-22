@@ -87,7 +87,8 @@ public class ATM
       }
 
       int pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
-      //gui.clearInput();
+      gui.clearInput();
+      
       // set userAuthenticated to boolean value returned by database
       userAuthenticated =
          bankDatabase.authenticateUser( accountNumber, pin );
@@ -147,12 +148,13 @@ public class ATM
    // display the main menu and return an input selection
    private int displayMainMenu()
    {
-      screen.displayMessageLine(gui, "\nMain menu:" );
-      screen.displayMessageLine(gui, "1 - View my balance" );
-      screen.displayMessageLine(gui, "2 - Withdraw cash" );
-      screen.displayMessageLine(gui, "3 - Transfer cash" );
-      screen.displayMessageLine(gui, "4 - Exit\n" );
-      screen.displayMessage( gui, "Enter a choice: " );
+      screen.mergeMessage(gui, "Main menu:\n" );
+      screen.mergeMessage(gui, "1 - View my balance\n" );
+      screen.mergeMessage(gui, "2 - Withdraw cash\n" );
+      screen.mergeMessage(gui, "3 - Transfer cash\n" );
+      screen.mergeMessage(gui, "4 - Exit\n" );
+      screen.mergeMessage( gui, "Enter a choice: " );
+      gui.printMessage();
       return keypad.getInput(); // return user's selection
    } // end method displayMainMenu
 

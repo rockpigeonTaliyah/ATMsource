@@ -67,8 +67,13 @@ public class GUI {
 	
 	public void printMessage() {
 		messageArea.setText(message);
+		setMessage("");
 	}
 
+	public void mergeMessage(String message) {
+		this.message = this.message.concat(message);
+	}
+	
 	public void setInput( String input ) {
 		this.input = input;
 	}
