@@ -62,7 +62,7 @@ public class ATM
     		   gui.printMessage();
     		   gui.waitTilInput();
         	   accountNumber = Integer.parseInt( gui.getInput() ); // input account number
-        	   gui.clearInput();
+        	   //gui.clearInput();
         	   gui.inputEntered = false;
         	   gui.setInput( "" );
         	   gui.printInput();
@@ -83,7 +83,7 @@ public class ATM
       }
 
       int pin = Integer.parseInt( gui.getInput() ) ; // input PIN
-      gui.clearInput();
+      //gui.clearInput();
       // set userAuthenticated to boolean value returned by database
       userAuthenticated =
          bankDatabase.authenticateUser( accountNumber, pin );

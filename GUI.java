@@ -87,8 +87,6 @@ public class GUI {
 	public String getPassword() {
 		return password;
 	}
-
-	}
 	
 	public void waitTilInput() {
 		synchronized ( this ) {
