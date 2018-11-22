@@ -60,8 +60,13 @@ public class GUI {
 
 	public void printMessage() {
 		messageArea.setText(message);
+		setMessage("");
 	}
 
+	public void mergeMessage(String message) {
+		this.message = this.message.concat(message);
+	}
+	
 	public void setInput( String input ) {
 		this.input = input;
 	}
@@ -78,8 +83,9 @@ public class GUI {
 	public void clearInput() {
 		inputEntered = false;
 		setInput( "" );
-		printInput();
+		printInput();	
 	}
+	
 	public String getPassword() {
 		return password;
 	}

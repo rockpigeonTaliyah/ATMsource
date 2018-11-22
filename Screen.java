@@ -18,7 +18,7 @@ public class Screen
    } // end method displayMessageLine
 
    public void mergeMessage( GUI gui, String message ) {
-	   gui.setMessage( message );
+	   gui.mergeMessage( message );
    }
    
    // display a dollar amount
