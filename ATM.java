@@ -53,7 +53,6 @@ public class ATM
    private void authenticateUser()
    {
 	  int accountNumber = 0;
-	  int accountPin = 0;
 	   synchronized ( this ) {
            try {
         	   wait(2000);
@@ -67,13 +66,15 @@ public class ATM
         	   gui.setInput( "" );
         	   gui.printInput();
         	   gui.clearMessage();
+        	   
+        	   //password input process -Lucas
         	   screen.displayMessage( gui, "\nEnter your PIN: " );// prompt for PIN        	   
         	   gui.isPassword = true;
         	   gui.waitTilInput();
         	   System.out.printf("\n%s", gui.getPassword());
-        	   //accountPin = Integer.parseInt( gui.getPassword() );
         	   gui.isPassword = false;
         	   gui.setInput( "" );
+        	   //password input session ends here ^^^^
         	   
         	   gui.printMessage();
         	   gui.waitTilInput();
