@@ -22,7 +22,7 @@ public class GUI {
 	private String message = "";//for message
 	private String input = "";//store user input
 	private String currentAction = "";
-	private boolean enterClicked = false;
+	private boolean inputEntered = false;
 	
 
 	/**
@@ -59,6 +59,35 @@ public class GUI {
 
 	public String getMessage() {
 		return message;
+	}
+	
+	public void printMessage() {
+		messageArea.setText(message);
+	}
+	
+	public void setInput( String input ) {
+		this.input = input;
+	}
+	
+	public String getInput() {
+		return input;
+	}
+	
+	public void printInput() {
+		textArea.setText(input);
+	}
+	
+	public void waitTilInput() {
+		synchronized ( this ) {
+	           try {
+	        	   while ( !inputEntered ) {
+	        		   Thread.sleep(200);;
+	        	   }
+	           } catch (InterruptedException e) {
+	        	   e.printStackTrace();
+	           }
+		}
+		inputEntered = false;
 	}
 
 	/**
@@ -118,17 +147,10 @@ public class GUI {
 		keys[ 11 ].addActionListener( new buttonListenerConcat());
 		keys[ 12 ].addActionListener(new ActionListener(){
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				textArea.setText(currentAction);
-				enterClicked = true;
-					switch (currentAction) {
-						case "authenticateUser":
-							break;
-						default:
-							break;
-					}
-				}
-			});
+			public void actionPerformed( ActionEvent e ) {
+	    		inputEntered = true;
+	    	}
+	    });
 	    keys[ 13 ].addActionListener( new buttonListenerConcat());
 	    keys[ 14 ].addActionListener( new buttonListenerConcat());
 			// String ATMActionCommand =new String[8];
@@ -195,26 +217,6 @@ public class GUI {
 	    frame.add( textArea, BorderLayout.CENTER );
 	    frame.add( keyPadJPanel, BorderLayout.SOUTH );
 
-	}
-
-	public String getCurrentAction(){
-		return currentAction;
-	}
-
-	public void setCurrentAction(String currentAction){
-		this.currentAction = currentAction;
-	}
-	
-	public void clearEnterClicked() {
-		this.enterClicked = false;
-	}
-	
-	public boolean getEnterClicked() {
-		return this.enterClicked;
-	}
-	
-	public int getInputInt() {
-		return input == "" ? 0 : Integer.parseInt(this.input);
 	}
 
 	class buttonListenerConcat implements ActionListener {

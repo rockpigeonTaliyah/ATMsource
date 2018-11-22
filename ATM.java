@@ -44,7 +44,6 @@ public class ATM
             screen.displayMessageLine( gui, "\nWelcome!" );
             //Thread.sleep(10000);
             authenticateUser(); // authenticate user
-            gui.setCurrentAction("authenticateUser");
          } // end while
 
          performTransactions(); // user is now authenticated
@@ -57,22 +56,25 @@ public class ATM
    // attempts to authenticate user against database
    private void authenticateUser()
    {
-      //gui.setCurrentAction("authenticateUser");
-      screen.displayMessage( gui, "\nPlease enter your account number: " );
-      
-      while(!gui.getEnterClicked()) {
-    	  if(gui.getEnterClicked()) {
-    		gui.clearEnterClicked();
-    		break;  
-    	  }
-    	  System.out.print("");
-    	  //Thread.sleep(4000);;
+	  int accountNumber = 0;
+	   synchronized ( this ) {
+           try {
+        	   wait(1000);
+    		   screen.displayMessage( gui, "\nPlease enter your account number: " );
+    		   gui.printMessage();
+    		   gui.waitTilInput();
+        	   accountNumber = Integer.parseInt( gui.getInput() ); // input account number
+        	   gui.setInput( "" );
+        	   gui.printInput();
+        	   screen.displayMessage( gui, "\nEnter your PIN: " );// prompt for PIN
+        	   gui.printMessage();
+        	   gui.waitTilInput();
+           } catch (InterruptedException e) {
+           		e.printStackTrace();
+           }
       }
-      /**/
-      int accountNumber = gui.getInputInt();//keypad.getInput(); // input account number gui.getinput();
-      System.out.println(accountNumber);
-      screen.displayMessage( gui, "\nEnter your PIN: " ); // prompt for PIN
-      int pin = keypad.getInput(); // input PIN
+	 
+      int pin = Integer.parseInt( gui.getInput() ) ; // input PIN
 
       // set userAuthenticated to boolean value returned by database
       userAuthenticated =
@@ -83,9 +85,12 @@ public class ATM
       {
          currentAccountNumber = accountNumber; // save user's account #
       } // end if
-      else
-         screen.displayMessageLine( gui,
+      else {
+         screen.displayMessageLine(
+        		 gui,
              "Invalid account number or PIN. Please try again." );
+         gui.printMessage();
+      }
    } // end method authenticateUser
 
    // display the main menu and perform transactions
