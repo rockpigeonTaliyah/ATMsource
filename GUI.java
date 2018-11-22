@@ -51,10 +51,12 @@ public class GUI {
 
 	public void setMessage( String message ) {
 		this.message = this.message.concat(message);
+		//messageArea.setText(this.message);
 	}
 
-	public void clearMessage() {
+	public void clearScreen() {
 		this.message = "";
+		messageArea.setText(this.message);
 	}
 
 	public String getMessage() {
