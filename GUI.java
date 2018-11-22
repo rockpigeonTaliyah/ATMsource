@@ -85,8 +85,9 @@ public class GUI {
 	public void clearInput() {
 		inputEntered = false;
 		setInput( "" );
-		printInput();
+		printInput();	
 	}
+	
 	public String getPassword() {
 		return password;
 	}
