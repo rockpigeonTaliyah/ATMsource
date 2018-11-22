@@ -25,6 +25,7 @@ public class GUI {
 	private String password = "";//password
 	public boolean isPassword = false;
 	public boolean inputEntered;
+	public String functionChoice;
 
 	/**
 	 * Launch the application.
@@ -66,7 +67,7 @@ public class GUI {
 	public void mergeMessage(String message) {
 		this.message = this.message.concat(message);
 	}
-	
+
 	public void setInput( String input ) {
 		this.input = input;
 	}
@@ -74,7 +75,19 @@ public class GUI {
 	public String getInput() {
 		return input;
 	}
-
+	public String getFunctionInput(){
+		// synchronized ( this ) {
+		// 				 try {
+		// 					 while ( functionChoice!=null ) {
+		// 						 Thread.sleep(200);;
+		// 					 }
+		// 				 } catch (InterruptedException e) {
+		// 					 e.printStackTrace();
+		// 				 }
+		// }
+		return functionChoice;
+		// return "123";
+	}
 	public void printInput() {
 		textArea.setText(input);
 	}
@@ -83,9 +96,9 @@ public class GUI {
 	public void clearInput() {
 		inputEntered = false;
 		setInput( "" );
-		printInput();	
+		printInput();
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}

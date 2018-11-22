@@ -9,10 +9,10 @@ public class ATM
    private BankDatabase bankDatabase; // account information database
 
    // constants corresponding to main menu options
-   private static final int BALANCE_INQUIRY = 1;
-   private static final int WITHDRAWAL = 2;
-   private static final int TRANSFER = 3;
-   private static final int EXIT = 4;
+   private static final String BALANCE_INQUIRY = "BALANCE_INQUIRY";
+   private static final String WITHDRAWAL = "WITHDRAWAL";
+   private static final String TRANSFER = "TRANSFER";
+   private static final String EXIT = "EXIT";
 
    // no-argument ATM constructor initializes instance variables
    public ATM()
@@ -74,7 +74,7 @@ public class ATM
         	   screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
         	   gui.isPassword = true;
         	   gui.waitTilInput();
-        	   System.out.printf("\n%s", gui.getPassword());
+        	   // System.out.printf("\n%s", gui.getPassword());
         	   gui.isPassword = false;
         	   gui.setInput( "" );
         	   //password input session ends here ^^^^
@@ -111,20 +111,20 @@ public class ATM
       Transaction currentTransaction = null;
 
       boolean userExited = false; // user has not chosen to exit
-
+      // screen.displayMessage(gui, (displayMainMenu()));
       // loop while user has not chosen option to exit system
       while ( !userExited )
       {
          // show main menu and get user selection
-         int mainMenuSelection = displayMainMenu();
-
+         String mainMenuSelection = displayMainMenu();
+        // screen.displayMessage(gui, displayMainMenu());
          // decide how to proceed based on user's menu selection
-         switch ( mainMenuSelection )
+        switch ( mainMenuSelection )
          {
             // user chose to perform one of three transaction types
-            case BALANCE_INQUIRY:
-            case WITHDRAWAL:
-            case TRANSFER:
+            case "BALANCE_INQUIRY":
+            case "WITHDRAWAL":
+            case "TRANSFER":
 
                // initialize as new object of chosen type
                currentTransaction =
@@ -132,7 +132,7 @@ public class ATM
 
                currentTransaction.execute(); // execute transaction
                break;
-            case EXIT: // user chose to terminate session
+            case "EXIT": // user chose to terminate session
                screen.displayMessageLine(gui, "Exiting the system..." );
                userExited = true; // this ATM session should end
                break;
@@ -145,7 +145,7 @@ public class ATM
    } // end method performTransactions
 
    // display the main menu and return an input selection
-   private int displayMainMenu()
+   private String displayMainMenu()
    {
 
 	      gui.welcomePageButtonAction();
@@ -156,29 +156,31 @@ public class ATM
       screen.mergeMessage(gui, "4 - Exit\n" );
       screen.mergeMessage( gui, "Enter a choice: " );
       gui.printMessage();
-      return keypad.getInput(); // return user's selection
+      return gui.getFunctionInput(); // return user's selection
    } // end method displayMainMenu
 
    // return object of specified Transaction subclass
-   private Transaction createTransaction( int type )
+   private Transaction createTransaction( String type )
    {
       Transaction temp = null; // temporary Transaction variable
-
+      // screen.displayMessage(gui,"test");
       // determine which type of Transaction to create
       switch ( type )
       {
-         case BALANCE_INQUIRY: // create new BalanceInquiry transaction
-            temp = new BalanceInquiry(
-               currentAccountNumber, screen, bankDatabase, gui );
+        case "BALANCE_INQUIRY": break;
+         case "WITHDRAWL": // create new BalanceInquiry transaction
+         screen.displayMessage(gui,"test");
+            // temp = new BalanceInquiry(
+            //    currentAccountNumber, screen, bankDatabase, gui );
             break;
-         case WITHDRAWAL: // create new Withdrawal transaction
+         case "DEPOSIT": // create new Withdrawal transaction
             temp = new Withdrawal( currentAccountNumber, screen,
                bankDatabase, keypad, cashDispenser, gui );
             break;
-        case TRANSFER: // create new Transfer transaction
+        case "TRANSFER": // create new Transfer transaction
             temp = new Transfer(currentAccountNumber, screen,
                bankDatabase, keypad, gui);
-               break;
+          case "EXIT" : break;
           //  break;
       } // end switch
 
