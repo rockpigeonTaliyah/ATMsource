@@ -172,11 +172,8 @@ public class GUI {
 
 	}
 
-	public void balanceEnquiryButtonAction() {
-		//left top for 4
-		//right top for 4
+	/*public void balanceEnquiryButtonAction() {
 		
-		String [] ATMActionCommand = {"","","","","","","","EXIT"};
 		removeCurrentListener();
 		for ( int i = 0; i <= 7; i++){
 			keys[ 16 + i ].setText(ATMActionCommand[i]);

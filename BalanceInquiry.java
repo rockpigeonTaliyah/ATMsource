@@ -30,7 +30,7 @@ public class BalanceInquiry extends Transaction
       screen = getScreen();
       
       //Button choices
-      gui.balanceEnquiryButtonAction();
+      gui.mainMenuButtonAction("_BALANCE_CHECK");
 
       // display the balance information on the screen
       
