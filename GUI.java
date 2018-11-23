@@ -94,6 +94,13 @@ public class GUI {
 		functionChoice = null;
 			amountChoice = 0 ;
 	}
+	public void delay(){
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			return;
+		}
+	}
 	public void	confirmAmount(){
 		synchronized ( this ) {
 						 try {
