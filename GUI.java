@@ -126,9 +126,8 @@ public class GUI {
 		textArea.setText(input);
 	}
 
-	//clear the inputArea and reset state
+	//clear the inputArea
 	public void clearInput() {
-		inputEntered = false;
 		setInput( "" );
 		printInput();
 	}
@@ -146,6 +145,7 @@ public class GUI {
 	    while ( !inputEntered || functionChoice =="EXIT" ) {
 	    	delay(200);
 		}
+	    //reset state
 		inputEntered = false;
 	}
 
@@ -172,11 +172,8 @@ public class GUI {
 
 	}
 
-	public void balanceEnquiryButtonAction() {
-		//left top for 4
-		//right top for 4
+	/*public void balanceEnquiryButtonAction() {
 		
-		String [] ATMActionCommand = {"","","","","","","","EXIT"};
 		removeCurrentListener();
 		for ( int i = 0; i <= 7; i++){
 			keys[ 16 + i ].setText(ATMActionCommand[i]);
