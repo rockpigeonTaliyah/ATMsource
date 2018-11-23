@@ -30,12 +30,11 @@ public class BalanceInquiry extends Transaction
       gui.withdrawalButtonAction();
       
       // display the balance information on the screen
-      screen.displayMessageLine( gui, "\nBalance Information:" );
-      screen.displayMessage( gui, " - Available balance: " ); 
+      screen.mergeMessage( gui, "Balance Information:\n" );
+      screen.mergeMessage( gui, " - Available balance: " ); 
       screen.displayDollarAmount( gui, availableBalance );
       screen.displayMessage( gui, "\n - Total balance:     " );
       screen.displayDollarAmount( gui, totalBalance );
-      screen.displayMessageLine( gui, "" );
    } // end method execute
 } // end class BalanceInquiry
 
