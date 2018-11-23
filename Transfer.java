@@ -42,7 +42,7 @@ try {
     System.out.println(temp_amount);
     gui.clearInput();
   }else {
-    temp_amount  =  Integer.parseInt(gui.getInput());
+    temp_amount  =  Double.parseDouble(gui.getInput());
     gui.clearInput();
   }
 
