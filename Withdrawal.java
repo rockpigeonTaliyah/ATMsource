@@ -74,10 +74,13 @@ public class Withdrawal extends Transaction
                      System.out.print("Test B2");
                } // end if
                else // cash dispenser does not have enough cash
+               {
+                  System.out.println("B Exception");
                   screen.displayMessage( gui,
                      "\nInsufficient cash available in the ATM." +
                      "\n\nPlease choose a smaller amount." );
                      gui.delay();
+                   }
             } // end if
             else // not enough money available in user's account
             {
@@ -85,6 +88,9 @@ public class Withdrawal extends Transaction
                screen.displayMessage( gui,
                   "\nInsufficient funds in your account." +
                   "\n\nPlease choose a smaller amount." );
+                  gui.delay();
+                  return;
+
             } // end else
          } // end if
          else // user chose cancel menu option
