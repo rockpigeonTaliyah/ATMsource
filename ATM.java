@@ -34,17 +34,11 @@ public class ATM
 	  // welcome and authenticate user; perform transactions
       while ( true )
       {
-    	  //print the welcome message
-    	  synchronized ( this ) {
-    		try {
-    			screen.mergeMessage(gui, "Welcome");
-    			wait(1000);
-    			screen.displayMessage(gui, "Please insert your card.");
-    			wait(1000);//wait for user to insert card
-    		}catch(InterruptedException e) {
-           		e.printStackTrace();
-           }
-    	  }
+    	//print the welcome message
+    	screen.mergeMessage(gui, "Welcome");
+    	gui.delay(1000);;
+    	screen.displayMessage(gui, "Please insert your card.");
+    	gui.delay(1000);//wait for user to insert card
 
     	 // loop while user is not yet authenticated
          while ( !userAuthenticated )
@@ -55,6 +49,7 @@ public class ATM
          performTransactions(); // user is now authenticated
          userAuthenticated = false; // reset before next ATM session
          currentAccountNumber = 0; // reset before next ATM session
+         gui.functionChoice = "";
          screen.displayMessage(gui, "Thank you! Goodbye!" );
          System.out.println("clear exit?");
          gui.functionChoice = "";
@@ -65,30 +60,20 @@ public class ATM
    private void authenticateUser()
    {
 	  int accountNumber = 0;
-	   synchronized ( this ) {
-           try {
-        	   wait(1000);//give user time to watch the message
-    		   screen.displayMessage( gui, "Please enter your account number: " );
-    		   gui.waitTilInput();
-        	   accountNumber = Integer.parseInt( gui.getInput() ); // input account number
-        	   gui.clearInput();
-        	   //password input process
-        	   screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
-        	   gui.isPassword = true;
-            gui.waitTilInput();  
-        	   // System.out.printf("\n%s", gui.getPassword());
-        	   gui.isPassword = false;
-        	   gui.setInput( "" );
-        	   //password input session ends here ^^^^
+	  gui.delay(1000);//give user time to watch the message
+	  screen.displayMessage( gui, "Please enter your account number: " );
+	  gui.waitTilInput();
+      accountNumber = Integer.parseInt( gui.getInput() ); // input account number
+      gui.clearInput();
 
-        	   gui.printMessage();
-        	   gui.waitTilInput();
-           } catch (InterruptedException e) {
-           		e.printStackTrace();
-           }
-      }
-
+      //password input process
+      screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
+      gui.isPassword = true;
+      gui.waitTilInput();
+   	  gui.isPassword = false;
       int pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
+      //password input session ends here ^^^^
+
       gui.setPassword( "" );
       gui.clearInput();
       // set userAuthenticated to boolean value returned by database
@@ -131,8 +116,9 @@ public class ATM
               System.out.println("Inquiry");
             	break;
             case "WITHDRAWAL":
-            	
+
             case "TRANSFER":
+            gui.setMessage("");
                // initialize as new object of chosen type
                currentTransaction = createTransaction( mainMenuSelection );
                currentTransaction.execute(); // execute transaction
@@ -176,15 +162,13 @@ public class ATM
       switch ( type )
       {
         case "BALANCE":
-        	temp = new BalanceInquiry( currentAccountNumber, screen, bankDatabase , gui ); 
+        	temp = new BalanceInquiry( currentAccountNumber, screen, bankDatabase , gui );
         	break;
          case "WITHDRAWAL": // create new BalanceInquiry transaction
 
                temp = new Withdrawal( currentAccountNumber, screen,
                   bankDatabase, keypad, cashDispenser, gui );
             break;
-         case "DEPOSIT": // create new Withdrawal transaction
-         break;
         case "TRANSFER": // create new Transfer transaction
             temp = new Transfer(currentAccountNumber, screen,
                bankDatabase, keypad, gui);
@@ -196,6 +180,22 @@ public class ATM
    } // end method createTransaction
 } // end class ATM
 
+
+
+/**************************
+ * (C) Copyright 1992-2007 by Deitel & Associates, Inc. and               *
+ * Pearson Education, Inc. All Rights Reserved.                           *
+ *                                                                        *
+ * DISCLAIMER: The authors and publisher of this book have used their     *
+ * best efforts in preparing the book. These efforts include the          *
+ * development, research, and testing of the theories and programs        *
+ * to determine their effectiveness. The authors and publisher make       *
+ * no warranty of any kind, expressed or implied, with regard to these    *
+ * programs or to the documentation contained in these books. The authors *
+ * and publisher shall not be liable in any event for incidental or       *
+ * consequential damages in connection with, or arising out of, the       *
+ * furnishing, performance, or use of these programs.                     *
+ *************************/
 
 
 /**************************
