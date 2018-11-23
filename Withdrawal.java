@@ -106,7 +106,7 @@ public class Withdrawal extends Transaction
 
       } while ( !cashDispensed );
       screen.displayMessage( gui, "\ntransaction Done, returning..." );
-      gui.delay();
+      gui.delay(1000);
       cashDispensed = false;
       return;
    } // end method execute
@@ -135,7 +135,15 @@ public class Withdrawal extends Transaction
          screen.mergeMessage( gui, " -- Cancel transaction\n\n" );
          screen.mergeMessage( gui, "\nChoose a withdrawal amount: " );
          gui.printMessage();
-         int input =gui.getAmountInput();
+         int input = 0;
+         gui.waitTilInput();
+         System.out.println("123");
+         if (gui.getInput() == "") {
+           input = gui.getAmountInput();
+         }else{
+           input = Integer.parseInt(gui.getInput());
+           gui.clearInput();
+         }
 
          // int customValue = keypad.getInput();// get user input through keypad
 

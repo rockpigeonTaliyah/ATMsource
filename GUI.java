@@ -82,7 +82,7 @@ public class GUI {
 							 while ( functionChoice ==null ) {
 								 delay(200);;
 							 }
-						
+
 				 		return functionChoice;
 	}
 	public void resetChoice(){
@@ -110,7 +110,7 @@ public class GUI {
 		}
 	}*/
 	public int getAmountInput(){
-		
+
 		while (amountChoice == 0 ) {
 			 delay(200);
 		}
@@ -146,6 +146,7 @@ public class GUI {
 	    while ( !inputEntered || functionChoice =="EXIT" ) {
 	    	delay(200);
 		}
+		inputEntered = false;
 	}
 
 	public void mainMenuButtonAction(String action) {
@@ -170,11 +171,11 @@ public class GUI {
 		}
 
 	}
-	
+
 	public void balanceEnquiryButtonAction() {
 		//left top for 4
 		//right top for 4
-		
+
 		String [] ATMActionCommand = {"","100","500","1000","","","","EXIT"};
 		removeCurrentListener();
 		for ( int i = 0; i <= 7; i++){
@@ -364,7 +365,7 @@ public class GUI {
 					amountChoice = Integer.parseInt(e.getActionCommand());
 				break;
 			}
-
+			// inputEntered = true;
 
 
 		}
