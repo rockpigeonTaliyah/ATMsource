@@ -9,7 +9,7 @@ public class ATM
    private BankDatabase bankDatabase; // account information database
 
    // constants corresponding to main menu options
-   private static final String BALANCE_INQUIRY = "BALANCE INQUIRY";
+   private static final String BALANCE = "BALANCE";
    private static final String WITHDRAWAL = "WITHDRAWAL";
    private static final String TRANSFER = "TRANSFER";
    private static final String EXIT = "EXIT";
@@ -110,6 +110,7 @@ public class ATM
    {
       // local variable to store transaction currently being processed
       Transaction currentTransaction = null;
+      BalanceInquiry balance = new BalanceInquiry( currentAccountNumber, screen, bankDatabase , gui );
       String mainMenuSelection = "";
       boolean userExited = false; // user has not chosen to exit
       // screen.displayMessage(gui, (displayMainMenu()));
@@ -121,10 +122,12 @@ public class ATM
         switch ( mainMenuSelection )
          {
             // user chose to perform one of three transaction types
-            case "BALANCE INQUIRY":
+            case "BALANCE":
+            	balance.execute();
             	screen.displayMessage(gui, "Balance Inquiry");
             	break;
             case "WITHDRAWAL":
+            	
             case "TRANSFER":
                // initialize as new object of chosen type
                currentTransaction = createTransaction( mainMenuSelection );
@@ -166,7 +169,9 @@ public class ATM
       // determine which type of Transaction to create
       switch ( type )
       {
-        case "BALANCE INQUIRY":screen.displayMessage(gui,"BALANCE INQUIRY"); break;
+        case "BALANCE":
+        	temp = new BalanceInquiry( currentAccountNumber, screen, bankDatabase , gui ); 
+        	break;
          case "WITHDRAWAL": // create new BalanceInquiry transaction
 
                temp = new Withdrawal( currentAccountNumber, screen,

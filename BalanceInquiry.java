@@ -26,10 +26,14 @@ public class BalanceInquiry extends Transaction
       double totalBalance = 
          bankDatabase.getTotalBalance( getAccountNumber() );
       
+      gui = getGUI();
+      screen = getScreen();
+      
       //Button choices
-      gui.withdrawalButtonAction();
+      gui.balanceEnquiryButtonAction();
       
       // display the balance information on the screen
+      
       screen.mergeMessage( gui, "Balance Information:\n" );
       screen.mergeMessage( gui, " - Available balance: " ); 
       screen.displayDollarAmount( gui, availableBalance );

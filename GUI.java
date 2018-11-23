@@ -194,12 +194,14 @@ public class GUI {
 	public void balanceEnquiryButtonAction() {
 		//left top for 4
 		//right top for 4
-		String [] ATMActionCommand = {"","","","","","","","EXIT"};
+		
+		String [] ATMActionCommand = {"","100","500","1000","","","","EXIT"};
 		removeCurrentListener();
 		for ( int i = 0; i <= 7; i++){
 			keys[ 16 + i ].setText(ATMActionCommand[i]);
 			keys[ 16 + i ].addActionListener( new buttonListenerFunction());
 		}
+		System.out.print("\nLOMO");
 
 	}
 
@@ -357,7 +359,7 @@ public class GUI {
 			System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
 			// functionChoice = e.getActionCommand();
 			switch(e.getActionCommand()){
-				case "BALANCE":functionChoice = "BALANCE_INQUIRY";
+				case "BALANCE":functionChoice = "BALANCE";
 				  break;
 				case "WITHDRAWAL": functionChoice = "WITHDRAWAL";
 				 	break;
