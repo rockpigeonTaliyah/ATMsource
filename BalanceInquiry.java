@@ -33,12 +33,12 @@ public class BalanceInquiry extends Transaction
       gui.balanceEnquiryButtonAction();
 
       // display the balance information on the screen
-      
+      screen.displayMessage(gui, "");
       //Plz fix
       screen.mergeMessage( gui, "\nBalance Information:\n" );
-      screen.mergeMessage( gui, " - Available balance: " );
-      screen.displayDollarAmount( gui, availableBalance );
-      screen.mergeMessage( gui, " - Total balance:     \n" );
+      screen.mergeMessage( gui, " - Available balance: \n$" );
+      screen.mergeMessage( gui, Double.toString(availableBalance));
+      screen.mergeMessage( gui, "\n - Total balance:     \n" );
       screen.displayDollarAmount( gui, totalBalance );
 			gui.delay(5000);
    } // end method execute
