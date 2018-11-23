@@ -239,7 +239,10 @@ public class GUI {
 	    keys[ 12 ].addActionListener( new ActionListener() {
 	    	@Override
 	    	public void actionPerformed( ActionEvent e ) {
-	    		inputEntered = true;
+	    		System.out.println("Enter Pressed");
+	    		if (keypadEnabled) {
+	    			inputEntered = true;
+	    		}
 	    	}
 	    });
 	    keys[ 13 ].addActionListener( new buttonListenerConcat());
