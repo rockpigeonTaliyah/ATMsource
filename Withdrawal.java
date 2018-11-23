@@ -164,9 +164,9 @@ public class Withdrawal extends Transaction
             gui.keypadNumberEnabled = false;
             screen.mergeMessage(gui, "You have selected to withdraw $" + input);
             screen.mergeMessage(gui, "\nPlease press enter to confirm ,\n");
-            screen.mergeMessage(gui,"or press exit to restart process");
+            screen.mergeMessage(gui,"or press EXIT to restart process");
             gui.printMessage();
-            gui.waitTilInput();
+            gui.waitTilEnter();
             gui.keypadNumberEnabled = true;
              userChoice = input;
               // save user's choice

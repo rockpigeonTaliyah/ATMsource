@@ -26,6 +26,8 @@ public class GUI {
 	private String password = "";//password
 	public boolean isPassword = false;
 	public boolean inputEntered;
+	public boolean EnterPressed;
+	public boolean ExitPressed;
 	public String functionChoice;
 	public static boolean keypadEnabled = false; //Disable keypad when not needed
 	public static boolean keypadNumberEnabled = true;
@@ -146,6 +148,22 @@ public class GUI {
 	    //reset state
 		inputEntered = false;
 	}
+	
+	public void waitTilEnter() {
+	    while ( !EnterPressed ) {
+	    	delay(200);
+		}
+	    //reset state
+		EnterPressed = false;
+	}
+	
+	public void waitTilExit() {
+	    while ( !ExitPressed ) {
+	    	delay(200);
+		}
+	    //reset state
+		ExitPressed = false;
+	}
 
 	public void mainMenuButtonAction(String action) {
 		//left top for 4
@@ -243,6 +261,7 @@ public class GUI {
 	    		System.out.println("Enter Pressed");
 	    		if (keypadEnabled) {
 	    			inputEntered = true;
+	    			EnterPressed = true;
 	    		}
 	    	}
 	    });
