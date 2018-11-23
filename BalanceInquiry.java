@@ -39,12 +39,7 @@ public class BalanceInquiry extends Transaction
       screen.displayDollarAmount( gui, availableBalance );
       screen.displayMessage( gui, "\n - Total balance:     " );
       screen.displayDollarAmount( gui, totalBalance );
-			gui.delay();
-			gui.delay();
-			gui.delay();
-			gui.delay();
-			gui.delay();
-			gui.delay();
+			gui.delay(5000);
    } // end method execute
 } // end class BalanceInquiry
 
