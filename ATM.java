@@ -75,7 +75,7 @@ public class ATM
         	   //password input process
         	   screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
         	   gui.isPassword = true;
-            gui.waitTilInput();  
+            gui.waitTilInput();
         	   // System.out.printf("\n%s", gui.getPassword());
         	   gui.isPassword = false;
         	   gui.setInput( "" );
@@ -125,11 +125,13 @@ public class ATM
          {
             // user chose to perform one of three transaction types
             case "BALANCE_INQUIRY":
-            	screen.displayMessage(gui, "Balance Inquiry");
-              System.out.println("Inquiry");
-            	break;
+            	// screen.displayMessage(gui, "Balance Inquiry");
+              // System.out.println("Inquiry");
+
+
             case "WITHDRAWAL":
             case "TRANSFER":
+            gui.setMessage("");
                // initialize as new object of chosen type
                currentTransaction = createTransaction( mainMenuSelection );
                currentTransaction.execute(); // execute transaction
@@ -181,8 +183,6 @@ public class ATM
                temp = new Withdrawal( currentAccountNumber, screen,
                   bankDatabase, keypad, cashDispenser, gui );
             break;
-         case "DEPOSIT": // create new Withdrawal transaction
-         break;
         case "TRANSFER": // create new Transfer transaction
             temp = new Transfer(currentAccountNumber, screen,
                bankDatabase, keypad, gui);

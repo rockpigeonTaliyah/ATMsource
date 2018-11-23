@@ -72,6 +72,7 @@ public class Withdrawal extends Transaction
                      "\nPlease take your cash now." );
                      gui.delay();
                      System.out.print("Test B2");
+
                } // end if
                else // cash dispenser does not have enough cash
                {
@@ -104,8 +105,9 @@ public class Withdrawal extends Transaction
 
 
       } while ( !cashDispensed );
-      screen.displayMessage( gui, "\nCanceling transaction..." );
-      gui.delay();;
+      screen.displayMessage( gui, "\ntransaction Done, returning..." );
+      gui.delay();
+      cashDispensed = false;
       return;
    } // end method execute
 
@@ -144,7 +146,7 @@ public class Withdrawal extends Transaction
             case 500:                  // (i.e., chose option 1, 2 or 3), return the
             case 1000:
             screen.displayMessage(gui,"Please press enter to confirm ,\n or press exit to restart process");
-            gui.confirmAmount();
+            gui.waitTilInput();
              userChoice = input;
               // save user's choice
               break;

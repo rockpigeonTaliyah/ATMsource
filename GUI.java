@@ -172,13 +172,13 @@ public class GUI {
 		//right top for 4
 		String [] ATMActionCommand = new String[8];
 		switch (action) {
-			case "_BALANCE_CHECK":  ATMActionCommand =  new String []{"BALANCE","WITHDRAWAL","DEPOSIT","","TRANSFER","","","EXIT"}; break;
+			case "_BALANCE_CHECK":  ATMActionCommand =  new String []{"BALANCE","WITHDRAWAL","","","TRANSFER","","","EXIT"}; break;
 			case "_WITHDRWAL": ATMActionCommand = new String []{"","100","500","1000","","","","EXIT"}; break;
-			case "_DEPOSIT":  ATMActionCommand =  new String []{"","100","500","1000","","","","EXIT"}; break;
+			// case "_DEPOSIT":  ATMActionCommand =  new String []{"","100","500","1000","","","","EXIT"}; break;
 			case "_TRANSFER": ATMActionCommand =  new String []{"","100","500","1000","","","","EXIT"}; break;
 			case "_BLANK":  ATMActionCommand =  new String []{"","","","","","","","EXIT"}; break;
 			default:
-				ATMActionCommand =  new String []{"BALANCE","WITHDRAWAL","DEPOSIT","","TRANSFER","","","EXIT"}; break;
+				ATMActionCommand =  new String []{"BALANCE","WITHDRAWAL","","","TRANSFER","","","EXIT"}; break;
 		}
 
 		removeCurrentListener();
