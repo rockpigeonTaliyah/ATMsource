@@ -82,12 +82,12 @@ public class GUI {
 							 while ( functionChoice ==null ) {
 								 delay(200);;
 							 }
-						
+
 				 		return functionChoice;
 	}
 	public void resetChoice(){
 		functionChoice = null;
-			amountChoice = 0 ;
+		amountChoice = 0 ;
 	}
 	public void delay( int time ){
 		try {
@@ -110,7 +110,7 @@ public class GUI {
 		}
 	}*/
 	public int getAmountInput(){
-		
+
 		while (amountChoice == 0 ) {
 			 delay(200);
 		}
@@ -154,13 +154,13 @@ public class GUI {
 		//right top for 4
 		String [] ATMActionCommand = new String[8];
 		switch (action) {
-			case "_BALANCE_CHECK":  ATMActionCommand =  new String []{"BALANCE","WITHDRAWAL","DEPOSIT","","TRANSFER","","","EXIT"}; break;
+			case "_BALANCE_CHECK":  ATMActionCommand =  new String []{"BALANCE","WITHDRAWAL","","","TRANSFER","","","EXIT"}; break;
 			case "_WITHDRWAL": ATMActionCommand = new String []{"","100","500","1000","","","","EXIT"}; break;
-			case "_DEPOSIT":  ATMActionCommand =  new String []{"","100","500","1000","","","","EXIT"}; break;
+			// case "_DEPOSIT":  ATMActionCommand =  new String []{"","100","500","1000","","","","EXIT"}; break;
 			case "_TRANSFER": ATMActionCommand =  new String []{"","100","500","1000","","","","EXIT"}; break;
 			case "_BLANK":  ATMActionCommand =  new String []{"","","","","","","","EXIT"}; break;
 			default:
-				ATMActionCommand =  new String []{"BALANCE","WITHDRAWAL","DEPOSIT","","TRANSFER","","","EXIT"}; break;
+				ATMActionCommand =  new String []{"BALANCE","WITHDRAWAL","","","TRANSFER","","","EXIT"}; break;
 		}
 
 		removeCurrentListener();
@@ -171,18 +171,17 @@ public class GUI {
 		}
 
 	}
-	
+
 	public void balanceEnquiryButtonAction() {
 		//left top for 4
 		//right top for 4
 		
-		String [] ATMActionCommand = {"","100","500","1000","","","","EXIT"};
+		String [] ATMActionCommand = {"","","","","","","","EXIT"};
 		removeCurrentListener();
 		for ( int i = 0; i <= 7; i++){
 			keys[ 16 + i ].setText(ATMActionCommand[i]);
 			keys[ 16 + i ].addActionListener( new buttonListenerFunction());
 		}
-		System.out.print("\nLOMO");
 
 	}
 	// public void mainMenuButtonAction() {
@@ -365,7 +364,7 @@ public class GUI {
 					amountChoice = Integer.parseInt(e.getActionCommand());
 				break;
 			}
-
+			// inputEntered = true;
 
 
 		}
