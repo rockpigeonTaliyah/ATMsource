@@ -140,6 +140,7 @@ public class Withdrawal extends Transaction
          System.out.println("123");
          if (gui.getInput() == "") {
            input = gui.getAmountInput();
+           System.out.print(input);
          }else{
            input = Integer.parseInt(gui.getInput());
            gui.clearInput();

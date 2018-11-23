@@ -30,7 +30,7 @@ public class BalanceInquiry extends Transaction
       screen = getScreen();
       
       //Button choices
-      gui.mainMenuButtonAction("_BALANCE_CHECK");
+      gui.mainMenuButtonAction("_BLANK");
 
       // display the balance information on the screen
       screen.displayMessage(gui, "");
@@ -40,7 +40,6 @@ public class BalanceInquiry extends Transaction
       screen.mergeMessage( gui, Double.toString(availableBalance));
       screen.mergeMessage( gui, "\n - Total balance:     \n" );
       screen.displayDollarAmount( gui, totalBalance );
-      gui.delay(1000);
       gui.waitTilInput();
    } // end method execute
 } // end class BalanceInquiry

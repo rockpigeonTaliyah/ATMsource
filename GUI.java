@@ -111,11 +111,7 @@ public class GUI {
 	}*/
 	public int getAmountInput(){
 
-		while (amountChoice == 0 ) {
-			 delay(200);
-		}
-						 // if (functionChoice == "EXIT") {
-							//  System.out.println("qwe");
+				//  System.out.println("qwe");
 							//  amountChoice = 4;
 		functionChoice = "";
 						 // }
@@ -142,7 +138,7 @@ public class GUI {
 
 	//stop the system for user to press enter
 	public void waitTilInput() {
-	    while ( !inputEntered || functionChoice =="EXIT" ) {
+	    while ( !inputEntered ) {
 	    	delay(200);
 		}
 	    //reset state
@@ -154,9 +150,7 @@ public class GUI {
 		//right top for 4
 		String [] ATMActionCommand = new String[8];
 		switch (action) {
-			case "_BALANCE_CHECK":  ATMActionCommand =  new String []{"BALANCE","WITHDRAWAL","","","TRANSFER","","","EXIT"}; break;
 			case "_WITHDRWAL": ATMActionCommand = new String []{"","100","500","1000","","","","EXIT"}; break;
-			// case "_DEPOSIT":  ATMActionCommand =  new String []{"","100","500","1000","","","","EXIT"}; break;
 			case "_TRANSFER": ATMActionCommand =  new String []{"","100","500","1000","","","","EXIT"}; break;
 			case "_BLANK":  ATMActionCommand =  new String []{"","","","","","","","EXIT"}; break;
 			default:
@@ -356,9 +350,12 @@ public class GUI {
 				case "TRANSFER": functionChoice = "TRANSFER";
 				 	break;
 				case "EXIT": functionChoice = "EXIT" ;amountChoice = 4;
+					inputEntered = true;
 				 	break;
 				default :
 					amountChoice = Integer.parseInt(e.getActionCommand());
+					inputEntered = true;
+					System.out.print(amountChoice);
 				break;
 			}
 			// inputEntered = true;
