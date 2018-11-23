@@ -352,6 +352,8 @@ public class GUI {
 				case "EXIT": functionChoice = "EXIT" ;amountChoice = 4;
 					inputEntered = true;
 				 	break;
+				case "":
+					break;
 				default :
 					amountChoice = Integer.parseInt(e.getActionCommand());
 					inputEntered = true;

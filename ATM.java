@@ -173,6 +173,8 @@ public class ATM
             temp = new Transfer(currentAccountNumber, screen,
                bankDatabase, keypad, gui);
           case "EXIT" : break;
+          case "":
+				break;
           //  break;
       } // end switch
 
