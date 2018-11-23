@@ -122,7 +122,7 @@ public class ATM
          {
             // user chose to perform one of three transaction types
             case "BALANCE INQUIRY":
-            	screen.displayMessageLine(gui, "Balance Inquiry");
+            	screen.displayMessage(gui, "Balance Inquiry");
             	break;
             case "WITHDRAWAL":
             case "TRANSFER":

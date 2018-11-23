@@ -170,11 +170,7 @@ public class GUI {
 		//left top for 4
 		//right top for 4
 
-<<<<<<< HEAD
-		String [] ATMActionCommand = {"BALANCE INQUIRY","WITHDRAWAL","DEPOSIT","","TRANSFER","","","EXIT"};
-=======
 		String [] ATMActionCommand = {"BALANCE","WITHDRAWAL","DEPOSIT","","TRANSFER","","","EXIT"};
->>>>>>> d7fff8fce8816f18dab3d3a521b88c7f8dca4161
 		removeCurrentListener();
 		for ( int i = 0; i <= 7; i++){
 			keys[ 16 + i ].setText(ATMActionCommand[i]);
@@ -361,11 +357,7 @@ public class GUI {
 			System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
 			// functionChoice = e.getActionCommand();
 			switch(e.getActionCommand()){
-<<<<<<< HEAD
-				case "BALANCE INQUIRY":functionChoice = "BALANCE INQUIRY";
-=======
 				case "BALANCE":functionChoice = "BALANCE_INQUIRY";
->>>>>>> d7fff8fce8816f18dab3d3a521b88c7f8dca4161
 				  break;
 				case "WITHDRAWAL": functionChoice = "WITHDRAWAL";
 				 	break;
