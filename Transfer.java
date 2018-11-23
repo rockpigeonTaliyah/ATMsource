@@ -49,7 +49,7 @@ public class Transfer extends Transaction{
     	}
     }
     gui.clearInput();
-    gui.mainMenuButtonAction("_TRANSFER");
+    gui.mainMenuButtonAction("_BLANK");
     isDouble = true;
     while(isDouble){
     	try{
