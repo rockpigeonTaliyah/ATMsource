@@ -28,6 +28,7 @@ public class GUI {
 	public boolean inputEntered;
 	public String functionChoice;
 	public static boolean keypadEnabled = false; //Disable keypad when not needed
+	public static boolean keypadNumberEnabled = true;
 	public int amountChoice = 0;
 
 
@@ -330,7 +331,7 @@ public class GUI {
 					if(action == 1)
 						System.exit(0);
 			}else 
-				if(keypadEnabled) {
+				if(keypadEnabled && keypadNumberEnabled) {
 					if(!isPassword) {
 						input = input.concat( e.getActionCommand() );
 					}

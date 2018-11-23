@@ -161,11 +161,13 @@ public class Withdrawal extends Transaction
             case "100":            // if the user chose a withdrawal amount
             case "500":                  // (i.e., chose option 1, 2 or 3), return the
             case "1000":
+            gui.keypadNumberEnabled = false;
             screen.mergeMessage(gui, "You have selected to withdraw $" + input);
             screen.mergeMessage(gui, "\nPlease press enter to confirm ,\n");
             screen.mergeMessage(gui,"or press exit to restart process");
             gui.printMessage();
             gui.waitTilInput();
+            gui.keypadNumberEnabled = true;
              userChoice = input;
               // save user's choice
               break;
