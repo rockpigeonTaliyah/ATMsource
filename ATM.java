@@ -56,6 +56,8 @@ public class ATM
          userAuthenticated = false; // reset before next ATM session
          currentAccountNumber = 0; // reset before next ATM session
          screen.displayMessage(gui, "Thank you! Goodbye!" );
+         System.out.println("clear exit?");
+         gui.functionChoice = "";
       } // end while
    } // end method run
 
@@ -73,7 +75,8 @@ public class ATM
         	   //password input process
         	   screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
         	   gui.isPassword = true;
-        	   gui.waitTilInput();
+            gui.waitTilInput();  
+        	   // System.out.printf("\n%s", gui.getPassword());
         	   gui.isPassword = false;
         	   gui.setInput( "" );
         	   //password input session ends here ^^^^
