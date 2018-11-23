@@ -27,6 +27,7 @@ public class GUI {
 	public boolean isPassword = false;
 	public boolean inputEntered;
 	public String functionChoice;
+	public static boolean keypadEnabled = false;
 	public int amountChoice = 0;
 
 

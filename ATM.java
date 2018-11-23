@@ -119,7 +119,7 @@ public class ATM
 			  gui.setPassword("");
 			  gui.delay(2000);
 			  isDouble = true;
-		}
+		  }
       }
       */
 
