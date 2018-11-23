@@ -87,7 +87,7 @@ public class GUI {
 	}
 	public void resetChoice(){
 		functionChoice = null;
-			amountChoice = 0 ;
+		amountChoice = 0 ;
 	}
 	public void delay( int time ){
 		try {
