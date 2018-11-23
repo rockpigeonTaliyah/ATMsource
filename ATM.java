@@ -9,7 +9,7 @@ public class ATM
    private BankDatabase bankDatabase; // account information database
 
    // constants corresponding to main menu options
-   private static final String BALANCE_INQUIRY = "BALANCE_INQUIRY";
+   private static final String BALANCE_INQUIRY = "BALANCE INQUIRY";
    private static final String WITHDRAWAL = "WITHDRAWAL";
    private static final String TRANSFER = "TRANSFER";
    private static final String EXIT = "EXIT";
@@ -74,7 +74,6 @@ public class ATM
         	   screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
         	   gui.isPassword = true;
         	   gui.waitTilInput();
-        	   // System.out.printf("\n%s", gui.getPassword());
         	   gui.isPassword = false;
         	   gui.setInput( "" );
         	   //password input session ends here ^^^^
@@ -122,7 +121,9 @@ public class ATM
         switch ( mainMenuSelection )
          {
             // user chose to perform one of three transaction types
-            case "BALANCE_INQUIRY":
+            case "BALANCE INQUIRY":
+            	screen.displayMessage(gui, "Balance Inquiry");
+            	break;
             case "WITHDRAWAL":
             case "TRANSFER":
                // initialize as new object of chosen type
@@ -165,7 +166,7 @@ public class ATM
       // determine which type of Transaction to create
       switch ( type )
       {
-        case "BALANCE_INQUIRY":screen.displayMessage(gui,"BALANCE_INQUIRY"); break;
+        case "BALANCE INQUIRY":screen.displayMessage(gui,"BALANCE INQUIRY"); break;
          case "WITHDRAWAL": // create new BalanceInquiry transaction
 
                temp = new Withdrawal( currentAccountNumber, screen,

@@ -3,6 +3,8 @@
 
 public class BalanceInquiry extends Transaction
 {
+	private Screen screen;
+	private GUI gui;
    // BalanceInquiry constructor
    public BalanceInquiry( int userAccountNumber, Screen atmScreen, 
       BankDatabase atmBankDatabase, GUI gui )
@@ -15,8 +17,6 @@ public class BalanceInquiry extends Transaction
    {
       // get references to bank database and screen
       BankDatabase bankDatabase = getBankDatabase();
-      Screen screen = getScreen();
-      GUI gui = getGUI();
 
       // get the available balance for the account involved
       double availableBalance = 
@@ -25,6 +25,9 @@ public class BalanceInquiry extends Transaction
       // get the total balance for the account involved
       double totalBalance = 
          bankDatabase.getTotalBalance( getAccountNumber() );
+      
+      //Button choices
+      gui.withdrawalButtonAction();
       
       // display the balance information on the screen
       screen.mergeMessage( gui, "Balance Information:\n" );
