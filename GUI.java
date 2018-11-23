@@ -29,6 +29,7 @@ public class GUI {
 	public String functionChoice;
 	public int amountChoice = 0;
 
+
 	/**
 	 * Launch the application.
 	 */
@@ -166,27 +167,25 @@ public class GUI {
 		}
 	}
 
-	public void mainMenuButtonAction() {
+	public void mainMenuButtonAction(String action) {
 		//left top for 4
 		//right top for 4
-
-		String [] ATMActionCommand = {"BALANCE","WITHDRAWAL","DEPOSIT","","TRANSFER","","","EXIT"};
-		removeCurrentListener();
-		for ( int i = 0; i <= 7; i++){
-			keys[ 16 + i ].setText(ATMActionCommand[i]);
-			keys[ 16 + i ].addActionListener( new buttonListenerFunction());
-
+		String [] ATMActionCommand = new String[8];
+		switch (action) {
+			case "_BALANCE_CHECK":  ATMActionCommand =  new String []{"BALANCE","WITHDRAWAL","DEPOSIT","","TRANSFER","","","EXIT"}; break;
+			case "_WITHDRWAL": ATMActionCommand = new String []{"","100","500","1000","","","","EXIT"}; break;
+			case "_DEPOSIT":  ATMActionCommand =  new String []{"","100","500","1000","","","","EXIT"}; break;
+			case "_TRANSFER": ATMActionCommand =  new String []{"","100","500","1000","","","","EXIT"}; break;
+			case "_BLANK":  ATMActionCommand =  new String []{"","","","","","","","EXIT"}; break;
+			default:
+				ATMActionCommand =  new String []{"BALANCE","WITHDRAWAL","DEPOSIT","","TRANSFER","","","EXIT"}; break;
 		}
 
-	}
-	public void withdrawalButtonAction() {
-		//left top for 4
-		//right top for 4
-		String [] ATMActionCommand = {"","100","500","1000","","","","EXIT"};
 		removeCurrentListener();
 		for ( int i = 0; i <= 7; i++){
 			keys[ 16 + i ].setText(ATMActionCommand[i]);
 			keys[ 16 + i ].addActionListener( new buttonListenerFunction());
+
 		}
 
 	}
@@ -204,6 +203,17 @@ public class GUI {
 		System.out.print("\nLOMO");
 
 	}
+	// public void mainMenuButtonAction() {
+	// 	//left top for 4
+	// 	//right top for 4
+	//
+	// 	removeCurrentListener();
+	// 	for ( int i = 0; i <= 7; i++){
+	// 		keys[ 16 + i ].setText(ATMActionCommand[i]);
+	// 		keys[ 16 + i ].addActionListener( new buttonListenerFunction());
+	// 	}
+	//
+	// }
 
 	/**
 	 * Initialize the coents of the frame.
@@ -224,8 +234,8 @@ public class GUI {
 		textArea = new JTextArea( 3, 20 );  // declaration of textArea for displaying input
 	    textArea.setEditable(false);    // set textArea not editable
 			textArea.setText(input);  // display input in textArea
-			
-			
+
+
 
 			//declaration of textJPanel for containing messageArea and textArea
 	    textJPanel = new JPanel();

@@ -56,6 +56,8 @@ public class ATM
          userAuthenticated = false; // reset before next ATM session
          currentAccountNumber = 0; // reset before next ATM session
          screen.displayMessage(gui, "Thank you! Goodbye!" );
+         System.out.println("clear exit?");
+         gui.functionChoice = "";
       } // end while
    } // end method run
 
@@ -73,7 +75,8 @@ public class ATM
         	   //password input process
         	   screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
         	   gui.isPassword = true;
-        	   gui.waitTilInput();
+            gui.waitTilInput();  
+        	   // System.out.printf("\n%s", gui.getPassword());
         	   gui.isPassword = false;
         	   gui.setInput( "" );
         	   //password input session ends here ^^^^
@@ -125,6 +128,7 @@ public class ATM
             case "BALANCE":
             	balance.execute();
             	screen.displayMessage(gui, "Balance Inquiry");
+              System.out.println("Inquiry");
             	break;
             case "WITHDRAWAL":
             	
@@ -149,7 +153,7 @@ public class ATM
    private String displayMainMenu()
    {
 
-	      gui.mainMenuButtonAction();
+	    gui.mainMenuButtonAction("menu");
       screen.mergeMessage(gui, "Main menu:\n" );
       screen.mergeMessage(gui, "1 - View my balance\n" );
       screen.mergeMessage(gui, "2 - Withdraw cash\n" );
@@ -158,12 +162,14 @@ public class ATM
       screen.mergeMessage( gui, "Enter a choice: " );
       gui.printMessage();
       gui.resetChoice();
+
       return gui.getFunctionInput(); // return user's selection
    } // end method displayMainMenu
 
    // return object of specified Transaction subclass
    private Transaction createTransaction( String type )
    {
+
       Transaction temp = null; // temporary Transaction variable
       // screen.displayMessage(gui,"test");
       // determine which type of Transaction to create
@@ -172,12 +178,14 @@ public class ATM
         case "BALANCE":
         	temp = new BalanceInquiry( currentAccountNumber, screen, bankDatabase , gui ); 
         	break;
+                    break;
          case "WITHDRAWAL": // create new BalanceInquiry transaction
 
                temp = new Withdrawal( currentAccountNumber, screen,
                   bankDatabase, keypad, cashDispenser, gui );
             break;
          case "DEPOSIT": // create new Withdrawal transaction
+         break;
          temp = new BalanceInquiry(
             currentAccountNumber, screen, bankDatabase, gui );
             break;
