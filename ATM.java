@@ -121,7 +121,7 @@ public class ATM
         switch ( mainMenuSelection )
          {
             // user chose to perform one of three transaction types
-            case "BALANCE INQUIRY":
+            case "BALANCE_INQUIRY":
             	screen.displayMessage(gui, "Balance Inquiry");
               System.out.println("Inquiry");
             	break;
@@ -156,18 +156,20 @@ public class ATM
       screen.mergeMessage( gui, "Enter a choice: " );
       gui.printMessage();
       gui.resetChoice();
+
       return gui.getFunctionInput(); // return user's selection
    } // end method displayMainMenu
 
    // return object of specified Transaction subclass
    private Transaction createTransaction( String type )
    {
+
       Transaction temp = null; // temporary Transaction variable
       // screen.displayMessage(gui,"test");
       // determine which type of Transaction to create
       switch ( type )
       {
-        case "BALANCE INQUIRY":screen.displayMessage(gui,"BALANCE INQUIRY");
+        case "BALANCE_INQUIRY":screen.displayMessage(gui,"BALANCE INQUIRY");
                  temp = new BalanceInquiry(
                     currentAccountNumber, screen, bankDatabase, gui );
                     break;
@@ -177,7 +179,7 @@ public class ATM
                   bankDatabase, keypad, cashDispenser, gui );
             break;
          case "DEPOSIT": // create new Withdrawal transaction
-
+         break;
         case "TRANSFER": // create new Transfer transaction
             temp = new Transfer(currentAccountNumber, screen,
                bankDatabase, keypad, gui);
