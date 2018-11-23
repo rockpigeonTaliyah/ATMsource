@@ -9,7 +9,7 @@ public class ATM
    private BankDatabase bankDatabase; // account information database
 
    // constants corresponding to main menu options
-   private static final String BALANCE_INQUIRY = "BALANCE_INQUIRY";
+   private static final String BALANCE_INQUIRY = "BALANCE INQUIRY";
    private static final String WITHDRAWAL = "WITHDRAWAL";
    private static final String TRANSFER = "TRANSFER";
    private static final String EXIT = "EXIT";
@@ -124,7 +124,10 @@ public class ATM
         switch ( mainMenuSelection )
          {
             // user chose to perform one of three transaction types
-            case "BALANCE_INQUIRY":
+            case "BALANCE INQUIRY":
+            	screen.displayMessage(gui, "Balance Inquiry");
+              System.out.println("Inquiry");
+            	break;
             case "WITHDRAWAL":
             case "TRANSFER":
                // initialize as new object of chosen type
@@ -147,7 +150,7 @@ public class ATM
    private String displayMainMenu()
    {
 
-	      gui.mainMenuButtonAction();
+	    gui.mainMenuButtonAction("menu");
       screen.mergeMessage(gui, "Main menu:\n" );
       screen.mergeMessage(gui, "1 - View my balance\n" );
       screen.mergeMessage(gui, "2 - Withdraw cash\n" );
@@ -167,16 +170,17 @@ public class ATM
       // determine which type of Transaction to create
       switch ( type )
       {
-        case "BALANCE_INQUIRY":screen.displayMessage(gui,"BALANCE_INQUIRY"); break;
+        case "BALANCE INQUIRY":screen.displayMessage(gui,"BALANCE INQUIRY");
+                 temp = new BalanceInquiry(
+                    currentAccountNumber, screen, bankDatabase, gui );
+                    break;
          case "WITHDRAWAL": // create new BalanceInquiry transaction
 
                temp = new Withdrawal( currentAccountNumber, screen,
                   bankDatabase, keypad, cashDispenser, gui );
             break;
          case "DEPOSIT": // create new Withdrawal transaction
-         temp = new BalanceInquiry(
-            currentAccountNumber, screen, bankDatabase, gui );
-            break;
+
         case "TRANSFER": // create new Transfer transaction
             temp = new Transfer(currentAccountNumber, screen,
                bankDatabase, keypad, gui);
