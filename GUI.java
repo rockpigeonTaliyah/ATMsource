@@ -157,7 +157,7 @@ public class GUI {
 	public void waitTilInput() {
 		synchronized ( this ) {
 	           try {
-	        	   while ( !inputEntered ) {
+	        	   while ( !inputEntered || functionChoice =="EXIT" ) {
 	        		   Thread.sleep(200);;
 	        	   }
 	           } catch (InterruptedException e) {
