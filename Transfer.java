@@ -44,15 +44,33 @@ public class Transfer extends Transaction{
     	}
     	catch(Exception e){
     		gui.setMessage("");
-    		screen.displayMessage(gui, "Invalid Account Number!");
+    		screen.displayMessage(gui, "Invalid Account Number! Re-Enter");
     		gui.delay(1000);
     	}
     }
     gui.clearInput();
-    screen.displayMessage( gui, "\nTransfer Amount: " );
     gui.mainMenuButtonAction("_TRANSFER");
-    gui.waitTilInput();
-
+    isDouble = true;
+    while(isDouble){
+    	try{
+    		gui.setMessage("");
+    		gui.clearInput();
+    		screen.displayMessage( gui, "Transfer Amount: " );
+    		gui.waitTilInput();
+    		temp_amount = Double.parseDouble(gui.getInput());
+    		System.out.println("temp amount: " + temp_amount);
+    		isDouble = false;
+    		if(!isDouble){
+    			break;
+    		}
+    	}
+    	catch(Exception e){
+    		gui.setMessage("");
+    		screen.displayMessage(gui, "Invalid Amount! Re-Enter");
+    		gui.delay(1000);
+    	}
+    }
+/*
 try {
   if(gui.getInput() == ""){
     temp_amount = gui.getAmountInput();
@@ -64,9 +82,10 @@ try {
   }
 
 } catch(Exception e) {
-  screen.displayMessage(gui, "Invalid Account , please try again");
+  screen.displayMessage(gui, "Invalid amount , please try again");
 return;
 }
+*/
 
 
 
@@ -109,6 +128,7 @@ return;
     	gui.delay(1000);
     	gui.setMessage("");
     }
+    gui.clearInput();
     gui.keypadEnabled = false;
   }
 
