@@ -145,7 +145,7 @@ public class ATM
    private String displayMainMenu()
    {
 
-	      gui.mainMenuButtonAction();
+	    gui.mainMenuButtonAction("menu");
       screen.mergeMessage(gui, "Main menu:\n" );
       screen.mergeMessage(gui, "1 - View my balance\n" );
       screen.mergeMessage(gui, "2 - Withdraw cash\n" );
