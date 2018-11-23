@@ -123,6 +123,7 @@ public class ATM
             // user chose to perform one of three transaction types
             case "BALANCE INQUIRY":
             	screen.displayMessage(gui, "Balance Inquiry");
+              System.out.println("Inquiry");
             	break;
             case "WITHDRAWAL":
             case "TRANSFER":
@@ -166,16 +167,17 @@ public class ATM
       // determine which type of Transaction to create
       switch ( type )
       {
-        case "BALANCE INQUIRY":screen.displayMessage(gui,"BALANCE INQUIRY"); break;
+        case "BALANCE INQUIRY":screen.displayMessage(gui,"BALANCE INQUIRY");
+                 temp = new BalanceInquiry(
+                    currentAccountNumber, screen, bankDatabase, gui );
+                    break;
          case "WITHDRAWAL": // create new BalanceInquiry transaction
 
                temp = new Withdrawal( currentAccountNumber, screen,
                   bankDatabase, keypad, cashDispenser, gui );
             break;
          case "DEPOSIT": // create new Withdrawal transaction
-         temp = new BalanceInquiry(
-            currentAccountNumber, screen, bankDatabase, gui );
-            break;
+
         case "TRANSFER": // create new Transfer transaction
             temp = new Transfer(currentAccountNumber, screen,
                bankDatabase, keypad, gui);
