@@ -34,7 +34,7 @@ public class Withdrawal extends Transaction
       // screen.displayMessage(gui, " asdf");
       boolean cashDispensed = false; // cash was not dispensed yet
       double availableBalance; // amount available for withdrawal
-
+      gui.keypadEnabled = true;
       // get references to bank database and screen
       BankDatabase bankDatabase = getBankDatabase();
       // Screen screen = getScreen();
@@ -107,9 +107,11 @@ public class Withdrawal extends Transaction
 
       } while ( !cashDispensed );
       screen.displayMessage( gui, "\ntransaction Done, returning..." );
+      gui.keypadEnabled = false;
       cashDispensed = true;
       gui.delay(1000);
       cashDispensed = false;
+      
       return;
    } // end method execute
 

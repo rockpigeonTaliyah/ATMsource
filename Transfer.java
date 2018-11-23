@@ -23,6 +23,7 @@ public class Transfer extends Transaction{
     double temp_amount = 0;
     boolean is_account = true;
     boolean is_amount = true;
+    gui.keypadEnabled = true;
     // display the menu
     gui.mainMenuButtonAction("_BLANK");
     screen.displayMessage( gui, "\nTransfer Menu: \n\nPlease specify the target and amount: " );
@@ -81,6 +82,7 @@ return;
     }else{
       screen.displayMessage( gui, "\nTransaction canceled");
     }
+    gui.keypadEnabled = false;
   }
 
 

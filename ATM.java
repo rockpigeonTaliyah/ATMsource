@@ -71,6 +71,7 @@ public class ATM
    {
 	  int accountNumber = 0;
 	  boolean isDouble = true;
+	  gui.keypadEnabled = true;
 	  while (isDouble) {
 		  try {	
 			  screen.displayMessage( gui, "Please enter your account number: " );
@@ -142,6 +143,7 @@ public class ATM
              "Invalid account number or PIN. Please try again." );
          gui.setPassword( "" );
       }
+      gui.keypadEnabled = false;
    }// end method authenticateUser
 
    // display the main menu and perform transactions

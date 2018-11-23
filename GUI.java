@@ -27,7 +27,7 @@ public class GUI {
 	public boolean isPassword = false;
 	public boolean inputEntered;
 	public String functionChoice;
-	public static boolean keypadEnabled = false;
+	public static boolean keypadEnabled = false; //Disable keypad when not needed
 	public int amountChoice = 0;
 
 
@@ -326,12 +326,15 @@ public class GUI {
 					// textArea.setText(String.valueOf(action));
 					if(action == 1)
 						System.exit(0);
-			}else if(!isPassword) {
-					input = input.concat( e.getActionCommand() );
-				}
-				else {
-					password = password.concat( e.getActionCommand());
-					input = input.concat("*");
+			}else 
+				if(keypadEnabled) {
+					if(!isPassword) {
+						input = input.concat( e.getActionCommand() );
+					}
+					else {
+						password = password.concat( e.getActionCommand());
+						input = input.concat("*");
+					}
 				}
 				textArea.setText(input);
 		}
