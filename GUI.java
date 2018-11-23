@@ -90,6 +90,23 @@ public class GUI {
 		}
 		// return "123";
 	}
+	public void resetChoice(){
+		functionChoice = null;
+			amountChoice = 0 ;
+	}
+	public void	confirmAmount(){
+		synchronized ( this ) {
+						 try {
+
+							 while (!inputEntered) {
+								 Thread.sleep(200);
+
+							 }
+						 } catch (InterruptedException e) {
+							 e.printStackTrace();
+						 }
+		}
+	}
 	public int getAmountInput(){
 		synchronized ( this ) {
 						 try {
@@ -124,7 +141,7 @@ public class GUI {
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String string) {
 		password = string;
 	}

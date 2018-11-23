@@ -87,7 +87,7 @@ public class ATM
       }
 
       int pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
-      gui.setPassword( "" ); 
+      gui.setPassword( "" );
       gui.clearInput();
       // set userAuthenticated to boolean value returned by database
       userAuthenticated =
@@ -153,6 +153,7 @@ public class ATM
       screen.mergeMessage(gui, "4 - Exit\n" );
       screen.mergeMessage( gui, "Enter a choice: " );
       gui.printMessage();
+      gui.resetChoice();
       return gui.getFunctionInput(); // return user's selection
    } // end method displayMainMenu
 
