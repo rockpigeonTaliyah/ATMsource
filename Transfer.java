@@ -20,7 +20,7 @@ public class Transfer extends Transaction{
     Screen screen = getScreen(); // get screen reference
     GUI gui = getGUI();
     int temp_id = 0;
-    double temp_amount = 0;
+    double temp_amount = 0.0;
     boolean is_account = true;
     boolean is_amount = true;
     gui.keypadEnabled = true;

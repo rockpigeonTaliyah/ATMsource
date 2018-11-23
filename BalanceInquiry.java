@@ -34,7 +34,8 @@ public class BalanceInquiry extends Transaction
 
       // display the balance information on the screen
       screen.displayMessage(gui, "");
-      //Plz fix
+      
+      screen.mergeMessage( gui, "\nPress EXIT to leave\n" );
       screen.mergeMessage( gui, "\nBalance Information:\n" );
       screen.mergeMessage( gui, " - Available balance: \n$" );
       screen.mergeMessage( gui, Double.toString(availableBalance));

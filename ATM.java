@@ -42,6 +42,8 @@ public class ATM
     	gui.delay(1000);;
     	screen.displayMessage(gui, "Please insert your card.");
     	gui.delay(1000);//wait for user to insert card
+    	gui.setInput("");
+    	gui.setPassword("");
 
     	 // loop while user is not yet authenticated
          while ( !userAuthenticated )

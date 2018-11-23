@@ -1,3 +1,5 @@
+import java.io.Console;
+
 // Withdrawal.java
 // Represents a withdrawal ATM transaction
 public class Withdrawal extends Transaction
@@ -44,7 +46,7 @@ public class Withdrawal extends Transaction
       do
       {
          // obtain a chosen withdrawal amount from the user
-         amount = displayMenuOfAmounts();
+         amount = Integer.parseInt(displayMenuOfAmounts());
          cashDispensed = false;
 //
 
@@ -78,7 +80,7 @@ public class Withdrawal extends Transaction
                else // cash dispenser does not have enough cash
                {
                   System.out.println("B Exception");
-                  screen.displayMessage( gui,
+                  screen.mergeMessage( gui,
                      "\nInsufficient cash available in the ATM." +
                      "\n\nPlease choose a smaller amount." );
                      gui.delay(1000);
@@ -117,10 +119,10 @@ public class Withdrawal extends Transaction
 
    // display a menu of withdrawal amounts and the option to cancel;
    // return the chosen amount or 0 if the user chooses to cancel
-   private int displayMenuOfAmounts()
+   private String displayMenuOfAmounts()
    {
       gui.mainMenuButtonAction("_WITHDRWAL");
-      int userChoice = 0; // local variable to store return value
+      String userChoice = "0"; // local variable to store return value
 
       // Screen screen = getScreen(); // get screen reference
       // GUI gui = getGUI();
@@ -128,7 +130,7 @@ public class Withdrawal extends Transaction
       // array of amounts to correspond to menu numbers
       // int amounts[] = {0, 100, 500, 1000};
       // loop while no valid choice has been made
-      while ( userChoice == 0 )
+      while ( userChoice == "0" )
       {
          // display the menu
          screen.mergeMessage( gui, "\n Withdrawal Menu:\n\n" );
@@ -139,25 +141,26 @@ public class Withdrawal extends Transaction
          screen.mergeMessage( gui, " -- Cancel transaction\n\n" );
          screen.mergeMessage( gui, "\nChoose a withdrawal amount: " );
          gui.printMessage();
-         int input = 0;
+         String input = "";
          gui.waitTilInput();
          System.out.println("123");
          if (gui.getInput() == "") {
-           input = gui.getAmountInput();
+           input = String.valueOf(gui.getAmountInput());
            System.out.print(input);
          }else{
-           input = Integer.parseInt(gui.getInput());
+           input = gui.getInput();
            gui.clearInput();
          }
 
          // int customValue = keypad.getInput();// get user input through keypad
 
          // determine how to proceed based on the input value
+         
          switch ( input )
          {
-            case 100:            // if the user chose a withdrawal amount
-            case 500:                  // (i.e., chose option 1, 2 or 3), return the
-            case 1000:
+            case "100":            // if the user chose a withdrawal amount
+            case "500":                  // (i.e., chose option 1, 2 or 3), return the
+            case "1000":
             screen.mergeMessage(gui, "You have selected to withdraw $" + input);
             screen.mergeMessage(gui, "\nPlease press enter to confirm ,\n");
             screen.mergeMessage(gui,"or press exit to restart process");
@@ -166,9 +169,8 @@ public class Withdrawal extends Transaction
              userChoice = input;
               // save user's choice
               break;
-            case 4: // the user chose to cancel
-               userChoice = 4; // save user's choice
-
+            case "4": // the user chose to cancel
+               userChoice = "4"; // save user's choice
                break;
             default: // the user did not enter a value from 1-4
               // check is the user input valid amount, then save amount , else output error
@@ -176,10 +178,9 @@ public class Withdrawal extends Transaction
                  // gui.waitTilInput();
                  // userChoice = Integer.parseInt(gui.getInput());
                  // System.out.println(userChoice);
-               // }else{
-                 screen.displayMessage( gui,
-                    "\nInvalid selection. Try again." );
-                    break;
+               // }else{ 
+                screen.mergeMessage( gui, "INVALID AMOUNT, try again." );             
+                break;
                // }
 
          } // end switch
