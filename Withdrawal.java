@@ -113,7 +113,7 @@ public class Withdrawal extends Transaction
    // return the chosen amount or 0 if the user chooses to cancel
    private int displayMenuOfAmounts()
    {
-      gui.withdrawalButtonAction();
+      gui.mainMenuButtonAction("_WITHDRWAL");
       int userChoice = 0; // local variable to store return value
 
       // Screen screen = getScreen(); // get screen reference
