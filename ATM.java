@@ -9,7 +9,7 @@ public class ATM
    private BankDatabase bankDatabase; // account information database
 
    // constants corresponding to main menu options
-   private static final String BALANCE_INQUIRY = "BALANCE INQUIRY";
+   private static final String BALANCE = "BALANCE";
    private static final String WITHDRAWAL = "WITHDRAWAL";
    private static final String TRANSFER = "TRANSFER";
    private static final String EXIT = "EXIT";
@@ -34,17 +34,11 @@ public class ATM
 	  // welcome and authenticate user; perform transactions
       while ( true )
       {
-    	  //print the welcome message
-    	  synchronized ( this ) {
-    		try {
-    			screen.mergeMessage(gui, "Welcome");
-    			wait(1000);
-    			screen.displayMessage(gui, "Please insert your card.");
-    			wait(1000);//wait for user to insert card
-    		}catch(InterruptedException e) {
-           		e.printStackTrace();
-           }
-    	  }
+    	//print the welcome message
+    	screen.mergeMessage(gui, "Welcome");
+    	gui.delay(1000);;
+    	screen.displayMessage(gui, "Please insert your card.");
+    	gui.delay(1000);//wait for user to insert card
 
     	 // loop while user is not yet authenticated
          while ( !userAuthenticated )
@@ -55,6 +49,7 @@ public class ATM
          performTransactions(); // user is now authenticated
          userAuthenticated = false; // reset before next ATM session
          currentAccountNumber = 0; // reset before next ATM session
+         gui.functionChoice = "";
          screen.displayMessage(gui, "Thank you! Goodbye!" );
          System.out.println("clear exit?");
          gui.functionChoice = "";
@@ -65,30 +60,20 @@ public class ATM
    private void authenticateUser()
    {
 	  int accountNumber = 0;
-	   synchronized ( this ) {
-           try {
-        	   wait(1000);//give user time to watch the message
-    		   screen.displayMessage( gui, "Please enter your account number: " );
-    		   gui.waitTilInput();
-        	   accountNumber = Integer.parseInt( gui.getInput() ); // input account number
-        	   gui.clearInput();
-        	   //password input process
-        	   screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
-        	   gui.isPassword = true;
-            gui.waitTilInput();
-        	   // System.out.printf("\n%s", gui.getPassword());
-        	   gui.isPassword = false;
-        	   gui.setInput( "" );
-        	   //password input session ends here ^^^^
+	  gui.delay(1000);//give user time to watch the message
+	  screen.displayMessage( gui, "Please enter your account number: " );
+	  gui.waitTilInput();
+      accountNumber = Integer.parseInt( gui.getInput() ); // input account number
+      gui.clearInput();
 
-        	   gui.printMessage();
-        	   gui.waitTilInput();
-           } catch (InterruptedException e) {
-           		e.printStackTrace();
-           }
-      }
-
+      //password input process
+      screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
+      gui.isPassword = true;
+      gui.waitTilInput();
+   	  gui.isPassword = false;
       int pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
+      //password input session ends here ^^^^
+
       gui.setPassword( "" );
       gui.clearInput();
       // set userAuthenticated to boolean value returned by database
@@ -113,6 +98,7 @@ public class ATM
    {
       // local variable to store transaction currently being processed
       Transaction currentTransaction = null;
+      BalanceInquiry balance = new BalanceInquiry( currentAccountNumber, screen, bankDatabase , gui );
       String mainMenuSelection = "";
       boolean userExited = false; // user has not chosen to exit
       // screen.displayMessage(gui, (displayMainMenu()));
@@ -124,12 +110,13 @@ public class ATM
         switch ( mainMenuSelection )
          {
             // user chose to perform one of three transaction types
-            case "BALANCE_INQUIRY":
-            	// screen.displayMessage(gui, "Balance Inquiry");
-              // System.out.println("Inquiry");
-
-
+            case "BALANCE":
+            	balance.execute();
+            	screen.displayMessage(gui, "Balance Inquiry");
+              System.out.println("Inquiry");
+            	break;
             case "WITHDRAWAL":
+
             case "TRANSFER":
             gui.setMessage("");
                // initialize as new object of chosen type
@@ -174,10 +161,9 @@ public class ATM
       // determine which type of Transaction to create
       switch ( type )
       {
-        case "BALANCE_INQUIRY":screen.displayMessage(gui,"BALANCE INQUIRY");
-                 temp = new BalanceInquiry(
-                    currentAccountNumber, screen, bankDatabase, gui );
-                    break;
+        case "BALANCE":
+        	temp = new BalanceInquiry( currentAccountNumber, screen, bankDatabase , gui );
+        	break;
          case "WITHDRAWAL": // create new BalanceInquiry transaction
 
                temp = new Withdrawal( currentAccountNumber, screen,

@@ -79,30 +79,24 @@ public class GUI {
 		return input;
 	}
 	public String getFunctionInput(){
-		synchronized ( this ) {
-						 try {
 							 while ( functionChoice ==null ) {
-								 Thread.sleep(200);;
+								 delay(200);;
 							 }
-						 } catch (InterruptedException e) {
-							 e.printStackTrace();
-						 }
+						
 				 		return functionChoice;
-		}
-		// return "123";
 	}
 	public void resetChoice(){
 		functionChoice = null;
 			amountChoice = 0 ;
 	}
-	public void delay(){
+	public void delay( int time ){
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(time);
 		} catch (InterruptedException e) {
 			return;
 		}
 	}
-	public void	confirmAmount(){
+/*	public void	confirmAmount(){
 		synchronized ( this ) {
 						 try {
 
@@ -114,27 +108,20 @@ public class GUI {
 							 e.printStackTrace();
 						 }
 		}
-	}
+	}*/
 	public int getAmountInput(){
-		synchronized ( this ) {
-						 try {
-
-							 while (amountChoice == 0 ) {
-								 Thread.sleep(200);
-
-							 }
-						 } catch (InterruptedException e) {
-							 e.printStackTrace();
-						 }
+		
+		while (amountChoice == 0 ) {
+			 delay(200);
+		}
 						 // if (functionChoice == "EXIT") {
 							//  System.out.println("qwe");
 							//  amountChoice = 4;
-							 functionChoice = "";
+		functionChoice = "";
 						 // }
-						return amountChoice;
+		return amountChoice;
 		}
 		// return "123";
-	}
 	public void printInput() {
 		textArea.setText(input);
 	}
@@ -156,14 +143,8 @@ public class GUI {
 
 	//stop the system for user to press enter
 	public void waitTilInput() {
-		synchronized ( this ) {
-	           try {
-	        	   while ( !inputEntered || functionChoice =="EXIT" ) {
-	        		   Thread.sleep(200);;
-	        	   }
-	           } catch (InterruptedException e) {
-	        	   e.printStackTrace();
-	           }
+	    while ( !inputEntered || functionChoice =="EXIT" ) {
+	    	delay(200);
 		}
 	}
 
@@ -187,6 +168,20 @@ public class GUI {
 			keys[ 16 + i ].addActionListener( new buttonListenerFunction());
 
 		}
+
+	}
+	
+	public void balanceEnquiryButtonAction() {
+		//left top for 4
+		//right top for 4
+		
+		String [] ATMActionCommand = {"","100","500","1000","","","","EXIT"};
+		removeCurrentListener();
+		for ( int i = 0; i <= 7; i++){
+			keys[ 16 + i ].setText(ATMActionCommand[i]);
+			keys[ 16 + i ].addActionListener( new buttonListenerFunction());
+		}
+		System.out.print("\nLOMO");
 
 	}
 	// public void mainMenuButtonAction() {
@@ -267,7 +262,7 @@ public class GUI {
 	    // set leftJPanel layout to grid layout
 	    leftJPanel = new JPanel();
 	    leftJPanel.setLayout( new GridLayout( 4, 1 ) );
-	    leftJPanel.setPreferredSize( new Dimension( 100, 100 ));
+	    leftJPanel.setPreferredSize( new Dimension( 110, 100 ));
 
 
 	    // add buttons to leftJPanel panel
@@ -277,7 +272,7 @@ public class GUI {
 	    // set rightJPanel layout to grid layout
 	    rightJPanel = new JPanel();
 	    rightJPanel.setLayout( new GridLayout( 4, 1 ) );
-	    rightJPanel.setPreferredSize( new Dimension( 100, 100 ));
+	    rightJPanel.setPreferredSize( new Dimension( 110, 100 ));
 
 	    // add buttons to rightJPanel panel
 	    for ( int i = 20; i <= 23; i++ )
@@ -355,7 +350,7 @@ public class GUI {
 			System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
 			// functionChoice = e.getActionCommand();
 			switch(e.getActionCommand()){
-				case "BALANCE":functionChoice = "BALANCE_INQUIRY";
+				case "BALANCE":functionChoice = "BALANCE";
 				  break;
 				case "WITHDRAWAL": functionChoice = "WITHDRAWAL";
 				 	break;

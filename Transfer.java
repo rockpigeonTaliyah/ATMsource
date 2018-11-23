@@ -26,7 +26,7 @@ public class Transfer extends Transaction{
     // display the menu
     gui.mainMenuButtonAction("_BLANK");
     screen.displayMessage( gui, "\nTransfer Menu: \n\nPlease specify the target and amount: " );
-    gui.delay();
+    gui.delay(1000);
     screen.displayMessage( gui, "\nTransfer Account: " );
     gui.waitTilInput();
     temp_id = Integer.parseInt(gui.getInput());
@@ -55,20 +55,20 @@ return;
     // prevent error input
     if(bankDatabase.getTarget( temp_id ) == false ){
       System.out.println("Error: Account not exists");
-      gui.delay();
+      gui.delay(1000);
       is_account = false;
     }else if(getAccountNumber() == temp_id){
       System.out.printf("Error: Account %d is repeated", temp_id);
-      gui.delay();
+      gui.delay(1000);
       is_account = false;
     }
     if (temp_amount == 0 || temp_amount == 0.0  ) {
       screen.displayMessage( gui, "Error: Amount invalid. ");
-      gui.delay();
+      gui.delay(1000);
       is_amount = false;
     }else if(temp_amount >= bankDatabase.getAvailableBalance( getAccountNumber() )){
       screen.displayMessage( gui, "Error: Insufficient amount. ");
-      gui.delay();
+      gui.delay(1000);
       is_amount = false;
     }
     // transfer
@@ -76,7 +76,7 @@ return;
     if( is_account != false & is_amount != false ){
         bankDatabase.transfer( getAccountNumber(), temp_id, temp_amount, screen, gui );
         screen.displayMessage( gui, "transaction done ");
-        gui.delay();
+        gui.delay(1000);
         return;
     }else{
       screen.displayMessage( gui, "\nTransaction canceled");

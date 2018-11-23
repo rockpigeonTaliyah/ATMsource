@@ -70,7 +70,7 @@ public class Withdrawal extends Transaction
                   // instruct user to take cash
                   screen.displayMessage( gui,
                      "\nPlease take your cash now." );
-                     gui.delay();
+                     gui.delay(1000);
                      System.out.print("Test B2");
 
                } // end if
@@ -80,7 +80,7 @@ public class Withdrawal extends Transaction
                   screen.displayMessage( gui,
                      "\nInsufficient cash available in the ATM." +
                      "\n\nPlease choose a smaller amount." );
-                     gui.delay();
+                     gui.delay(1000);
                    }
             } // end if
             else // not enough money available in user's account
@@ -89,7 +89,7 @@ public class Withdrawal extends Transaction
                screen.displayMessage( gui,
                   "\nInsufficient funds in your account." +
                   "\n\nPlease choose a smaller amount." );
-                  gui.delay();
+                  gui.delay(1000);
                   return;
 
             } // end else
@@ -99,7 +99,7 @@ public class Withdrawal extends Transaction
             System.out.print("Test E Exit");
 
             screen.displayMessage( gui, "\nCanceling transaction..." );
-            gui.delay();
+            gui.delay(1000);
             return; // return to main menu because user canceled
          } // end else
 

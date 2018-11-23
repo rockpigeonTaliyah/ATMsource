@@ -26,21 +26,20 @@ public class BalanceInquiry extends Transaction
       double totalBalance =
          bankDatabase.getTotalBalance( getAccountNumber() );
 
+      gui = getGUI();
+      screen = getScreen();
+      
       //Button choices
-      gui.mainMenuButtonAction("_BALANCE_CHECK");
+      gui.balanceEnquiryButtonAction();
 
       // display the balance information on the screen
+      
       screen.mergeMessage( gui, "Balance Information:\n" );
       screen.mergeMessage( gui, " - Available balance: " );
       screen.displayDollarAmount( gui, availableBalance );
       screen.displayMessage( gui, "\n - Total balance:     " );
       screen.displayDollarAmount( gui, totalBalance );
-			gui.delay();
-			gui.delay();
-			gui.delay();
-			gui.delay();
-			gui.delay();
-			gui.delay();
+			gui.delay(5000);
    } // end method execute
 } // end class BalanceInquiry
 
