@@ -178,7 +178,6 @@ public class ATM
         case "BALANCE":
         	temp = new BalanceInquiry( currentAccountNumber, screen, bankDatabase , gui ); 
         	break;
-                    break;
          case "WITHDRAWAL": // create new BalanceInquiry transaction
 
                temp = new Withdrawal( currentAccountNumber, screen,
@@ -186,9 +185,6 @@ public class ATM
             break;
          case "DEPOSIT": // create new Withdrawal transaction
          break;
-         temp = new BalanceInquiry(
-            currentAccountNumber, screen, bankDatabase, gui );
-            break;
         case "TRANSFER": // create new Transfer transaction
             temp = new Transfer(currentAccountNumber, screen,
                bankDatabase, keypad, gui);
