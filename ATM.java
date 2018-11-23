@@ -55,7 +55,7 @@ public class ATM
          performTransactions(); // user is now authenticated
          userAuthenticated = false; // reset before next ATM session
          currentAccountNumber = 0; // reset before next ATM session
-         screen.displayMessageLine(gui, "Thank you! Goodbye!" );
+         screen.displayMessage(gui, "Thank you! Goodbye!" );
       } // end while
    } // end method run
 
@@ -99,7 +99,7 @@ public class ATM
          currentAccountNumber = accountNumber; // save user's account #
       } // end if
       else {
-         screen.displayMessageLine(
+         screen.displayMessage(
         		 gui,
              "Invalid account number or PIN. Please try again." );
          gui.setPassword( "" );
@@ -130,11 +130,11 @@ public class ATM
                currentTransaction.execute(); // execute transaction
                break;
             case "EXIT": // user chose to terminate session
-               screen.displayMessageLine(gui, "Exiting the system..." );
+               screen.displayMessage(gui, "Exiting the system..." );
                userExited = true; // this ATM session should end
                break;
             default: // user did not enter an integer from 1-4
-               screen.displayMessageLine(gui,
+               screen.displayMessage(gui,
                   "You did not enter a valid selection. Try again." );
                break;
          } // end switch
@@ -145,7 +145,7 @@ public class ATM
    private String displayMainMenu()
    {
 
-	      gui.welcomePageButtonAction();
+	      gui.mainMenuButtonAction();
       screen.mergeMessage(gui, "Main menu:\n" );
       screen.mergeMessage(gui, "1 - View my balance\n" );
       screen.mergeMessage(gui, "2 - Withdraw cash\n" );

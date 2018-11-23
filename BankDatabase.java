@@ -72,10 +72,10 @@ public class BankDatabase
    public void transfer( int userAccountNumber, int targetUserAccountNumber, double amount, Screen paramScreen, GUI gui )
    {
           Screen screen = paramScreen;
-          screen.displayMessageLine( gui, "\n Transaction Processing.... ");
+          screen.displayMessage( gui, "\n Transaction Processing.... ");
           getAccount( userAccountNumber ).debit(amount);
           getAccount( targetUserAccountNumber ).credit(amount);
-          screen.displayMessageLine( gui, "Transaction End.");
+          screen.displayMessage( gui, "Transaction End.");
     } // end method transfer
 
     // getTarget
