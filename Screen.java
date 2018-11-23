@@ -2,29 +2,24 @@
 // Represents the screen of the ATM
 
 public class Screen
-{	
+{
    // displays a message without a carriage return
-   public void displayMessage( GUI gui, String message ) 
+   public void displayMessage( GUI gui, String message )
    {
-      gui.setMessage( message ) ; 
+      gui.setMessage( message ) ;
       gui.printMessage();
    } // end method displayMessage
 
-   // display a message with a carriage return
-   public void displayMessageLine( GUI gui, String message ) 
-   {
-      gui.setMessage( message + "\n" );  
-      gui.printMessage();
-   } // end method displayMessageLine
-
+   //concate the message to gui.message
    public void mergeMessage( GUI gui, String message ) {
 	   gui.mergeMessage( message );
    }
-   
+
    // display a dollar amount
    public void displayDollarAmount( GUI gui, double amount )
    {
-      gui.setMessage( String.format( "$%,.2f", amount ));   
+      gui.mergeMessage( String.format( "$%,.2f", amount )); 
+      gui.printMessage();  
    } // end method displayDollarAmount 
 } // end class Screen
 

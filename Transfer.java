@@ -20,7 +20,7 @@ public class Transfer extends Transaction{
     boolean is_account = true;
     boolean is_amount = true;
     // display the menu
-    screen.displayMessageLine( gui, "\nTransfer Menu: \n\nPlease specify the target and amount: " );
+    screen.displayMessage( gui, "\nTransfer Menu: \n\nPlease specify the target and amount: " );
     screen.displayMessage( gui, "\nTransfer Account: " );
     temp_id = keypad.getInput();
     screen.displayMessage( gui, "\nTransfer Amount: " );

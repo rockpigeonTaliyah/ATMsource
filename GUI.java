@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JOptionPane;
+import javax.swing.text.*;
 
 public class GUI {
 
@@ -74,7 +75,6 @@ public class GUI {
 	}
 
 	public String getInput() {
-		System.out.println(input);
 		return input;
 	}
 	public String getFunctionInput(){
@@ -89,6 +89,30 @@ public class GUI {
 				 		return functionChoice;
 		}
 		// return "123";
+	}
+	public void resetChoice(){
+		functionChoice = null;
+			amountChoice = 0 ;
+	}
+	public void delay(){
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			return;
+		}
+	}
+	public void	confirmAmount(){
+		synchronized ( this ) {
+						 try {
+
+							 while (!inputEntered) {
+								 Thread.sleep(200);
+
+							 }
+						 } catch (InterruptedException e) {
+							 e.printStackTrace();
+						 }
+		}
 	}
 	public int getAmountInput(){
 		synchronized ( this ) {
@@ -124,7 +148,7 @@ public class GUI {
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String string) {
 		password = string;
 	}
@@ -142,11 +166,11 @@ public class GUI {
 		}
 	}
 
-	public void welcomePageButtonAction() {
+	public void mainMenuButtonAction() {
 		//left top for 4
 		//right top for 4
 
-		String [] ATMActionCommand = {"BALANCE_INQUIRY","WITHDRAWAL","DEPOSIT","","TRANSFER","","","EXIT"};
+		String [] ATMActionCommand = {"BALANCE","WITHDRAWAL","DEPOSIT","","TRANSFER","","","EXIT"};
 		removeCurrentListener();
 		for ( int i = 0; i <= 7; i++){
 			keys[ 16 + i ].setText(ATMActionCommand[i]);
@@ -172,7 +196,7 @@ public class GUI {
 	 */
 	public void initialize() {
 		frame = new JFrame();
-		frame.setBounds(600, 120, 350, 400);//set frame position and size
+		frame.setBounds(600, 120, 400, 450);//set frame position and size
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -185,8 +209,11 @@ public class GUI {
 
 		textArea = new JTextArea( 3, 20 );  // declaration of textArea for displaying input
 	    textArea.setEditable(false);    // set textArea not editable
-	    textArea.setText(input);  // display input in textArea
+			textArea.setText(input);  // display input in textArea
+			
+			
 
+			//declaration of textJPanel for containing messageArea and textArea
 	    textJPanel = new JPanel();
 	    textJPanel.setLayout( new BorderLayout() );
 
@@ -230,7 +257,7 @@ public class GUI {
 	    // set leftJPanel layout to grid layout
 	    leftJPanel = new JPanel();
 	    leftJPanel.setLayout( new GridLayout( 4, 1 ) );
-	    //leftJPanel.setPreferredSize( new Dimension( 70, 100 ));
+	    leftJPanel.setPreferredSize( new Dimension( 100, 100 ));
 
 
 	    // add buttons to leftJPanel panel
@@ -240,6 +267,7 @@ public class GUI {
 	    // set rightJPanel layout to grid layout
 	    rightJPanel = new JPanel();
 	    rightJPanel.setLayout( new GridLayout( 4, 1 ) );
+	    rightJPanel.setPreferredSize( new Dimension( 100, 100 ));
 
 	    // add buttons to rightJPanel panel
 	    for ( int i = 20; i <= 23; i++ )
@@ -317,7 +345,7 @@ public class GUI {
 			System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
 			// functionChoice = e.getActionCommand();
 			switch(e.getActionCommand()){
-				case "BALANCE_INQUIRY":functionChoice = "BALANCE_INQUIRY";
+				case "BALANCE":functionChoice = "BALANCE_INQUIRY";
 				  break;
 				case "WITHDRAWAL": functionChoice = "WITHDRAWAL";
 				 	break;
