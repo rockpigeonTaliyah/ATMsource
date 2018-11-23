@@ -74,7 +74,6 @@ public class GUI {
 	}
 
 	public String getInput() {
-		System.out.println(input);
 		return input;
 	}
 	public String getFunctionInput(){
@@ -170,7 +169,7 @@ public class GUI {
 		//left top for 4
 		//right top for 4
 
-		String [] ATMActionCommand = {"BALANCE_INQUIRY","WITHDRAWAL","DEPOSIT","","TRANSFER","","","EXIT"};
+		String [] ATMActionCommand = {"BALANCE INQUIRY","WITHDRAWAL","DEPOSIT","","TRANSFER","","","EXIT"};
 		removeCurrentListener();
 		for ( int i = 0; i <= 7; i++){
 			keys[ 16 + i ].setText(ATMActionCommand[i]);
@@ -183,6 +182,18 @@ public class GUI {
 		//left top for 4
 		//right top for 4
 		String [] ATMActionCommand = {"","100","500","1000","","","","EXIT"};
+		removeCurrentListener();
+		for ( int i = 0; i <= 7; i++){
+			keys[ 16 + i ].setText(ATMActionCommand[i]);
+			keys[ 16 + i ].addActionListener( new buttonListenerFunction());
+		}
+
+	}
+	
+	public void balanceEnquiryButtonAction() {
+		//left top for 4
+		//right top for 4
+		String [] ATMActionCommand = {"","","","","","","","EXIT"};
 		removeCurrentListener();
 		for ( int i = 0; i <= 7; i++){
 			keys[ 16 + i ].setText(ATMActionCommand[i]);
@@ -341,7 +352,7 @@ public class GUI {
 			System.out.println("Count of listeners: " + ((JButton) e.getSource()).getActionListeners().length);
 			// functionChoice = e.getActionCommand();
 			switch(e.getActionCommand()){
-				case "BALANCE_INQUIRY":functionChoice = "BALANCE_INQUIRY";
+				case "BALANCE INQUIRY":functionChoice = "BALANCE INQUIRY";
 				  break;
 				case "WITHDRAWAL": functionChoice = "WITHDRAWAL";
 				 	break;
