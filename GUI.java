@@ -126,9 +126,8 @@ public class GUI {
 		textArea.setText(input);
 	}
 
-	//clear the inputArea and reset state
+	//clear the inputArea
 	public void clearInput() {
-		inputEntered = false;
 		setInput( "" );
 		printInput();
 	}
@@ -146,6 +145,8 @@ public class GUI {
 	    while ( !inputEntered || functionChoice =="EXIT" ) {
 	    	delay(200);
 		}
+	    //reset state
+		inputEntered = false;
 	}
 
 	public void mainMenuButtonAction(String action) {
