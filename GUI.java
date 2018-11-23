@@ -194,13 +194,12 @@ public class GUI {
 		//left top for 4
 		//right top for 4
 		
-		String [] ATMActionCommand = {"","100","500","1000","","","","EXIT"};
+		String [] ATMActionCommand = {"","","","","","","","EXIT"};
 		removeCurrentListener();
 		for ( int i = 0; i <= 7; i++){
 			keys[ 16 + i ].setText(ATMActionCommand[i]);
 			keys[ 16 + i ].addActionListener( new buttonListenerFunction());
 		}
-		System.out.print("\nLOMO");
 
 	}
 	// public void mainMenuButtonAction() {
