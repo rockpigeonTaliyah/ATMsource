@@ -10,6 +10,7 @@ public class Withdrawal extends Transaction
 
    // constant corresponding to menu option to cancel
    private final static int CANCELED = 4;
+   private static  boolean cashDispensed = false; // whether user withdraw money
 
    // Withdrawal constructor
    public Withdrawal( int userAccountNumber, Screen atmScreen,
@@ -106,6 +107,7 @@ public class Withdrawal extends Transaction
 
       } while ( !cashDispensed );
       screen.displayMessage( gui, "\ntransaction Done, returning..." );
+      cashDispensed = true;
       gui.delay(1000);
       cashDispensed = false;
       return;
@@ -154,7 +156,10 @@ public class Withdrawal extends Transaction
             case 100:            // if the user chose a withdrawal amount
             case 500:                  // (i.e., chose option 1, 2 or 3), return the
             case 1000:
-            screen.displayMessage(gui,"Please press enter to confirm ,\n or press exit to restart process");
+            screen.mergeMessage(gui, "You have selected to withdraw $" + input + "dollar\n");
+            screen.mergeMessage(gui, "Please press enter to confirm ,\n");
+            screen.mergeMessage(gui,"or press exit to restart process");
+            gui.printMessage();
             gui.waitTilInput();
              userChoice = input;
               // save user's choice
@@ -181,6 +186,10 @@ public class Withdrawal extends Transaction
 
       return userChoice; // return withdrawal amount or CANCELED
    } // end method displayMenuOfAmounts
+   
+   public static boolean getCashDispensed () {
+	   return cashDispensed;
+   }
 } // end class Withdrawal
 
 

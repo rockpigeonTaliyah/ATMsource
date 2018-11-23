@@ -1,6 +1,7 @@
 public class ATM
 {
    private boolean userAuthenticated; // whether user is authenticated
+   
    private int currentAccountNumber; // current user's account number
    private Screen screen; // ATM's screen
    private Keypad keypad; // ATM's keypad
@@ -13,6 +14,8 @@ public class ATM
    private static final String WITHDRAWAL = "WITHDRAWAL";
    private static final String TRANSFER = "TRANSFER";
    private static final String EXIT = "EXIT";
+   
+   private boolean cashDispensed = false; // whether user withdraw money
 
    // no-argument ATM constructor initializes instance variables
    public ATM()
@@ -50,6 +53,13 @@ public class ATM
          userAuthenticated = false; // reset before next ATM session
          currentAccountNumber = 0; // reset before next ATM session
          gui.functionChoice = "";
+         if (Withdrawal.getCashDispensed()) {
+        	 gui.delay(1000);
+        	 screen.displayMessage( gui, "Cash dispenised...\nPlease take your cash.");
+        	 gui.delay(1000);
+         }
+         gui.delay(1000);
+         screen.displayMessage( gui, "Card rejecting...\nPlease take your card.");
          screen.displayMessage(gui, "Thank you! Goodbye!" );
          System.out.println("clear exit?");
          gui.functionChoice = "";
