@@ -70,18 +70,59 @@ public class ATM
    private void authenticateUser()
    {
 	  int accountNumber = 0;
-	  gui.delay(1000);//give user time to watch the message
-	  screen.displayMessage( gui, "Please enter your account number: " );
-	  gui.waitTilInput();
-      accountNumber = Integer.parseInt( gui.getInput() ); // input account number
+	  boolean isDouble = true;
+	  while (isDouble) {
+		  try {	
+			  screen.displayMessage( gui, "Please enter your account number: " );
+			  gui.waitTilInput();
+			  accountNumber = Integer.parseInt( gui.getInput() ); // input account number
+			  isDouble = false;
+			  if (!isDouble)
+				  break;
+		  }
+		  catch (Exception e) {
+			  screen.displayMessage(gui, "Invalid account number or PIN. Please try again.");
+			  gui.clearInput();
+			  gui.delay(2000);
+			  isDouble = true;
+		  }
+	  }
       gui.clearInput();
 
       //password input process
+      
       screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
       gui.isPassword = true;
       gui.waitTilInput();
    	  gui.isPassword = false;
       int pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
+      
+      //DONT DEL YET TO BE FIXED!!!
+      /*
+      int pin = 0;
+      isDouble = true;
+      while(isDouble) {
+    	  try {	
+    		  gui.isPassword = true;
+			  screen.displayMessage( gui, "Enter your PIN: " );
+			  gui.waitTilInput();
+			  pin = Integer.parseInt( gui.getPassword() ); // input pin
+			  isDouble = false;
+			  gui.isPassword = false;
+			  if (!isDouble)
+				  break;
+		  }
+		  catch (Exception e) {
+			  screen.displayMessage(gui, "Invalid account number or PIN. Please try again.");
+			  System.out.printf("Pin:%s AC:%s", gui.getInput(), gui.getPassword());
+			  gui.clearInput();
+			  gui.setPassword("");
+			  gui.delay(2000);
+			  isDouble = true;
+		}
+      }
+      */
+
       //password input session ends here ^^^^
 
       gui.setPassword( "" );
@@ -101,7 +142,7 @@ public class ATM
              "Invalid account number or PIN. Please try again." );
          gui.setPassword( "" );
       }
-   } // end method authenticateUser
+   }// end method authenticateUser
 
    // display the main menu and perform transactions
    private void performTransactions()
