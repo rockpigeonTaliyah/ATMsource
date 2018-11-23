@@ -48,48 +48,6 @@ public class Withdrawal extends Transaction
 //
 
          // check whether user chose a withdrawal amount or canceled
-<<<<<<< HEAD
-         // if ( amount != CANCELED )
-         // {
-         //    System.out.println(amount);
-         //    // get available balance of account involved
-         //    availableBalance =
-         //       bankDatabase.getAvailableBalance( getAccountNumber() );
-         //
-         //    // check whether the user has enough money in the account
-         //    if ( amount <= availableBalance )
-         //    {
-         //       // check whether the cash dispenser has enough money
-         //       if ( cashDispenser.isSufficientCashAvailable( amount ) )
-         //       {
-         //          // update the account involved to reflect withdrawal
-         //          bankDatabase.debit( getAccountNumber(), amount );
-         //          cashDispenser.dispenseCash( amount ); // dispense cash
-         //          cashDispensed = true; // cash was dispensed
-         //
-         //          // instruct user to take cash
-         //          screen.displayMessage( gui,
-         //             "\nPlease take your cash now." );
-         //       } // end if
-         //       else // cash dispenser does not have enough cash
-         //          screen.displayMessage( gui,
-         //             "\nInsufficient cash available in the ATM." +
-         //             "\n\nPlease choose a smaller amount." );
-         //    } // end if
-         //    else // not enough money available in user's account
-         //    {
-         //       screen.displayMessage( gui,
-         //          "\nInsufficient funds in your account." +
-         //          "\n\nPlease choose a smaller amount." );
-         //    } // end else
-         // } // end if
-         // else // user chose cancel menu option
-         // {
-         //    screen.displayMessage( gui, "\nCanceling transaction..." );
-         //    return; // return to main menu because user canceled
-         // } // end else
-      } while ( !cashDispensed );
-=======
          if ( amount != CANCELED )
          {
             // get available balance of account involved
@@ -137,7 +95,6 @@ public class Withdrawal extends Transaction
             gui.delay();
             return; // return to main menu because user canceled
          } // end else
->>>>>>> master
 
 
       } while ( !cashDispensed );
