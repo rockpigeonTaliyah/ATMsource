@@ -3,7 +3,7 @@ public class Transfer extends Transaction{
   // constant corresponding to menu option to cancel
 
   // Transfer constructor initializes attributes
-  public Transfer( int userAccountNumber, Screen atmScreen, 
+  public Transfer( int userAccountNumber, Screen atmScreen,
     BankDatabase atmBankDatabase, Keypad atmKeypad, GUI gui)
   {
     super( userAccountNumber, atmScreen, atmBankDatabase, gui );
@@ -21,8 +21,11 @@ public class Transfer extends Transaction{
     boolean is_amount = true;
     // display the menu
     screen.displayMessage( gui, "\nTransfer Menu: \n\nPlease specify the target and amount: " );
+    gui.delay();
     screen.displayMessage( gui, "\nTransfer Account: " );
-    temp_id = keypad.getInput();
+    gui.waitTilInput();
+    temp_id = Integer.parseInt(gui.getInput());
+    gui.clearInput();
     screen.displayMessage( gui, "\nTransfer Amount: " );
     temp_amount  = keypad.getDoubleInput();
     // prevent error input
