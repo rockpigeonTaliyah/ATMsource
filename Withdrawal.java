@@ -46,12 +46,14 @@ public class Withdrawal extends Transaction
       do
       {
          // obtain a chosen withdrawal amount from the user
-         amount = Integer.parseInt(displayMenuOfAmounts());
+         String choiceReturned = displayMenuOfAmounts();
+         System.out.println(choiceReturned);
+         amount = Integer.parseInt(choiceReturned);
+         System.out.println(choiceReturned);
          cashDispensed = false;
-//
-
+         System.out.println(choiceReturned);
          // check whether user chose a withdrawal amount or canceled
-         if ( amount != CANCELED )
+         if ( amount != 4 )
          {
             // get available balance of account involved
             availableBalance =
@@ -60,6 +62,7 @@ public class Withdrawal extends Transaction
             // check whether the user has enough money in the account
             if ( amount <= availableBalance )
             {
+              System.out.println("test a");
                // check whether the cash dispenser has enough money
                if ( cashDispenser.isSufficientCashAvailable( amount ) )
                {
@@ -84,6 +87,7 @@ public class Withdrawal extends Transaction
             } // end if
             else // not enough money available in user's account
             {
+              System.out.println("test b");
                screen.displayMessage( gui,
                   "\nInsufficient funds in your account." +
                   "\n\nPlease choose a smaller amount." );
@@ -140,6 +144,7 @@ public class Withdrawal extends Transaction
          gui.waitTilInput();
          if (gui.getInput() == "") {
            input = String.valueOf(gui.getAmountInput());
+           System.out.println("test c");
            // char[] inp = input.toCharArray();
            // int counter = 0;
            //  for (int i = 0; i < str.length(); i++) {
@@ -148,6 +153,7 @@ public class Withdrawal extends Transaction
            //    }
            //  }
          }else{
+           System.out.println("test d ");
            input = gui.getInput();
            gui.clearInput();
          }
@@ -158,7 +164,7 @@ public class Withdrawal extends Transaction
 
          switch ( input )
          {
-            case "100":            // if the user chose a withdrawal amount
+            case "100":      // if the user chose a withdrawal amount
             case "500":                  // (i.e., chose option 1, 2 or 3), return the
             case "1000":
             gui.keypadNumberEnabled = false;
@@ -174,7 +180,10 @@ public class Withdrawal extends Transaction
               // break;
             case "4": // the user chose to cancel
             // System.out.println(gui.waitChoice());
-            if(gui.waitChoice() == 0 ){ userChoice = "4";return userChoice;}
+              userChoice = "1";
+            System.out.println(userChoice);
+            System.out.println(input);
+            if( input == "4" || gui.waitChoice() == 0){ userChoice = "4"; return userChoice;}
             else {
               userChoice = input;
             }
