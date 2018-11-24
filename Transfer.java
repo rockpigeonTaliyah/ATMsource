@@ -106,7 +106,7 @@ return;
     }
     if (temp_amount == 0 || temp_amount == 0.0  ) {
 
-    	screen.displayMessage( gui, "Error: Amount invalid. ");
+    	screen.displayMessage( gui, "Error: Amount cannot be zero. ");
       gui.delay(1000);
       is_amount = false;
     }else if(temp_amount >= bankDatabase.getAvailableBalance( getAccountNumber() )){
