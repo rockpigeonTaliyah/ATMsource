@@ -183,7 +183,7 @@ public class Withdrawal extends Transaction
               userChoice = "1";
             System.out.println(userChoice);
             System.out.println(input);
-            if( input == "4" || gui.waitChoice() == 0){ userChoice = "4"; return userChoice;}
+            if( input == "4" ){ userChoice = "4"; return userChoice;}
             else {
               userChoice = input;
             }
