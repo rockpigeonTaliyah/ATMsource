@@ -9,7 +9,7 @@ public class Screen
       gui.setMessage("");
       gui.setMessage( message ) ;
       gui.printMessage();
-      gui.delay(1000);
+
 
    } // end method displayMessage
 

@@ -28,13 +28,13 @@ public class BalanceInquiry extends Transaction
 
       gui = getGUI();
       screen = getScreen();
-      
+
       //Button choices
       gui.mainMenuButtonAction("_BLANK");
 
       // display the balance information on the screen
-      screen.displayMessage(gui, "");
-      
+      screen.displayMessage(gui, "Loading...");
+
       screen.mergeMessage( gui, "\nPress EXIT to leave\n" );
       screen.mergeMessage( gui, "\nBalance Information:\n" );
       screen.mergeMessage( gui, " - Available balance: \n$" );

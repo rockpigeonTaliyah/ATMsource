@@ -109,8 +109,13 @@ public class ATM
       //password input process
 
       screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
+
+      // gui.keypadEnabled = false;
+
       gui.isPassword = true;
+      // gui.keypadEnabled = true;
       gui.waitTilInput();
+      System.out.println(gui.getPassword());
    	  gui.isPassword = false;
       if (String.valueOf(gui.getPassword() ).indexOf('.') >= 0 || String.valueOf(gui.getPassword() ).indexOf(" ") >= 0) {
         isDouble = false;
