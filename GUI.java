@@ -145,20 +145,22 @@ public class GUI {
 
 	//stop the system for user to press enter
 	public void waitTilInput() {
+		resetState();
 	    while ( !inputEntered ) {
 	    	delay(200);
-		}
+				// System.out.println("enter not pressed");
+			}
+			System.out.println(inputEntered);
 	    //reset state
 		inputEntered = false;
 	}
-/*NOTE NO ONE USING*/
-	// public void waitTilEnter() {
-	//     while ( !EnterPressed ) {
-	//     	delay(200);
-	// 	}
-	//     //reset state
-	// 	EnterPressed = false;
-	// }
+	public void waitTilEnter() {
+	    while ( !EnterPressed ) {
+	    	delay(200);
+		}
+	    //reset state
+		EnterPressed = false;
+	}
 	/*NOTE NO ONE USING*/
 	// public void waitTilExit() {
 	//     while ( !ExitPressed ) {

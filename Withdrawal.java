@@ -60,26 +60,22 @@ public class Withdrawal extends Transaction
             // check whether the user has enough money in the account
             if ( amount <= availableBalance )
             {
-              System.out.print("Test A");
                // check whether the cash dispenser has enough money
                if ( cashDispenser.isSufficientCashAvailable( amount ) )
                {
-                 System.out.print("Test B");
                   // update the account involved to reflect withdrawal
                   bankDatabase.debit( getAccountNumber(), amount );
                   cashDispenser.dispenseCash( amount ); // dispense cash
                   cashDispensed = true; // cash was dispensed
-                  System.out.print("Test B1");
                   // instruct user to take cash
                   screen.displayMessage( gui,
                      "\nPlease take your cash now." );
                      gui.delay(1000);
-                     System.out.print("Test B2");
+
 
                } // end if
                else // cash dispenser does not have enough cash
                {
-                  System.out.println("B Exception");
                   screen.mergeMessage( gui,
                      "\nInsufficient cash available in the ATM." +
                      "\n\nPlease choose a smaller amount." );
@@ -88,7 +84,6 @@ public class Withdrawal extends Transaction
             } // end if
             else // not enough money available in user's account
             {
-                System.out.print("Test D");
                screen.displayMessage( gui,
                   "\nInsufficient funds in your account." +
                   "\n\nPlease choose a smaller amount." );

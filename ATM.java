@@ -81,14 +81,19 @@ public class ATM
 	  while (isDouble) {
 
 		  try {
-        System.out.println("test a");
-        gui.resetState();
-			  screen.displayMessage( gui, "Please enter your account number: " );
-			  gui.waitTilInput();
+        System.out.println("test start");
 
+			  screen.displayMessage( gui, "Please enter your account number: " );
+        gui.resetState();
+			  gui.waitTilInput();
+        gui.waitTilEnter();
+        // gui.delay(3000);
+        System.out.println("waiting");
         if (String.valueOf(gui.getInput() ).indexOf('.') >= 0 || String.valueOf(gui.getPassword() ).indexOf(" ") >= 0) {
+          System.out.println("test a");
           isDouble = false;
         }else{
+          System.out.println("test b");
           accountNumber = Integer.parseInt( gui.getInput() ); // input account number
           isDouble = false;
         }
@@ -253,7 +258,7 @@ public class ATM
         case "TRANSFER": // create new Transfer transaction
             temp = new Transfer(currentAccountNumber, screen,
                bankDatabase, keypad, gui);
-          case "EXIT" :gui.mainMenuButtonAction("_BLANK"); break;
+          case "EXIT" :gui.mainMenuButtonAction("_BLANK");gui.resetState(); break;
           case "":
 				break;
           //  break;

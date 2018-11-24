@@ -9,7 +9,7 @@ public abstract class Transaction
    private GUI gui;
 
    // Transaction constructor invoked by subclasses using super()
-   public Transaction( int userAccountNumber, Screen atmScreen, 
+   public Transaction( int userAccountNumber, Screen atmScreen,
       BankDatabase atmBankDatabase, GUI gui )
    {
       accountNumber = userAccountNumber;
@@ -18,10 +18,10 @@ public abstract class Transaction
       this.gui = gui;
    } // end Transaction constructor
 
-   // return account number 
+   // return account numberxw
    public int getAccountNumber()
    {
-      return accountNumber; 
+      return accountNumber;
    } // end method getAccountNumber
 
    // return reference to screen
@@ -40,7 +40,6 @@ public abstract class Transaction
    {
        return gui;
    }
-
    // perform the transaction (overridden by each subclass)
    abstract public void execute();
 } // end class Transaction

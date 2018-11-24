@@ -41,8 +41,12 @@ public class BalanceInquiry extends Transaction
       screen.mergeMessage( gui, Double.toString(availableBalance));
       screen.mergeMessage( gui, "\n - Total balance:     \n" );
       screen.displayDollarAmount( gui, totalBalance );
-      gui.waitTilInput();
+      int returnChoice = gui.waitChoice();
+			if (returnChoice == 0) {
+				return;
+			}
    } // end method execute
+
 } // end class BalanceInquiry
 
 
