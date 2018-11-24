@@ -39,9 +39,11 @@ public class ATM
       {
     	//print the welcome message
     	screen.mergeMessage(gui, "Welcome");
-    	gui.delay(1000);;
+    	gui.delay(1000);
+    	gui.printMessage();
+    	gui.delay(1000);
     	screen.displayMessage(gui, "Please insert your card.");
-    	gui.delay(1000);//wait for user to insert card
+    	gui.delay(2000);//wait for user to insert card
     	gui.setInput("");
     	gui.setPassword("");
 
@@ -58,12 +60,16 @@ public class ATM
          if (Withdrawal.getCashDispensed()) {
         	 gui.delay(1000);
         	 screen.displayMessage( gui, "Cash dispenised...\nPlease take your cash.");
+        	 Withdrawal.setCashDispensed();
+        	 System.out.print(Withdrawal.getCashDispensed());
         	 gui.delay(1000);
          }
          gui.delay(1000);
          screen.displayMessage( gui, "Card rejecting...\nPlease take your card.");
+         gui.delay(2000);
          screen.displayMessage(gui, "Thank you! Goodbye!" );
          gui.mainMenuButtonAction("_BLANK");
+         gui.delay(1000);
 
          System.out.println("clear exit?");
          gui.functionChoice = "";
@@ -125,7 +131,11 @@ public class ATM
       if (String.valueOf(gui.getPassword() ).indexOf('.') >= 0 || String.valueOf(gui.getPassword() ).indexOf(" ") >= 0) {
         isDouble = false;
       }else{
-        pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
+    	  try {
+          pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
+        } catch(Exception e) {
+          isDouble = false;
+        }
       }
 
       System.out.println(pin + " " + accountNumber);

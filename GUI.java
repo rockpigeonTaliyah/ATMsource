@@ -32,8 +32,8 @@ public class GUI {
 	public boolean EnterPressed;
 	public boolean ExitPressed;
 	public String functionChoice;
-	public static boolean keypadEnabled = false; //Disable keypad when not needed
-	public static boolean keypadNumberEnabled = true;
+	public boolean keypadEnabled = false; //Disable keypad when not needed
+	public boolean keypadNumberEnabled = true;
 	public int amountChoice = 0;
 
 
@@ -195,7 +195,7 @@ public class GUI {
 			case "_TRANSFER": ATMActionCommand =  new String []{"","100","500","1000","","","","EXIT"}; break;
 			case "_BLANK":  ATMActionCommand =  new String []{"","","","","","","","EXIT"}; break;
 			default:
-				ATMActionCommand =  new String []{"BALANCE","WITHDRAWAL","","","TRANSFER","","","EXIT"}; break;
+				ATMActionCommand =  new String []{"BALANCE","WITHDRAW","","","TRANSFER","","","EXIT"}; break;
 		}
 
 		removeCurrentListener();
@@ -408,7 +408,7 @@ public class GUI {
 			switch(e.getActionCommand()){
 				case "BALANCE":functionChoice = "BALANCE";
 				  break;
-				case "WITHDRAWAL": functionChoice = "WITHDRAWAL";
+				case "WITHDRAW": functionChoice = "WITHDRAWAL";
 				 	break;
 				case "DEPOSIT": functionChoice = "DEPOSIT";
 				 	break;

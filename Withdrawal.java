@@ -34,7 +34,7 @@ public class Withdrawal extends Transaction
    {
      // screen.displayMessage(gui, "executed");
       // screen.displayMessage(gui, " asdf");
-      boolean cashDispensed = false; // cash was not dispensed yet
+      cashDispensed = false; // cash was not dispensed yet
       double availableBalance; // amount available for withdrawal
       gui.keypadEnabled = true;
       // get references to bank database and screen
@@ -50,7 +50,6 @@ public class Withdrawal extends Transaction
          System.out.println(choiceReturned);
          amount = Integer.parseInt(choiceReturned);
          System.out.println(choiceReturned);
-         cashDispensed = false;
          System.out.println(choiceReturned);
          // check whether user chose a withdrawal amount or canceled
          if ( amount != 4 )
@@ -71,9 +70,9 @@ public class Withdrawal extends Transaction
                   cashDispenser.dispenseCash( amount ); // dispense cash
                   cashDispensed = true; // cash was dispensed
                   // instruct user to take cash
-                  screen.displayMessage( gui,
-                     "\nPlease take your cash now." );
-                     gui.delay(1000);
+                  //screen.displayMessage( gui,
+                    // "\nPlease take your cash now." );
+                     //gui.delay(1000);
 
 
                } // end if
@@ -108,11 +107,9 @@ public class Withdrawal extends Transaction
 
       } while ( !cashDispensed );
       screen.displayMessage( gui, "\ntransaction Done, returning..." );
+      System.out.print(cashDispensed);
       gui.keypadEnabled = false;
-      cashDispensed = true;
       gui.delay(1000);
-      cashDispensed = false;
-
       return;
    } // end method execute
 
@@ -210,6 +207,10 @@ public class Withdrawal extends Transaction
 
       return userChoice; // return withdrawal amount or CANCELED
    } // end method displayMenuOfAmounts
+   
+   public static void setCashDispensed() {
+	   cashDispensed = false;
+   }
 
    public static boolean getCashDispensed () {
 	   return cashDispensed;
