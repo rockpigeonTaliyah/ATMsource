@@ -151,22 +151,22 @@ public class GUI {
 	    //reset state
 		inputEntered = false;
 	}
-
-	public void waitTilEnter() {
-	    while ( !EnterPressed ) {
-	    	delay(200);
-		}
-	    //reset state
-		EnterPressed = false;
-	}
-
-	public void waitTilExit() {
-	    while ( !ExitPressed ) {
-	    	delay(200);
-		}
-	    //reset state
-		ExitPressed = false;
-	}
+/*NOTE NO ONE USING*/
+	// public void waitTilEnter() {
+	//     while ( !EnterPressed ) {
+	//     	delay(200);
+	// 	}
+	//     //reset state
+	// 	EnterPressed = false;
+	// }
+	/*NOTE NO ONE USING*/
+	// public void waitTilExit() {
+	//     while ( !ExitPressed ) {
+	//     	delay(200);
+	// 	}
+	//     //reset state
+	// 	ExitPressed = false;
+	// }
 	public int waitChoice(){
 		resetState();
 		while (ExitPressed ==false && EnterPressed == false) {

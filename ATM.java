@@ -63,6 +63,8 @@ public class ATM
          gui.delay(1000);
          screen.displayMessage( gui, "Card rejecting...\nPlease take your card.");
          screen.displayMessage(gui, "Thank you! Goodbye!" );
+         gui.mainMenuButtonAction("_BLANK");
+
          System.out.println("clear exit?");
          gui.functionChoice = "";
       } // end while
@@ -71,17 +73,28 @@ public class ATM
    // attempts to authenticate user against database
    private void authenticateUser()
    {
+
 	  int accountNumber = 0;
+    int pin = 0;
 	  boolean isDouble = true;
 	  gui.keypadEnabled = true;
 	  while (isDouble) {
+
 		  try {
+        System.out.println("test a");
+        gui.resetState();
 			  screen.displayMessage( gui, "Please enter your account number: " );
 			  gui.waitTilInput();
-			  accountNumber = Integer.parseInt( gui.getInput() ); // input account number
+
+        if (String.valueOf(gui.getInput() ).indexOf('.') >= 0) {
+          isDouble = false;
+        }else{
+          accountNumber = Integer.parseInt( gui.getInput() ); // input account number
+        }
 			  isDouble = false;
 			  if (!isDouble)
 				  break;
+
 		  }
 		  catch (Exception e) {
 			  screen.displayMessage(gui, "Invalid account number or PIN. Please try again.");
@@ -98,7 +111,12 @@ public class ATM
       gui.isPassword = true;
       gui.waitTilInput();
    	  gui.isPassword = false;
-      int pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
+      if (String.valueOf(gui.getPassword() ).indexOf('.') >= 0) {
+        isDouble = false;
+      }else{
+        pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
+      }
+
 
       //DONT DEL YET TO BE FIXED!!!
       /*
@@ -140,9 +158,11 @@ public class ATM
          currentAccountNumber = accountNumber; // save user's account #
       } // end if
       else {
+
          screen.displayMessage(
         		 gui,
-             "Invalid account number or PIN. Please try again." );
+             "\n\nInvalid account number or PIN. Please try again." );
+             gui.delay(1000);
          gui.setPassword( "" );
       }
       gui.keypadEnabled = false;
