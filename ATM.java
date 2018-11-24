@@ -193,7 +193,7 @@ public class ATM
             case "WITHDRAWAL":
 
             case "TRANSFER":
-            gui.setMessage("");
+
                // initialize as new object of chosen type
                currentTransaction = createTransaction( mainMenuSelection );
                currentTransaction.execute(); // execute transaction

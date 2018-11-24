@@ -6,8 +6,11 @@ public class Screen
    // displays a message without a carriage return
    public void displayMessage( GUI gui, String message )
    {
+
       gui.setMessage( message ) ;
       gui.printMessage();
+      gui.delay(1000);
+
    } // end method displayMessage
 
    //concate the message to gui.message
@@ -18,9 +21,9 @@ public class Screen
    // display a dollar amount
    public void displayDollarAmount( GUI gui, double amount )
    {
-      gui.mergeMessage( String.format( "$%,.2f", amount )); 
-      gui.printMessage();  
-   } // end method displayDollarAmount 
+      gui.mergeMessage( String.format( "$%,.2f", amount ));
+      gui.printMessage();
+   } // end method displayDollarAmount
 } // end class Screen
 
 

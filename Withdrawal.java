@@ -143,10 +143,15 @@ public class Withdrawal extends Transaction
          gui.printMessage();
          String input = "";
          gui.waitTilInput();
-         System.out.println("123");
          if (gui.getInput() == "") {
            input = String.valueOf(gui.getAmountInput());
-           System.out.print(input);
+           // char[] inp = input.toCharArray();
+           // int counter = 0;
+           //  for (int i = 0; i < str.length(); i++) {
+           //    if (String.valueOf(gui.getPassword() ).indexOf('.') >= 0) {
+           //      counter ++;
+           //    }
+           //  }
          }else{
            input = gui.getInput();
            gui.clearInput();

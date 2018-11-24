@@ -28,11 +28,11 @@ public class Transfer extends Transaction{
     gui.mainMenuButtonAction("_BLANK");
     screen.displayMessage( gui, "\nTransfer Menu: \n\nPlease specify the target and amount: " );
     gui.delay(1000);
-    
+
     boolean isDouble = true;
     while(isDouble){
     	try{
-    		gui.setMessage("");
+
     		gui.clearInput();
     		screen.displayMessage( gui, "Transfer Account: " );
     	    gui.waitTilInput();
@@ -43,7 +43,7 @@ public class Transfer extends Transaction{
     		}
     	}
     	catch(Exception e){
-    		gui.setMessage("");
+
     		screen.displayMessage(gui, "Invalid Account Number! Re-Enter");
     		gui.delay(1000);
     	}
@@ -53,7 +53,7 @@ public class Transfer extends Transaction{
     isDouble = true;
     while(isDouble){
     	try{
-    		gui.setMessage("");
+
     		gui.clearInput();
     		screen.displayMessage( gui, "Transfer Amount: " );
     		gui.waitTilInput();
@@ -65,7 +65,7 @@ public class Transfer extends Transaction{
     		}
     	}
     	catch(Exception e){
-    		gui.setMessage("");
+
     		screen.displayMessage(gui, "Invalid Amount! Re-Enter");
     		gui.delay(1000);
     	}
@@ -91,25 +91,26 @@ return;
 
     // prevent error input
     if(bankDatabase.getTarget( temp_id ) == false ){
-    	gui.setMessage("");
+
     	screen.displayMessage(gui, "Error: Account not exists");
 	    gui.delay(1000);
 	    is_account = false;
     }else if(getAccountNumber() == temp_id){
-    	gui.setMessage("");
-    	screen.displayMessage(gui, "Error: Account"); 
+
+    	screen.mergeMessage(gui, "Error: Account < ");
     	screen.mergeMessage(gui, String.valueOf(temp_id));
-    	screen.mergeMessage(gui, "is repeated");
+    	screen.mergeMessage(gui, " > is repeated ");
+      gui.printMessage();
     	gui.delay(1000);
     	is_account = false;
     }
     if (temp_amount == 0 || temp_amount == 0.0  ) {
-    	gui.setMessage("");
+
     	screen.displayMessage( gui, "Error: Amount invalid. ");
       gui.delay(1000);
       is_amount = false;
     }else if(temp_amount >= bankDatabase.getAvailableBalance( getAccountNumber() )){
-    	gui.setMessage("");
+
     	screen.displayMessage( gui, "Error: Insufficient amount. ");
       gui.delay(1000);
       is_amount = false;
@@ -118,15 +119,18 @@ return;
 
     if( is_account != false & is_amount != false ){
         bankDatabase.transfer( getAccountNumber(), temp_id, temp_amount, screen, gui );
-        gui.setMessage("");
+
+        gui.clearInput();
         screen.displayMessage( gui, "Transaction Succeed ");
+        gui.delay(1000);
+        screen.displayMessage(gui, "Returning");
         gui.delay(1000);
         return;
     }else{
-    	gui.setMessage("");
+
     	screen.displayMessage( gui, "Transaction canceled\n");
     	gui.delay(1000);
-    	gui.setMessage("");
+
     }
     gui.clearInput();
     gui.keypadEnabled = false;
