@@ -6,7 +6,7 @@ public class Screen
    // displays a message without a carriage return
    public void displayMessage( GUI gui, String message )
    {
-
+      gui.setMessage("");
       gui.setMessage( message ) ;
       gui.printMessage();
       gui.delay(1000);

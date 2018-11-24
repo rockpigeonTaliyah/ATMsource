@@ -372,6 +372,7 @@ public class GUI {
 	}
 	class buttonListenerConcat implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+				System.out.println(password);
 				if (e.getActionCommand() == "Clear") {
 					input = "";
 					password ="";
@@ -385,11 +386,14 @@ public class GUI {
 				if(keypadEnabled && keypadNumberEnabled) {
 					if(!isPassword) {
 						input = input.concat( e.getActionCommand() );
+
 					}
-					else {
+					else if (isPassword == true) {
 						password = password.concat( e.getActionCommand());
 						input = input.concat("*");
-					}
+					}else{
+					System.out.println("none");
+				}
 				}
 				textArea.setText(input);
 		}
