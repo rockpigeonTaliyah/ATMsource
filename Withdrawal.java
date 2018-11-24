@@ -113,7 +113,7 @@ public class Withdrawal extends Transaction
       cashDispensed = true;
       gui.delay(1000);
       cashDispensed = false;
-      
+
       return;
    } // end method execute
 
@@ -137,8 +137,8 @@ public class Withdrawal extends Transaction
          screen.mergeMessage( gui, " -- $100\n\n" );
          screen.mergeMessage( gui, " -- $500\n\n" );
          screen.mergeMessage( gui, " -- $1000\n\n" );
-         screen.mergeMessage( gui, " -- You may directly specify your amounts\n\n" );
-         screen.mergeMessage( gui, " -- Cancel transaction\n\n" );
+         screen.mergeMessage( gui, " -- You may directly specify your amounts\n" );
+         screen.mergeMessage( gui, " -- Cancel transaction\n" );
          screen.mergeMessage( gui, "\nChoose a withdrawal amount: " );
          gui.printMessage();
          String input = "";
@@ -155,7 +155,7 @@ public class Withdrawal extends Transaction
          // int customValue = keypad.getInput();// get user input through keypad
 
          // determine how to proceed based on the input value
-         
+
          switch ( input )
          {
             case "100":            // if the user chose a withdrawal amount
@@ -166,13 +166,19 @@ public class Withdrawal extends Transaction
             screen.mergeMessage(gui, "\nPlease press enter to confirm ,\n");
             screen.mergeMessage(gui,"or press EXIT to restart process");
             gui.printMessage();
-            gui.waitTilEnter();
+            // gui.waitTilEnter();
+
             gui.keypadNumberEnabled = true;
-             userChoice = input;
+
               // save user's choice
-              break;
+              // break;
             case "4": // the user chose to cancel
-               userChoice = "4"; // save user's choice
+            // System.out.println(gui.waitChoice());
+            if(gui.waitChoice() == 0 ){ userChoice = "4";return userChoice;}
+            else {
+              userChoice = input;
+            }
+               // userChoice = "4"; // save user's choice
                break;
             default: // the user did not enter a value from 1-4
               // check is the user input valid amount, then save amount , else output error
@@ -180,8 +186,8 @@ public class Withdrawal extends Transaction
                  // gui.waitTilInput();
                  // userChoice = Integer.parseInt(gui.getInput());
                  // System.out.println(userChoice);
-               // }else{ 
-                screen.mergeMessage( gui, "INVALID AMOUNT, try again." );             
+               // }else{
+                screen.mergeMessage( gui, "INVALID AMOUNT, try again." );
                 break;
                // }
 
@@ -191,7 +197,7 @@ public class Withdrawal extends Transaction
 
       return userChoice; // return withdrawal amount or CANCELED
    } // end method displayMenuOfAmounts
-   
+
    public static boolean getCashDispensed () {
 	   return cashDispensed;
    }

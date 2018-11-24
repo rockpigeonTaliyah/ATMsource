@@ -4,11 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Color;
 import javax.swing.JFrame;
+import javax.swing.JComponent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
 import javax.swing.text.*;
 
 public class GUI {
@@ -148,7 +151,7 @@ public class GUI {
 	    //reset state
 		inputEntered = false;
 	}
-	
+
 	public void waitTilEnter() {
 	    while ( !EnterPressed ) {
 	    	delay(200);
@@ -156,7 +159,7 @@ public class GUI {
 	    //reset state
 		EnterPressed = false;
 	}
-	
+
 	public void waitTilExit() {
 	    while ( !ExitPressed ) {
 	    	delay(200);
@@ -164,7 +167,23 @@ public class GUI {
 	    //reset state
 		ExitPressed = false;
 	}
-
+	public int waitChoice(){
+		resetState();
+		while (ExitPressed ==false && EnterPressed == false) {
+			delay(200);
+		}
+		if (EnterPressed) {
+			EnterPressed = false;
+			return 1 ;
+		}else {
+			ExitPressed = false;
+			return 0 ;
+		}
+	}
+	public void resetState(){
+		ExitPressed = false;
+		EnterPressed = false;
+	}
 	public void mainMenuButtonAction(String action) {
 		//left top for 4
 		//right top for 4
@@ -187,7 +206,7 @@ public class GUI {
 	}
 
 	/*public void balanceEnquiryButtonAction() {
-		
+
 		removeCurrentListener();
 		for ( int i = 0; i <= 7; i++){
 			keys[ 16 + i ].setText(ATMActionCommand[i]);
@@ -246,8 +265,20 @@ public class GUI {
 	    }
 
 	    keys[ 10 ] = new JButton( "Cancel" );
+			keys[10].setBackground(new Color(255,0,0));
+			keys[ 10 ].setOpaque(true);
+			keys[ 10 ].setBorderPainted(false);
+			// keys[ 10 ].setContentAreaFilled(true);
 	    keys[ 11 ] = new JButton( "Clear" );
+			keys[ 11 ].setBorderPainted(false);
+			keys[ 11 ].setBorder(new LineBorder(new Color(0,0,0)));
 	    keys[ 12 ] = new JButton( "Enter" );
+			keys[12].setBackground(new Color(0,255,0));
+			keys[ 12 ].setBorderPainted(false);
+			// keys[ 12 ].setContentAreaFilled(true);
+			keys[ 12 ].setOpaque(true);
+			// keys[ 12 ].setBackground("GREEN");
+
 	    keys[ 13 ] = new JButton( "." );
 	    keys[ 14 ] = new JButton( "00" );
 	    keys[ 15 ] = new JButton( "" );
@@ -292,6 +323,7 @@ public class GUI {
 	    // add buttons to rightJPanel panel
 	    for ( int i = 20; i <= 23; i++ )
 	    	rightJPanel.add( keys[ i ]);
+
 
 	    // set keyPadJPanel layout to grid layout
 	    keyPadJPanel = new JPanel();
@@ -349,7 +381,7 @@ public class GUI {
 					// textArea.setText(String.valueOf(action));
 					if(action == 1)
 						System.exit(0);
-			}else 
+			}else
 				if(keypadEnabled && keypadNumberEnabled) {
 					if(!isPassword) {
 						input = input.concat( e.getActionCommand() );
@@ -377,6 +409,7 @@ public class GUI {
 				case "TRANSFER": functionChoice = "TRANSFER";
 				 	break;
 				case "EXIT": functionChoice = "EXIT" ;amountChoice = 4;
+				ExitPressed  = true;
 					inputEntered = true;
 				 	break;
 				case "":
