@@ -86,12 +86,13 @@ public class ATM
 			  screen.displayMessage( gui, "Please enter your account number: " );
 			  gui.waitTilInput();
 
-        if (String.valueOf(gui.getInput() ).indexOf('.') >= 0) {
+        if (String.valueOf(gui.getInput() ).indexOf('.') >= 0 || String.valueOf(gui.getPassword() ).indexOf(" ") >= 0) {
           isDouble = false;
         }else{
           accountNumber = Integer.parseInt( gui.getInput() ); // input account number
+          isDouble = false;
         }
-			  isDouble = false;
+			  // isDouble = false;
 			  if (!isDouble)
 				  break;
 
@@ -111,13 +112,13 @@ public class ATM
       gui.isPassword = true;
       gui.waitTilInput();
    	  gui.isPassword = false;
-      if (String.valueOf(gui.getPassword() ).indexOf('.') >= 0) {
+      if (String.valueOf(gui.getPassword() ).indexOf('.') >= 0 || String.valueOf(gui.getPassword() ).indexOf(" ") >= 0) {
         isDouble = false;
       }else{
         pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
       }
 
-
+      System.out.println(pin + " " + accountNumber);
       //DONT DEL YET TO BE FIXED!!!
       /*
       int pin = 0;
