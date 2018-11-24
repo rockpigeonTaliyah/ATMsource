@@ -194,8 +194,11 @@ public class Withdrawal extends Transaction
                  // userChoice = Integer.parseInt(gui.getInput());
                  // System.out.println(userChoice);
                // }else{            else {
-               if (Integer.parseInt(input) >= 100 && Integer.parseInt(input) % 100 == 0) {
+                try{   if (Integer.parseInt(input) >= 100 && Integer.parseInt(input) % 100 == 0) {
                              userChoice = input;
+                }} catch(Exception e) {
+                  screen.mergeMessage( gui, "INVALID AMOUNT, try again." );
+                  break;
                 }
                 screen.mergeMessage( gui, "INVALID AMOUNT, try again." );
                 break;
