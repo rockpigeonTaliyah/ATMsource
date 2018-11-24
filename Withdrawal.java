@@ -184,18 +184,19 @@ public class Withdrawal extends Transaction
             System.out.println(userChoice);
             System.out.println(input);
             if( input == "4" ){ userChoice = "4"; return userChoice;}
-            else {
-              userChoice = input;
-            }
+
                // userChoice = "4"; // save user's choice
                break;
             default: // the user did not enter a value from 1-4
               // check is the user input valid amount, then save amount , else output error
-               // if (input >= 100 && input % 100 == 0) {
+
                  // gui.waitTilInput();
                  // userChoice = Integer.parseInt(gui.getInput());
                  // System.out.println(userChoice);
-               // }else{
+               // }else{            else {
+               if (Integer.parseInt(input) >= 100 && Integer.parseInt(input) % 100 == 0) {
+                             userChoice = input;
+                }
                 screen.mergeMessage( gui, "INVALID AMOUNT, try again." );
                 break;
                // }
