@@ -172,7 +172,7 @@ public class Withdrawal extends Transaction
             screen.mergeMessage(gui, "\nPlease press enter to confirm ,\n");
             screen.mergeMessage(gui,"or press EXIT to restart process");
             gui.printMessage();
-            // gui.waitTilEnter();
+            gui.waitTilEnter();
 
             gui.keypadNumberEnabled = true;
 
