@@ -1,7 +1,7 @@
 public class ATM
 {
    private boolean userAuthenticated; // whether user is authenticated
-   
+
    private int currentAccountNumber; // current user's account number
    private Screen screen; // ATM's screen
    private Keypad keypad; // ATM's keypad
@@ -14,7 +14,7 @@ public class ATM
    private static final String WITHDRAWAL = "WITHDRAWAL";
    private static final String TRANSFER = "TRANSFER";
    private static final String EXIT = "EXIT";
-   
+
    private boolean cashDispensed = false; // whether user withdraw money
 
    // no-argument ATM constructor initializes instance variables
@@ -75,7 +75,7 @@ public class ATM
 	  boolean isDouble = true;
 	  gui.keypadEnabled = true;
 	  while (isDouble) {
-		  try {	
+		  try {
 			  screen.displayMessage( gui, "Please enter your account number: " );
 			  gui.waitTilInput();
 			  accountNumber = Integer.parseInt( gui.getInput() ); // input account number
@@ -93,19 +93,19 @@ public class ATM
       gui.clearInput();
 
       //password input process
-      
+
       screen.displayMessage( gui, "Enter your PIN: " );// prompt for PIN
       gui.isPassword = true;
       gui.waitTilInput();
    	  gui.isPassword = false;
       int pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
-      
+
       //DONT DEL YET TO BE FIXED!!!
       /*
       int pin = 0;
       isDouble = true;
       while(isDouble) {
-    	  try {	
+    	  try {
     		  gui.isPassword = true;
 			  screen.displayMessage( gui, "Enter your PIN: " );
 			  gui.waitTilInput();
@@ -227,7 +227,7 @@ public class ATM
         case "TRANSFER": // create new Transfer transaction
             temp = new Transfer(currentAccountNumber, screen,
                bankDatabase, keypad, gui);
-          case "EXIT" : break;
+          case "EXIT" :gui.mainMenuButtonAction("_BLANK"); break;
           case "":
 				break;
           //  break;
