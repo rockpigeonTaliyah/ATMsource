@@ -125,7 +125,11 @@ public class ATM
       if (String.valueOf(gui.getPassword() ).indexOf('.') >= 0 || String.valueOf(gui.getPassword() ).indexOf(" ") >= 0) {
         isDouble = false;
       }else{
-        pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
+        try {
+          pin = Integer.parseInt( gui.getPassword() ) ; // input PIN
+        } catch(Exception e) {
+          isDouble = false;
+        }
       }
 
       System.out.println(pin + " " + accountNumber);
